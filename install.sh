@@ -1,6 +1,4 @@
 #! /usr/bin/env bash
-curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
-echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
 sudo -S apt-get update
 sudo -S apt-get dist-upgrade
 sudo -S apt-get -y install \
@@ -9,7 +7,6 @@ sudo -S apt-get -y install \
   tmux \
   zsh \
   gnome-terminal \
-  signal-desktop \
   openjdk-11-jdk \
   default-jre \
   urlview \
@@ -20,7 +17,8 @@ sudo -S apt-get -y install \
   cmake \
   python3-dev \
   ruby \
-  nodejs
+  nodejs \
+  npm
 
 sudo -S apt-get autoremove
 
@@ -29,17 +27,17 @@ npm install -g @angular/cli
 while true; do
   read -p "Would you like to backup your existing dotfiles? [yn]" yn
   case $yn in
-      [Yy]* ) mkdir .old/; \
+      [Yy]* ) mkdir ~/.old/; \
            mv ~/.bash_aliases \
            ~/.zshrc \
            ~/.tmux.conf \
            ~/.config/nvim/init.vim \
-           ~/.old; \
+           ~/.old/; \
            break;;
       [Nn]* ) rm ~/.bash_aliases \
            ~/.zshrc \
            ~/.tmux.conf \
-           ~/.config/nvim/init.vim \
+           ~/.config/nvim/init.vim;
            break;;
       * ) echo "Please answer yes or no.";;
   esac
@@ -48,11 +46,12 @@ done
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-ln -s aliases ~/.bash_aliases
-ln -s zshrc ~/.zshrc
-ln -s tmux.conf ~/.tmux.conf
+ln -s ~/dotfiles/aliases ~/.bash_aliases
+ln -s ~/dotfiles/zshrc ~/.zshrc
+ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
+mkdir ~/.config
 mkdir ~/.config/nvim
-ln -s nvimrc ~/.config/nvim/init.vim
+ln -s ~/dotfiles/nvimrc ~/.config/nvim/init.vim
 
 nvim +'PlugInstall --sync' +qa
 

@@ -1,6 +1,7 @@
 call plug#begin('~/.vim/plugged')
   Plug 'google/vim-maktaba'
   Plug 'airblade/vim-gitgutter'
+  Plug 'ycm-core/YouCompleteMe'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-sensible'
   Plug 'junegunn/fzf.vim'
