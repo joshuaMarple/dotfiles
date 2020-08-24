@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 sudo -S apt-get update
-sudo -S apt-get dist-upgrade
+sudo -S apt-get -y dist-upgrade
 sudo -S apt-get -y install \
   neovim \
   ranger \
