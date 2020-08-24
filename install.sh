@@ -89,5 +89,5 @@ git config --global user.name "Joshua Marple"
 git config --global user.email "joshua.d.marple@gmail.com"
 
 # put update script into /usr/bin/local
-sudo -S ln -s ~/dotfiles/update.sh /usr/local/bin/update
+sudo -S ln -sf ~/dotfiles/update.sh /usr/local/bin/update
 
