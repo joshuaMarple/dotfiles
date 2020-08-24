@@ -1,8 +1,10 @@
 #! /usr/bin/env bash
-sudo -S apt-get update
 sudo -S apt-get upgrade
+curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
+echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+sudo -S apt-get update
 sudo -S apt-get -y install \
-  nvim \
+  neovim \
   ranger \
   tmux \
   zsh \
@@ -14,10 +16,10 @@ sudo -S apt-get -y install \
   python \
   python3 \
   python3-pip \
-  build-essential \ #ycm
-  cmake \ #ycm
-  python3-dev \ #ycm
-  ruby \ #tmux jump
+  build-essential \
+  cmake \
+  python3-dev \
+  ruby \
   node-js
 
 npm install -g @angular/cli
