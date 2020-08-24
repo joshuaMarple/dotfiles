@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get -y install \
+sudo -S apt-get update
+sudo -S apt-get upgrade
+sudo -S apt-get -y install \
   nvim \
   ranger \
   tmux \
@@ -11,6 +11,7 @@ sudo apt-get -y install \
   openjdk-11-jdk \
   default-jre \
   urlview \
+  python \
   python3 \
   python3-pip \
   build-essential \ #ycm
@@ -62,7 +63,7 @@ git clone https://github.com/facebook/PathPicker.git
 cd PathPicker/debian
 ./package.sh
 cd ..
-sudo apt install ./pathpicker*.deb
+sudo -S apt install ./pathpicker*.deb
 
 # setup fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf\n~/.fzf/install
@@ -77,5 +78,5 @@ git config --global user.name "Joshua Marple"
 git config --global user.email "joshua.d.marple@gmail.com"
 
 # put update script into /usr/bin/local
-sudo ln -s ~/dotfiles/update.sh /usr/local/bin/update
+sudo -S ln -s ~/dotfiles/update.sh /usr/local/bin/update
 
