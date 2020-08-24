@@ -2,7 +2,7 @@
 curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
 echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
 sudo -S apt-get update
-sudo -S apt-get upgrade
+sudo -S apt-get dist-upgrade
 sudo -S apt-get -y install \
   neovim \
   ranger \
@@ -22,19 +22,22 @@ sudo -S apt-get -y install \
   ruby \
   nodejs
 
+sudo -S apt-get autoremove
+
 npm install -g @angular/cli
 
-echo "Do you wish to backup your existing dotfiles before continuing? [y/n]"
-select yn in "y" "n"; do
+while true; do
+  read -p "Would you like to backup your existing dotfiles? [yn]" yn
   case $yn in
-      y ) mkdir .old/; \
+      [Yy]* ) mkdir .old/; \
         mv ~/.bash_aliases \
            ~/.zshrc \
            ~/.tmux.conf \
            ~/.config/nvim/init.vim \
            ~/.old; \
            break;;
-      n ) exit;;
+      [Nn]* ) exit;;
+      * ) echo "Please answer yes or no.";;
   esac
 done
 
