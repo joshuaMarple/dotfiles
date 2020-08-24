@@ -45,12 +45,14 @@ while true; do
   esac
 done
 
-ln -s ~/dotfiles/aliases ~/.bash_aliases
-ln -s ~/dotfiles/zshrc ~/.zshrc
-ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+ln -s aliases ~/.bash_aliases
+ln -s zshrc ~/.zshrc
+ln -s tmux.conf ~/.tmux.conf
 mkdir ~/.config/nvim
-ln -s ~/dotfiles/nvimrc ~/.config/nvim/init.vim
-cp ./oh-my-zsh ~/.oh-my-zsh
+ln -s nvimrc ~/.config/nvim/init.vim
 
 nvim +'PlugInstall --sync' +qa
 
@@ -75,7 +77,8 @@ cd ..
 sudo -S apt install ./pathpicker*.deb
 
 # setup fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf\n~/.fzf/install
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 
 # install YCM (separate steps in case one fails)
 python3 ~/.vim/plugged/YouCompleteMe/install.py --all
