@@ -1,0 +1,27 @@
+call plug#begin('~/.vim/plugged')
+  Plug 'google/vim-maktaba'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'tpope/vim-sensible'
+  Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'easymotion/vim-easymotion'
+  Plug 'vim-airline/vim-airline'
+  Plug 'joshdick/onedark.vim'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'psliwka/vim-smoothie'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'mhinz/vim-signify'
+  Plug 'kshenoy/vim-signature'
+  Plug 'machakann/vim-swap'
+  "Plug 'ipod825/vim-netranger'
+  Plug 'airblade/vim-rooter'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'ervandew/supertab'
+  Plug 'wellle/targets.vim'
+  Plug 'ntpeters/vim-better-whitespace'
+  Plug 'tpope/vim-speeddating'
+call plug#end()
