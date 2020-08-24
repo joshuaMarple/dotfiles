@@ -30,13 +30,17 @@ while true; do
   read -p "Would you like to backup your existing dotfiles? [yn]" yn
   case $yn in
       [Yy]* ) mkdir .old/; \
-        mv ~/.bash_aliases \
+           mv ~/.bash_aliases \
            ~/.zshrc \
            ~/.tmux.conf \
            ~/.config/nvim/init.vim \
            ~/.old; \
            break;;
-      [Nn]* ) exit;;
+      [Nn]* ) rm ~/.bash_aliases \
+           ~/.zshrc \
+           ~/.tmux.conf \
+           ~/.config/nvim/init.vim \
+           break;;
       * ) echo "Please answer yes or no.";;
   esac
 done
