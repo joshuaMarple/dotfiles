@@ -20,7 +20,7 @@ sudo -S apt-get -y install \
   cmake \
   python3-dev \
   ruby \
-  node-js
+  nodejs
 
 npm install -g @angular/cli
 
