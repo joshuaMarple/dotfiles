@@ -26,7 +26,7 @@ set smartcase
 
 " Highlight search results
 "set hlsearch
-let g:incsearch#auto_nohlsearc = 1
+let g:incsearch#auto_nohlsearch = 1
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
 map *  <Plug>(incsearch-nohl-*)
@@ -43,9 +43,6 @@ set lazyredraw
 set timeoutlen=1000
 set ttimeoutlen=5
 
-" make YCM compatible with UltiSnips (using supertab)
-"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
@@ -59,6 +56,12 @@ let g:startify_custom_header = g:ascii
 
 let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
+""" COC
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 " https://superuser.com/questions/181377/auto-reloading-a-file-in-vim-as-soon-as-it-changes-on-disk
 set autoread
-au CursorHold * checktime
+"au CursorHold * checktime

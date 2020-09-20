@@ -9,6 +9,7 @@ nnoremap <leader>y :History:<CR>
 nnoremap <leader>x :Commands<CR>
 nnoremap <leader>g :Ag<CR>
 nnoremap <leader>e :Vexplore<CR>
+nnoremap <leader>q :q<CR>
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
