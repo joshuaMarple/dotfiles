@@ -1,13 +1,14 @@
 call plug#begin('~/.vim/plugged')
   Plug 'google/vim-maktaba'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'airblade/vim-gitgutter'
+  Plug 'preservim/nerdtree'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-sensible'
-  Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'easymotion/vim-easymotion'
   Plug 'sheerun/vim-polyglot'
-  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'mhinz/vim-signify'
   Plug 'kshenoy/vim-signature'
@@ -22,6 +23,17 @@ call plug#begin('~/.vim/plugged')
   Plug 'mhinz/vim-startify'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-tbone'
+  Plug 'haya14busa/incsearch.vim'
+  Plug 'haya14busa/incsearch-fuzzy.vim'
+  Plug 'haya14busa/incsearch-easymotion.vim'
+  Plug 'rhysd/clever-f.vim'
+  Plug 'TaDaa/vimade'
+  Plug 'liuchengxu/vim-which-key'
+  Plug 'junegunn/vim-peekaboo'
+
   " Themes
   Plug 'ryanoasis/vim-devicons'
   Plug 'psliwka/vim-smoothie'
