@@ -111,3 +111,8 @@ bindkey '^Z' fancy-ctrl-z
 
 #source ~/./
 eval enable-fzf-tab
+
+() {
+  local z=$'\0'
+  PROMPT='${${${$(spaceship_prompt)//\%\%/'$z'}//\%B}//'$z'/%%}'
+}
