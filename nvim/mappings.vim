@@ -20,6 +20,14 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+" I hate horizontal help
+cabbrev h vert h
+
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+nnoremap <leader>nt :call NumToggle()<CR>
+
 """ EasyMotion
 nmap s <Plug>(easymotion-overwin-f2)
 
