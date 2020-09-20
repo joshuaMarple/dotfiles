@@ -4,6 +4,7 @@ let mapleader = " "
 nnoremap ;; ;
 nnoremap <leader>; :w<CR>
 nnoremap ; :
+set nu
 set rnu
 filetype plugin indent on
 " On pressing tab, insert 2 spaces
@@ -24,7 +25,7 @@ set ignorecase
 set smartcase
 
 " Highlight search results
-set hlsearch
+"set hlsearch
 
 " Makes search act like search in modern browsers
 set incsearch
@@ -44,3 +45,13 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+let g:ascii = ['']
+
+let g:startify_custom_header = g:ascii
+
+let g:fzf_layout = { 'window'; 'call FloatingFZF()' }
+
+" https://superuser.com/questions/181377/auto-reloading-a-file-in-vim-as-soon-as-it-changes-on-disk
+set autoread
+au CursorHold * checktime

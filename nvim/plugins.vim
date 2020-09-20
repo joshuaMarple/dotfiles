@@ -1,7 +1,6 @@
 call plug#begin('~/.vim/plugged')
   Plug 'google/vim-maktaba'
   Plug 'airblade/vim-gitgutter'
-  Plug 'ycm-core/YouCompleteMe'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-sensible'
   Plug 'junegunn/fzf.vim'
@@ -20,12 +19,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'wellle/targets.vim'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'tpope/vim-speeddating'
+  Plug 'mhinz/vim-startify'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-eunuch'
   " Themes
   Plug 'ryanoasis/vim-devicons'
   Plug 'psliwka/vim-smoothie'
   Plug 'itchyny/lightline.vim'
   Plug 'joshdick/onedark.vim'
-  Plug 'vim-airline/vim-airline'
   Plug 'liuchengxu/space-vim-theme'
   Plug 'nightsense/cosmic_latte'
   Plug 'lifepillar/vim-solarized8'

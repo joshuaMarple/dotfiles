@@ -2,12 +2,13 @@
 nnoremap <leader>a :HgPstat<CR>
 nnoremap <leader>o :Bookmarks<CR>
 nnoremap <leader>p :Files<CR>
-nnoremap <leader>b :Buffers<CR>
+nnoremap , :Buffers<CR>
 nnoremap <leader>l :Lines<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>y :History:<CR>
 nnoremap <leader>x :Commands<CR>
 nnoremap <leader>g :Ag<CR>
+nnoremap <leader>e :Vexplore<CR>
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
