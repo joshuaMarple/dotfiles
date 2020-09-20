@@ -3,26 +3,27 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
+autoload -Uz compinit
+compinit
+
 source ~/antigen.zsh
 
-#antigen theme denysdovhan/spaceship-prompt
-antigen bundle sindresorhus/pure
+antigen theme denysdovhan/spaceship-prompt
 
 antigen bundle git
+antigen bundle Aloxaf/fzf-tab
 antigen bundle command-not-found
 
 # Syntax highlighting bundle
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 antigen bundle urbainvaes/fzf-marks
-antigen bundle Aloxaf/fzf-tab
 antigen bundle mafredri/zsh-async
 antigen bundle zsh-users/zsh-autosuggestions
 
 # Tell Antigen that you're done
 antigen apply
 
-enable-fzf-tab
 
 source ~/.bash_aliases
 
@@ -107,3 +108,6 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
+
+#source ~/./
+eval enable-fzf-tab
