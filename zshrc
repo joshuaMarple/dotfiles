@@ -24,7 +24,6 @@ antigen bundle zsh-users/zsh-autosuggestions
 # Tell Antigen that you're done
 antigen apply
 
-
 source ~/.bash_aliases
 
 bindkey '^ ' autosuggest-execute
@@ -109,7 +108,6 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-#source ~/./
 eval enable-fzf-tab
 
 () {

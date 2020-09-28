@@ -38,6 +38,8 @@ nmap s <Plug>(easymotion-overwin-f2)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
+nmap <leader> rn <Plug>(coc-rename)
+
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.

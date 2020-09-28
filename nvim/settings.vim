@@ -21,6 +21,8 @@ let g:netrw_banner=0
 " Ignore case when searching
 set ignorecase
 
+let g:rooter_silent_chdir = 1
+
 " When searching try to be smart about cases
 set smartcase
 
@@ -65,3 +67,5 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " https://superuser.com/questions/181377/auto-reloading-a-file-in-vim-as-soon-as-it-changes-on-disk
 set autoread
 "au CursorHold * checktime
+
+let g:wordmotion_prefix = 'm'
