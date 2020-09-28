@@ -44,6 +44,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'glts/vim-textobj-comment'
   Plug 'thalesmello/vim-textobj-methodcall'
   Plug 'Julian/vim-textobj-brace'
+  Plug 'Julian/vim-textobj-variable-segment'
+  Plug 'michaeljsmith/vim-indent-object'
 
   " Themes
   Plug 'ryanoasis/vim-devicons'
