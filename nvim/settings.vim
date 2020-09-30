@@ -1,5 +1,7 @@
 autocmd BufNewFile,BufEnter * silent! lcd %:p:h
 
+set history=10000
+
 set nu
 set rnu
 filetype plugin indent on

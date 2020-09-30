@@ -5,7 +5,7 @@ nnoremap <leader>p :ProjectFiles<CR>
 nnoremap , :Buffers<CR>
 nnoremap <leader>l :Lines<CR>
 nnoremap <leader>h :History<CR>
-nnoremap <leader>y :History:<CR>
+nnoremap <leader>; :History:<CR>
 nnoremap <leader>x :Commands<CR>
 nnoremap <leader>g :Ag<CR>
 nnoremap <leader>e :Vexplore<CR>

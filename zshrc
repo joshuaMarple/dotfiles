@@ -28,6 +28,9 @@ source ~/.bash_aliases
 
 bindkey '^ ' autosuggest-execute
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=bold,underline"
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+
 bindkey -v
 
 SPACESHIP_PROMPT_ORDER=(

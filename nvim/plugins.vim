@@ -36,6 +36,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mhinz/vim-startify'
   Plug 'junegunn/vim-peekaboo'
   Plug 'tmsvg/pear-tree'
+  Plug 'tommcdo/vim-exchange'
 
   " No such thing as too many textobjects
   Plug 'lucapette/vim-textobj-underscore'
@@ -45,9 +46,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'kana/vim-textobj-user'
   Plug 'glts/vim-textobj-comment'
   Plug 'thalesmello/vim-textobj-methodcall'
-  Plug 'Julian/vim-textobj-brace'
   Plug 'Julian/vim-textobj-variable-segment'
   Plug 'michaeljsmith/vim-indent-object'
+  Plug 'kana/vim-textobj-line'
 
   " Themes
   Plug 'ryanoasis/vim-devicons'
