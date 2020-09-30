@@ -1,9 +1,5 @@
 autocmd BufNewFile,BufEnter * silent! lcd %:p:h
 
-let mapleader = " "
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-nnoremap ;; ;
-nnoremap ; :
 set nu
 set rnu
 filetype plugin indent on
@@ -29,12 +25,6 @@ set smartcase
 " Highlight search results
 "set hlsearch
 let g:incsearch#auto_nohlsearch = 1
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
 
 " Makes search act like search in modern browsers
 set incsearch
@@ -69,3 +59,20 @@ set autoread
 "au CursorHold * checktime
 
 let g:wordmotion_prefix = 'm'
+
+" Smart pairs are disabled by default:
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:rooter_manual_only = 1
+let mapleader = " "

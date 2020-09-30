@@ -1,13 +1,13 @@
 call plug#begin('~/.vim/plugged')
   " S tier plugins
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-abolish'
+  Plug 'tpope/vim-commentary'
   Plug 'chaoren/vim-wordmotion'
   Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -35,7 +35,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'mhinz/vim-startify'
   Plug 'junegunn/vim-peekaboo'
+  Plug 'tmsvg/pear-tree'
 
+  " No such thing as too many textobjects
   Plug 'lucapette/vim-textobj-underscore'
   Plug 'kana/vim-textobj-lastpat'
   Plug 'kana/vim-textobj-function'

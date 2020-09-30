@@ -1,7 +1,7 @@
 """ FZF
-nnoremap <leader>a :HgPstat<CR>
+nnoremap <leader>s :GitStat<CR>
 nnoremap <leader>o :Bookmarks<CR>
-nnoremap <leader>p :Files<CR>
+nnoremap <leader>p :ProjectFiles<CR>
 nnoremap , :Buffers<CR>
 nnoremap <leader>l :Lines<CR>
 nnoremap <leader>h :History<CR>
@@ -10,16 +10,12 @@ nnoremap <leader>x :Commands<CR>
 nnoremap <leader>g :Ag<CR>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>q :q<CR>
+nnoremap <leader>f :Files<CR>
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
-
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " I hate horizontal help
 cabbrev h vert h
@@ -38,7 +34,7 @@ nmap s <Plug>(easymotion-overwin-f2)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-nmap <leader> rn <Plug>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
@@ -51,29 +47,30 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 map z/ <Plug>(incsearch-easymotion-/)
 
 " incsearch.vim x fuzzy x vim-easymotion
-
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-  \   'converters': [incsearch#config#fuzzy#converter()],
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
-endfunction
 
 noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
 noremap <leader>t :call NERDComment(0,"toggle")<CR>
 vmap<leader>t <Plug>NERDCommenterToggle<CR>gv
 nmap<leader>w :w<CR>
+
+nnoremap <silent> <Leader>a :set opfunc=Append<CR>g@
+nnoremap <silent> <Leader>i :set opfunc=Insert<CR>g@
+
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+nnoremap ;; ;
+nnoremap ; :
+vnoremap ; :
+
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
