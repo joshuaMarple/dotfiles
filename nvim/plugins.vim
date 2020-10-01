@@ -54,5 +54,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'ryanoasis/vim-devicons'
   Plug 'psliwka/vim-smoothie'
   Plug 'itchyny/lightline.vim'
-  Plug 'rakr/vim-one'
+  " Plug 'rakr/vim-one'
+  Plug 'https://gitlab.com/jmarple/vim-one'
 call plug#end()

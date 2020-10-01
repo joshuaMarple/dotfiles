@@ -78,3 +78,8 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 let g:rooter_manual_only = 1
 let mapleader = " "
+
+augroup TerminalStuff
+  au!
+  autocmd TermOpen * setlocal nonumber norelativenumber
+augroup END
