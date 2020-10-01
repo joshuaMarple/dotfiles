@@ -7,6 +7,8 @@ command! HgPstat call fzf#run(fzf#wrap({'source': 'hg pstatus -n'}))
 """ Git status in FZF
 command! GitStat call fzf#run(fzf#wrap({'source': 'git status -s | cut -c4-'}))
 
+command! Ranger FloatermNew ranger
+
 function! FloatingFZF()
   let buf = nvim_create_buf(v:false, v:true)
   call setbufvar(buf, '&signcolumn', 'no')

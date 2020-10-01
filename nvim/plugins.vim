@@ -37,6 +37,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-peekaboo'
   Plug 'tmsvg/pear-tree'
   Plug 'tommcdo/vim-exchange'
+  Plug 'voldikss/fzf-floaterm'
   Plug 'voldikss/vim-floaterm'
 
   " No such thing as too many textobjects

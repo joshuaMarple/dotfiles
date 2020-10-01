@@ -35,6 +35,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>rr :Ranger<CR>
 
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
