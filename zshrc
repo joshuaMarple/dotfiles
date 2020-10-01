@@ -72,6 +72,7 @@ SPACESHIP_PROMPT_ORDER=(
 
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

@@ -53,10 +53,6 @@ map z/ <Plug>(incsearch-easymotion-/)
 
 " incsearch.vim x fuzzy x vim-easymotion
 
-noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
-
-noremap <leader>t :call NERDComment(0,"toggle")<CR>
-vmap<leader>t <Plug>NERDCommenterToggle<CR>gv
 nmap<leader>w :w<CR>
 
 nnoremap <silent> <Leader>a :set opfunc=Append<CR>g@
@@ -74,3 +70,10 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <C-v><Esc> <Esc>
+endif
+
+nnoremap <silent> <leader>t :FloatermToggle<CR>
+tnoremap <silent> <C-e> <C-\><C-n>:FloatermToggle<CR>
