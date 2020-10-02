@@ -74,7 +74,9 @@ map g# <Plug>(incsearch-nohl-g#)
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
   tnoremap <C-v><Esc> <Esc>
+  au FileType fzf tunmap <Esc>
 endif
 
 nnoremap <silent> <leader>t :FloatermToggle<CR>
+
 " tnoremap <silent> <C-e> <C-\><C-n>:FloatermToggle<CR>

@@ -26,12 +26,8 @@ call plug#begin('~/.vim/plugged')
 
   " Whatever tier
   Plug 'airblade/vim-gitgutter'
-  Plug 'preservim/nerdtree'
   Plug 'liuchengxu/vim-which-key'
   Plug 'kshenoy/vim-signature'
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
-  Plug 'ervandew/supertab'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'mhinz/vim-startify'
   Plug 'junegunn/vim-peekaboo'
