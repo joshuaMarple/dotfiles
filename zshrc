@@ -1,28 +1,18 @@
+# zmodload zsh/zprof
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
 autoload -Uz compinit
-compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;
 
-source ~/antigen.zsh
-
-antigen theme denysdovhan/spaceship-prompt
-
-antigen bundle git
-antigen bundle Aloxaf/fzf-tab
-antigen bundle command-not-found
-
-# Syntax highlighting bundle
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-antigen bundle urbainvaes/fzf-marks
-antigen bundle mafredri/zsh-async
-antigen bundle zsh-users/zsh-autosuggestions
-
-# Tell Antigen that you're done
-antigen apply
+# source ~/antibody.zsh
+source ~/.zsh_plugins.sh
 
 source ~/.bash_aliases
 
@@ -118,3 +108,11 @@ eval enable-fzf-tab
   local z=$'\0'
   PROMPT='${${${$(spaceship_prompt)//\%\%/'$z'}//\%B}//'$z'/%%}'
 }
+
+# source <(antibody init)
+
+# antibody bundle < ~/.zsh_plugins.txt
+
+# # Tell antibody that you're done
+# antibody apply
+# zprof

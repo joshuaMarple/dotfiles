@@ -1,3 +1,4 @@
 alias ft="floaterm"
 alias v="nvim"
 alias r="ranger"
+alias antiup="antibody bundle < ~/dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh"
