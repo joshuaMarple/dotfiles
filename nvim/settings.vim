@@ -48,7 +48,7 @@ let g:ascii = ['']
 
 let g:startify_custom_header = g:ascii
 
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+" let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
 """ COC
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
