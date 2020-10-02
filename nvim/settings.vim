@@ -92,3 +92,6 @@ augroup TerminalStuff
 augroup END
 
 set inccommand=split
+
+let g:floaterm_autoclose=1
+autocmd User Startified setlocal buflisted

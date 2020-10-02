@@ -77,4 +77,4 @@ if has('nvim')
 endif
 
 nnoremap <silent> <leader>t :FloatermToggle<CR>
-tnoremap <silent> <C-e> <C-\><C-n>:FloatermToggle<CR>
+" tnoremap <silent> <C-e> <C-\><C-n>:FloatermToggle<CR>

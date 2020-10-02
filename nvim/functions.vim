@@ -58,6 +58,8 @@ function! Insert(type, ...)
 endfunction
 
 command! ProjectFiles execute 'Files' FindRootDirectory()
+command! ProjectAg call fzf#vim#ag('', {'': FindRootDirectory()})
+command! GitDiff FloatermNew git diff
 
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
