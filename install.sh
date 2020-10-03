@@ -87,6 +87,8 @@ python3 ~/.vim/plugged/YouCompleteMe/install.py --ts-completer
 # setup git
 git config --global user.name "Joshua Marple"
 git config --global user.email "joshua.d.marple@gmail.com"
+git config --global --unset core.editor
+git config --local --unset core.editor
 
 # put update script into /usr/bin/local
 sudo -S ln -sf ~/dotfiles/update.sh /usr/local/bin/update

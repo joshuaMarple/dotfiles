@@ -66,10 +66,14 @@ export PATH="$PATH:$HOME/.local/bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export TERM=screen-256color
+export TERM=vte-256color
+
+if [ -z "$VISUAL" ]
+then
 export EDITOR='nvim'
 export VISUAL='nvim'
 export FPP_EDITOR='nvim'
+fi
 
 bindkey -s '^e' 'vim $(fzf)\n'
 export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history"

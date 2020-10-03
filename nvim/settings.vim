@@ -97,5 +97,5 @@ let g:floaterm_autoclose=1
 autocmd User Startified setlocal buflisted
 
 " if has('nvim') && executable('nvr')
-  let $VISUAL="ft"
+  let $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
 " endif
