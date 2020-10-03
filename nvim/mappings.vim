@@ -7,7 +7,7 @@ nnoremap <leader>l :Lines<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>; :History:<CR>
 nnoremap <leader>x :Commands<CR>
-nnoremap <leader>g :Ag<CR>
+nnoremap <leader>g :AgProject<CR>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>f :Files<CR>
@@ -74,7 +74,7 @@ map g# <Plug>(incsearch-nohl-g#)
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
   tnoremap <C-v><Esc> <Esc>
-  au FileType fzf tunmap <Esc>
+  " au FileType fzf tunmap <Esc>
 endif
 
 nnoremap <silent> <leader>t :FloatermToggle<CR>

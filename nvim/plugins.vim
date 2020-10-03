@@ -23,6 +23,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'haya14busa/incsearch.vim'
   Plug 'haya14busa/incsearch-fuzzy.vim'
   Plug 'haya14busa/incsearch-easymotion.vim'
+  Plug 'ervandew/supertab'
 
   " Whatever tier
   Plug 'airblade/vim-gitgutter'
@@ -54,4 +55,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   " Plug 'rakr/vim-one'
   Plug 'https://gitlab.com/jmarple/vim-one'
+  Plug 'camspiers/animate.vim'
+  Plug 'camspiers/lens.vim'
 call plug#end()

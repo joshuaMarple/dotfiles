@@ -58,8 +58,26 @@ function! Insert(type, ...)
 endfunction
 
 command! ProjectFiles execute 'Files' FindRootDirectory()
-command! ProjectAg call fzf#vim#ag('', {'': FindRootDirectory()})
+command! ProjectAg call fzf#vim#ag_in('', {'': FindRootDirectory()})
 command! GitDiff FloatermNew git diff
+
+" AgIn: Start ag in the specified directory
+"
+" e.g.
+"   :AgIn .. foo
+function! s:ag_in(bang, ...)
+  if !isdirectory(a:1)
+    throw 'not a valid directory: ' .. a:1
+  endif
+  " Press `?' to enable preview window.
+  call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'up:50%:hidden', '?'), a:bang)
+
+  " If you don't want preview option, use this
+  " call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
+endfunction
+
+command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
+command! -bang -complete=dir AgProject call s:ag_in(<bang>0, FindRootDirectory())
 
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
