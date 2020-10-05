@@ -14,6 +14,9 @@ set softtabstop=2
 set shiftwidth=2
 set autoindent
 
+set undofile
+set undodir=~/.vim/undo
+
 let g:netrw_banner=0
 
 " Ignore case when searching
@@ -99,3 +102,8 @@ autocmd User Startified setlocal buflisted
 " if has('nvim') && executable('nvr')
   let $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
 " endif
+
+augroup EnableSyntaxHighlighting
+    autocmd! BufWinEnter * nested if exists('syntax_on') && ! exists('b:current_syntax') && ! empty(&l:filetype) | syntax enable | endif
+    autocmd! BufRead * if exists('syntax_on') && exists('b:current_syntax') && ! empty(&l:filetype) && index(split(&eventignore, ','), 'Syntax') != -1 | unlet! b:current_syntax | endif
+augroup END

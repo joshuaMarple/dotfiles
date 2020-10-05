@@ -57,8 +57,8 @@ function! Insert(type, ...)
     endif
 endfunction
 
-command! ProjectFiles execute 'Files' FindRootDirectory()
-command! ProjectAg call fzf#vim#ag_in('', {'': FindRootDirectory()})
+command! ProjectFiles execute 'Files' projectroot#guess()
+" command! ProjectAg call fzf#vim#ag_in('', {'': FindRootDirectory()})
 command! GitDiff FloatermNew git diff
 
 " AgIn: Start ag in the specified directory
@@ -77,7 +77,34 @@ function! s:ag_in(bang, ...)
 endfunction
 
 command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
-command! -bang -complete=dir AgProject call s:ag_in(<bang>0, FindRootDirectory())
+command! -bang -complete=dir AgProject call s:ag_in(<bang>0, projectroot#guess())
+command! -bang -complete=dir AgProject call s:ag_in(<bang>0, projectroot#guess())
+
+
+function! ProjectDo(command)
+  ProjectRootExe args **/*
+  execute 'argdo ' . a:command
+endfunction
+
+function! BufClear()
+  bufdo e!
+endfunction
+
+function! s:DiffAll()
+  bufdo echo expand('%:p') | w !diff % -
+endfunction
+com! DiffAll call s:DiffAll()
+
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
+command! -nargs=+ -complete=command ProjectDo call ProjectDo(<q-args>)
 
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({

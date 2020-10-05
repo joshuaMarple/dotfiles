@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-obsession'
   Plug 'chaoren/vim-wordmotion'
   Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -19,7 +20,8 @@ call plug#begin('~/.vim/plugged')
 
   " A tier
   Plug 'machakann/vim-swap'
-  Plug 'airblade/vim-rooter'
+  " Plug 'airblade/vim-rooter'
+  Plug 'dbakker/vim-projectroot'
   Plug 'haya14busa/incsearch.vim'
   Plug 'haya14busa/incsearch-fuzzy.vim'
   Plug 'haya14busa/incsearch-easymotion.vim'
