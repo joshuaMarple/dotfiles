@@ -70,7 +70,7 @@ autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
 autocmd FileChangedShellPost *
   \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
-let g:wordmotion_prefix = 'm'
+let g:wordmotion_prefix = ','
 
 " Smart pairs are disabled by default:
 let g:pear_tree_smart_openers = 1

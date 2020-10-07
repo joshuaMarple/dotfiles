@@ -2,7 +2,7 @@
 nnoremap <leader>s :GitStat<CR>
 nnoremap <leader>o :Bookmarks<CR>
 nnoremap <leader>p :ProjectFiles<CR>
-nnoremap , :Buffers<CR>
+nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>l :Lines<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>; :History:<CR>
@@ -45,7 +45,6 @@ nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " better key bindings for UltiSnipsExpandTrigger
@@ -56,8 +55,8 @@ map z/ <Plug>(incsearch-easymotion-/)
 
 nmap<leader>w :w<CR>
 
-nnoremap <silent> <Leader>a :set opfunc=Append<CR>g@
-nnoremap <silent> <Leader>i :set opfunc=Insert<CR>g@
+nnoremap <silent> ,a :set opfunc=Append<CR>g@
+nnoremap <silent> ,i :set opfunc=Insert<CR>g@
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap ;; ;
