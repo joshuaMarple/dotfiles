@@ -97,10 +97,14 @@ augroup END
 set inccommand=split
 
 let g:floaterm_autoclose=1
+let g:floaterm_gitcommit=1
 autocmd User Startified setlocal buflisted
 
 " if has('nvim') && executable('nvr')
-  let $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+  let $VISUAL="nvr -cc 'call floaterm#hide(1, 0, \"\") | vsplit' --remote-wait +'set bufhidden=wipe'"
+  " let $VISUAL="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
+  let $EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
+  let $FPP_EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
 " endif
 
 augroup EnableSyntaxHighlighting
