@@ -21,7 +21,7 @@ bindkey '^ ' autosuggest-execute
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=bold,underline"
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 
-# bindkey -v
+bindkey -v
 
 SPACESHIP_PROMPT_ORDER=(
   time          # Time stamps section
@@ -77,7 +77,7 @@ fi
 
 autoload -z edit-command-line 
 zle -N edit-command-line
-bindkey "^X^E" edit-command-line
+bindkey "v" edit-command-line
 # autoload edit-command-line; zle -N edit-command-line
 # bindkey -M vicmd "^V" edit-command-line
 

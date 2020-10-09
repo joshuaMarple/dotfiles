@@ -50,6 +50,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'Julian/vim-textobj-variable-segment'
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'kana/vim-textobj-line'
+  Plug 'gko/vim-coloresque'
 
   " Themes
   Plug 'ryanoasis/vim-devicons'
@@ -57,6 +58,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   " Plug 'rakr/vim-one'
   Plug 'https://gitlab.com/jmarple/vim-one'
+  Plug 'rakr/vim-two-firewatch'
   Plug 'camspiers/animate.vim'
   Plug 'camspiers/lens.vim'
 call plug#end()

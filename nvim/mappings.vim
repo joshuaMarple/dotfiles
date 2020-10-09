@@ -24,6 +24,7 @@ cabbrev h vert h
 map <C-n> :NERDTreeToggle<CR>
 
 nnoremap <leader>nt :call NumToggle()<CR>
+nnoremap <leader>nh :noh<CR>
 
 """ EasyMotion
 nmap s <Plug>(easymotion-overwin-f2)
@@ -63,6 +64,11 @@ nnoremap ;; ;
 nnoremap ; :
 vnoremap ; :
 
+noremap <C-H> <C-W><C-H>
+noremap <C-N> <C-W><C-J>
+noremap <C-E> <C-W><C-K>
+noremap <C-I> <C-W><C-L>
+
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
 map *  <Plug>(incsearch-nohl-*)
@@ -70,9 +76,12 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
+inoremap uu <Esc>
+vnoremap uu <Esc>
+
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
-  tnoremap <C-v><Esc> <Esc>
+  tnoremap uu <Esc>
   " au FileType fzf tunmap <Esc>
 endif
 
