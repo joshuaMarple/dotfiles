@@ -2,6 +2,8 @@ autocmd BufNewFile,BufEnter * silent! lcd %:p:h
 
 set history=10000
 
+set scrolloff=5
+
 set nu
 set rnu
 filetype plugin indent on
@@ -101,8 +103,8 @@ let g:floaterm_gitcommit=1
 autocmd User Startified setlocal buflisted
 
 " if has('nvim') && executable('nvr')
-  let $VISUAL="nvr -cc 'call floaterm#hide(1, 0, \"\") | vsplit' --remote-wait +'set bufhidden=wipe'"
-  " let $VISUAL="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
+  " let $VISUAL="nvr -cc 'call floaterm#hide(1, 0, \"\") | vsplit' --remote-wait +'set bufhidden=wipe'"
+  let $VISUAL="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
   let $EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
   let $FPP_EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
 " endif
