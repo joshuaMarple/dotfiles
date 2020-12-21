@@ -1,5 +1,5 @@
 """ FZF
-nnoremap <leader>s :GitStat<CR>
+nnoremap <leader>s :GitFiles<CR>
 nnoremap <leader>o :Bookmarks<CR>
 nnoremap <leader>p :ProjectFiles<CR>
 nnoremap <leader>b :Buffers<CR>
@@ -7,15 +7,21 @@ nnoremap <leader>l :Lines<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>; :History:<CR>
 nnoremap <leader>x :Commands<CR>
-nnoremap <leader>g :AgProject<CR>
+nnoremap <leader>g :RgProject<CR>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>f :Files<CR>
+nnoremap <leader>r :Ranger<CR>
+nnoremap <leader>o :CocFzfList outline<CR>
+" nnoremap <leader>r :Ranger<CR>
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " I hate horizontal help
 cabbrev h vert h
@@ -39,9 +45,9 @@ nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>rr :Ranger<CR>
 
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)

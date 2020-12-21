@@ -38,6 +38,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tommcdo/vim-exchange'
   Plug 'voldikss/fzf-floaterm'
   Plug 'voldikss/vim-floaterm'
+  Plug 'antoinemadec/coc-fzf'
 
   " No such thing as too many textobjects
   Plug 'lucapette/vim-textobj-underscore'
@@ -53,12 +54,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'gko/vim-coloresque'
 
   " Themes
+  Plug 'humanoid-colors/vim-humanoid-colorscheme'
   Plug 'ryanoasis/vim-devicons'
   Plug 'psliwka/vim-smoothie'
-  Plug 'itchyny/lightline.vim'
+  " Plug 'itchyny/lightline.vim'
   " Plug 'rakr/vim-one'
   Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'rakr/vim-two-firewatch'
-  Plug 'camspiers/animate.vim'
-  Plug 'camspiers/lens.vim'
+  " Plug 'camspiers/animate.vim'
+  " Plug 'camspiers/lens.vim'
+  Plug 'datwaft/bubbly.nvim'
 call plug#end()

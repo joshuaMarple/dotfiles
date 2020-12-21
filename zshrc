@@ -77,7 +77,7 @@ fi
 
 autoload -z edit-command-line 
 zle -N edit-command-line
-bindkey "v" edit-command-line
+bindkey "^v" edit-command-line
 # autoload edit-command-line; zle -N edit-command-line
 # bindkey -M vicmd "^V" edit-command-line
 
@@ -118,6 +118,15 @@ eval enable-fzf-tab
   local z=$'\0'
   PROMPT='${${${$(spaceship_prompt)//\%\%/'$z'}//\%B}//'$z'/%%}'
 }
+
+autoload -Uz compinit
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+
+eval "$(zoxide init zsh)"
+
+export BAT_THEME="base16-256"
 
 # source <(antibody init)
 
