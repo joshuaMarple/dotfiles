@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
   " S tier plugins
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'tpope/vim-sensible'
+  " Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-eunuch'
@@ -39,6 +39,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'voldikss/fzf-floaterm'
   Plug 'voldikss/vim-floaterm'
   Plug 'antoinemadec/coc-fzf'
+  Plug 'andymass/vim-matchup'
 
   " No such thing as too many textobjects
   Plug 'lucapette/vim-textobj-underscore'
@@ -46,11 +47,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'kana/vim-textobj-function'
   Plug 'kana/vim-textobj-methodcall'
   Plug 'kana/vim-textobj-user'
+  Plug 'kana/vim-textobj-entire'
   Plug 'glts/vim-textobj-comment'
   Plug 'thalesmello/vim-textobj-methodcall'
   Plug 'Julian/vim-textobj-variable-segment'
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'kana/vim-textobj-line'
+  Plug 'Chun-Yang/vim-textobj-chunk'
   Plug 'gko/vim-coloresque'
 
   " Themes
