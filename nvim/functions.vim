@@ -48,6 +48,7 @@ function! Append(type, ...)
         call feedkeys("o", 'n')
     endif
 endfunction
+
 function! Insert(type, ...)
     normal! `[
     if a:type == 'char'
@@ -61,33 +62,121 @@ command! ProjectFiles execute 'Files' projectroot#guess()
 " command! ProjectAg call fzf#vim#ag_in('', {'': FindRootDirectory()})
 command! GitDiff FloatermNew git diff
 
+command! -bang -nargs=* PGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number -- '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number -- '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+
 " AgIn: Start ag in the specified directory
 "
 " e.g.
 "   :AgIn .. foo
-function! s:rg_in(bang, ...)
-  if !isdirectory(a:1)
-    throw 'not a valid directory: ' .. a:1
+" function! s:rg_in(bang, ...)
+"   if !isdirectory(a:1)
+"     throw 'not a valid directory: ' .. a:1
+"   endif
+"   " Press `?' to enable preview window.
+"   call fzf#vim#grep(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'up:50%:hidden', '?'), a:bang)
+
+"   " If you don't want preview option, use this
+"   " call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
+" endfunction
+
+" function! RipgrepFzf(query, fullscreen)
+"   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+"   let initial_command = printf(command_fmt, shellescape(a:query))
+"   let reload_command = printf(command_fmt, '{q}')
+"   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+"   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+" endfunction
+
+" command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+
+" command! -bang -nargs=+ -complete=dir RgIn call s:rg_in(<bang>0, <f-args>)
+" command! -bang -complete=dir RgProject call s:rg_in(<bang>0, projectroot#guess())
+
+let s:actions = {
+  \   'ctrl-t': 'tabe',
+  \   'ctrl-x': 'split',
+  \   'ctrl-v': 'vsplit'
+  \ }
+
+let s:base_rip = 'rg --column --line-number --no-heading --hidden --follow --color "never"'
+
+function! s:CallRipGrep(smartcase, where, ...) abort
+  let args = copy(a:000)
+  let flags = []
+  let terms = []
+
+  let cmd = s:base_rip
+
+  if a:smartcase
+    let cmd .= ' --smart-case '
   endif
-  " Press `?' to enable preview window.
-  call fzf#vim#grep(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'up:50%:hidden', '?'), a:bang)
 
-  " If you don't want preview option, use this
-  " call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
+  for arg in args
+    if match(arg, '^-') == 0
+      call add(flags, arg)
+    else
+      call add(terms, arg)
+    endif
+  endfor
+
+  let where = a:where
+  
+  if where == ''
+    let where = remove(terms, -1)
+  endif
+
+  let term = join(terms, ' ')
+  let term = '"' . term . '"'
+
+  if len(flags)
+    let cmd .= join(flags, ' ') . ' '
+  endif
+
+  let cmd .= term  . ' ' . where
+  call fzf#vim#grep(cmd, 1, { 'options': '--expect='. join(keys(s:actions), ',') })
 endfunction
 
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+function! s:RipWithRange(smartcase, where) range
+  let lines = join(getline(a:firstline, a:lastline), '\n')
+  call s:CallRipGrep(a:smartcase, a:where, lines)
 endfunction
 
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+function! SetRipOpDir(dir) abort
+  let s:rip_opt_dir = a:dir
+endfunction
 
-command! -bang -nargs=+ -complete=dir RgIn call s:rg_in(<bang>0, <f-args>)
-command! -bang -complete=dir RgProject call s:rg_in(<bang>0, projectroot#guess())
+function! OperatorRip(wiseness) abort
+  if a:wiseness ==# 'char'
+    normal! `[v`]"ay
+    call s:CallRipGrep(1, s:rip_opt_dir, @a)
+  elseif a:wiseness ==# 'line'
+    '[,']call s:RipWithRange(1, s:rip_opt_dir)
+  endif
+endfunction
+
+nmap gr <Plug>(operator-ripgrep-root)
+vmap gr <Plug>(operator-ripgrep-root)
+call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(RootRelativeToCwd())')
+
+nmap gR <Plug>(operator-ripgrep-rel)
+vmap gR <Plug>(operator-ripgrep-rel)
+call operator#user#define('ripgrep-rel', 'OperatorRip', 'call SetRipOpDir(expand("%:h"))')
+
+nmap g. <Plug>(operator-ripgrep-cwd)
+vmap g. <Plug>(operator-ripgrep-cwd)
+call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd())')
+
+command! -bang -nargs=* Rip :call s:CallRipGrep(<bang>1, RootRelativeToCwd(), <f-args>)
+command! -bang -nargs=* Ripcwd :call s:CallRipGrep(<bang>1, getcwd(), <f-args>)
+command! -bang -nargs=* Ripfile :call s:CallRipGrep(<bang>1, expand("%:h"), <f-args>)
 
 function! ProjectDo(command)
   ProjectRootExe args **/*

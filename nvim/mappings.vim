@@ -32,6 +32,10 @@ map <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>nt :call NumToggle()<CR>
 nnoremap <leader>nh :noh<CR>
 
+let g:swap_no_default_key_mappings = 1
+map g< <Plug>(swap-prev)
+map g> <Plug>(swap-next)
+
 """ EasyMotion
 nmap s <Plug>(easymotion-overwin-f2)
 
@@ -64,16 +68,18 @@ nmap<leader>w :w<CR>
 
 nnoremap <silent> ,a :set opfunc=Append<CR>g@
 nnoremap <silent> ,i :set opfunc=Insert<CR>g@
+" nnoremap <silent> ,m :set opfunc=Insert<CR><ESC>g@
+" nnoremap <silent> ,n :set opfunc=Append<CR><ESC>g@
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap ;; ;
 nnoremap ; :
 vnoremap ; :
 
-noremap <C-H> <C-W><C-H>
-noremap <C-N> <C-W><C-J>
-noremap <C-E> <C-W><C-K>
-noremap <C-I> <C-W><C-L>
+" noremap <C-H> <C-W><C-H>
+" noremap <C-N> <C-W><C-J>
+" noremap <C-E> <C-W><C-K>
+" noremap <C-I> <C-W><C-L>
 
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
@@ -103,5 +109,45 @@ if has('nvim')
 endif
 
 nnoremap <silent> <leader>t :FloatermToggle<CR>
+function! RootRelativeToCwd()
+  if getcwd() == projectroot#guess()
+    return '.'
+  endif
+
+  let relative = split(getcwd(), b:projectroot_name . '/')
+  if len(relative) == 0
+    return b:projectroot_name
+  else
+    let relative = relative[1]
+  endif
+
+  let path = ''
+  for part in split(relative, '/')
+    let path .= '../'
+  endfor
+
+  return path
+endfunction
+
+augroup AssignProjectRoot
+  au!
+  au BufRead,BufNew * let b:projectroot = projectroot#guess() | let b:projectroot_name = matchstr(b:projectroot, '/\zs[^\/]\+\ze$')
+augroup END
 
 " tnoremap <silent> <C-e> <C-\><C-n>:FloatermToggle<CR>
+nmap gs <Plug>(operator-ripgrep-root)
+vmap gs <Plug>(operator-ripgrep-root)
+call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(RootRelativeToCwd())')
+
+nmap gS <Plug>(operator-ripgrep-rel)
+vmap gS <Plug>(operator-ripgrep-rel)
+call operator#user#define('ripgrep-rel', 'OperatorRip', 'call SetRipOpDir(expand("%:h"))')
+
+nmap g. <Plug>(operator-ripgrep-cwd)
+vmap g. <Plug>(operator-ripgrep-cwd)
+call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd())')
+
+
+vnoremap <leader>c :OSCYank<CR>
+
+
