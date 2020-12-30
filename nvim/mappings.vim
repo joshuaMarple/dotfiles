@@ -48,7 +48,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>rr :Ranger<CR>
 
-nmap <silent> gd :call <SID>GoToDefinition()<CR>
+nmap <silent> gd :call GoToDefinition()<CR>
 " GoTo code navigation.
 " nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)

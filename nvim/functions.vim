@@ -134,17 +134,17 @@ function! OperatorRip(wiseness) abort
   endif
 endfunction
 
-nmap gr <Plug>(operator-ripgrep-root)
-vmap gr <Plug>(operator-ripgrep-root)
-call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(RootRelativeToCwd())')
+" nmap gs <Plug>(operator-ripgrep-root)
+" vmap gs <Plug>(operator-ripgrep-root)
+" call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(RootRelativeToCwd())')
 
-nmap gR <Plug>(operator-ripgrep-rel)
-vmap gR <Plug>(operator-ripgrep-rel)
-call operator#user#define('ripgrep-rel', 'OperatorRip', 'call SetRipOpDir(expand("%:h"))')
+" nmap gS <Plug>(operator-ripgrep-rel)
+" vmap gS <Plug>(operator-ripgrep-rel)
+" call operator#user#define('ripgrep-rel', 'OperatorRip', 'call SetRipOpDir(expand("%:h"))')
 
-nmap g. <Plug>(operator-ripgrep-cwd)
-vmap g. <Plug>(operator-ripgrep-cwd)
-call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd())')
+" nmap g. <Plug>(operator-ripgrep-cwd)
+" vmap g. <Plug>(operator-ripgrep-cwd)
+" call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd())')
 
 command! -bang -nargs=* Rip :call s:CallRipGrep(<bang>1, RootRelativeToCwd(), <f-args>)
 command! -bang -nargs=* Ripcwd :call s:CallRipGrep(<bang>1, getcwd(), <f-args>)
