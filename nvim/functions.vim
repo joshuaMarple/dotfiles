@@ -72,34 +72,6 @@ command! -bang -nargs=* GGrep
   \   'git grep --line-number -- '.shellescape(<q-args>), 0,
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
-" AgIn: Start ag in the specified directory
-"
-" e.g.
-"   :AgIn .. foo
-" function! s:rg_in(bang, ...)
-"   if !isdirectory(a:1)
-"     throw 'not a valid directory: ' .. a:1
-"   endif
-"   " Press `?' to enable preview window.
-"   call fzf#vim#grep(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'up:50%:hidden', '?'), a:bang)
-
-"   " If you don't want preview option, use this
-"   " call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
-" endfunction
-
-" function! RipgrepFzf(query, fullscreen)
-"   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-"   let initial_command = printf(command_fmt, shellescape(a:query))
-"   let reload_command = printf(command_fmt, '{q}')
-"   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-"   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-" endfunction
-
-" command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-
-" command! -bang -nargs=+ -complete=dir RgIn call s:rg_in(<bang>0, <f-args>)
-" command! -bang -complete=dir RgProject call s:rg_in(<bang>0, projectroot#guess())
-
 let s:actions = {
   \   'ctrl-t': 'tabe',
   \   'ctrl-x': 'split',
@@ -128,7 +100,7 @@ function! s:CallRipGrep(smartcase, where, ...) abort
   endfor
 
   let where = a:where
-  
+
   if where == ''
     let where = remove(terms, -1)
   endif
@@ -177,6 +149,17 @@ call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd
 command! -bang -nargs=* Rip :call s:CallRipGrep(<bang>1, RootRelativeToCwd(), <f-args>)
 command! -bang -nargs=* Ripcwd :call s:CallRipGrep(<bang>1, getcwd(), <f-args>)
 command! -bang -nargs=* Ripfile :call s:CallRipGrep(<bang>1, expand("%:h"), <f-args>)
+
+function! GoToDefinition()
+  if CocAction('jumpDefinition')
+    return v:true
+  endif
+
+  let ret = execute("silent! normal \<C-]>")
+  if ret =~ "Error"
+    call searchdecl(expand('<cword>'))
+  endif
+endfunction
 
 function! ProjectDo(command)
   ProjectRootExe args **/*

@@ -1,15 +1,15 @@
 """ FZF
-nnoremap <leader>s :GitFiles<CR>
+nnoremap <leader>s :GitStat<CR>
 nnoremap <leader>o :Bookmarks<CR>
 nnoremap <leader>p :ProjectFiles<CR>
-nnoremap <leader>b :Buffers<CR>
+nnoremap ,, :Buffers<CR>
 nnoremap <leader>l :Lines<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>; :History:<CR>
 nnoremap <leader>x :Commands<CR>
-nnoremap <leader>g :RgProject<CR>
+nnoremap <leader>g :Rip<CR>
 nnoremap <leader>e :Vexplore<CR>
-nnoremap <leader>q :q<CR>
+" nnoremap <leader>q :q<CR>
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>r :Ranger<CR>
 nnoremap <leader>o :CocFzfList outline<CR>
@@ -48,13 +48,9 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>rr :Ranger<CR>
 
-" Show commands.
-" nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-" nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-
+nmap <silent> gd :call <SID>GoToDefinition()<CR>
 " GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 
@@ -76,10 +72,10 @@ nnoremap ;; ;
 nnoremap ; :
 vnoremap ; :
 
-" noremap <C-H> <C-W><C-H>
-" noremap <C-N> <C-W><C-J>
-" noremap <C-E> <C-W><C-K>
-" noremap <C-I> <C-W><C-L>
+noremap <C-H> <C-W><C-H>
+noremap <C-J> <C-W><C-J>
+noremap <C-K> <C-W><C-K>
+noremap <C-L> <C-W><C-L>
 
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
@@ -151,3 +147,5 @@ call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd
 vnoremap <leader>c :OSCYank<CR>
 
 
+nmap <leader>qq <Plug>(qf_qf_switch)
+nmap <leader>qt <Plug>(qf_qf_toggle)

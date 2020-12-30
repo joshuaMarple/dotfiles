@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
   " S tier plugins
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Plug 'tpope/vim-sensible'
+
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-eunuch'
