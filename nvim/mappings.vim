@@ -6,6 +6,7 @@ nnoremap ,, :Buffers<CR>
 nnoremap <leader>l :Lines<CR>
 nnoremap <leader>h :History<CR>
 nnoremap <leader>; :History:<CR>
+nnoremap <leader>d :Helptags<CR>
 nnoremap <leader>x :Commands<CR>
 nnoremap <leader>g :Rip<CR>
 nnoremap <leader>e :Vexplore<CR>
@@ -15,13 +16,16 @@ nnoremap <leader>r :Ranger<CR>
 nnoremap <leader>o :CocFzfList outline<CR>
 " nnoremap <leader>r :Ranger<CR>
 
+nnoremap <leader>tr :T !!<CR>
+nnoremap <leader>tn :Tnew<CR>
+nnoremap <leader>tt :Ttoggle<CR>
 " Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-l> <plug>(fzf-complete-line)
+nmap <leader><tab> <Plug>(fzf-maps-n)
+xmap <leader><tab> <Plug>(fzf-maps-x)
+omap <leader><tab> <Plug>(fzf-maps-o)
+imap <c-x><c-k> <Plug>(fzf-complete-word)
+imap <c-x><c-f> <Plug>(fzf-complete-path)
+imap <c-x><c-l> <Plug>(fzf-complete-line)
 
 " I hate horizontal help
 cabbrev h vert h
@@ -98,13 +102,21 @@ omap iX <Plug>(textobj-big-a)
 inoremap uu <Esc>
 vnoremap uu <Esc>
 
+autocmd BufWinEnter,WinEnter term://* startinsert
+
 if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-  tnoremap uu <Esc>
+  tnoremap ,, <C-\><C-n>:Buffers<CR>
+  tnoremap <C-H> <C-\><C-n><C-W><C-H>
+  tnoremap <C-J> <C-\><C-n><C-W><C-J>
+  tnoremap <C-K> <C-\><C-n><C-W><C-K>
+  tnoremap <C-L> <C-\><C-n><C-W><C-L>
+  " tnoremap <Esc> <C-\><C-n>
+  tnoremap <C-t> <C-\><C-n>:FloatermToggle<CR>
+  tnoremap uu <C-\><C-n>
   " au FileType fzf tunmap <Esc>
 endif
 
-nnoremap <silent> <leader>t :FloatermToggle<CR>
+nnoremap <silent> <C-t> :FloatermToggle<CR>
 function! RootRelativeToCwd()
   if getcwd() == projectroot#guess()
     return '.'
@@ -146,6 +158,14 @@ call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd
 
 vnoremap <leader>c :OSCYank<CR>
 
+nmap ,s <plug>(SubversiveSubstituteRange)
+xmap ,s <plug>(SubversiveSubstituteRange)
+nmap ,ss <plug>(SubversiveSubstituteWordRange)
+
+nmap ,,s <plug>(SubversiveSubvertRange)
+xmap ,,s <plug>(SubversiveSubvertRange)
+nmap ,,ss <plug>(SubversiveSubvertWordRange)
 
 nmap <leader>qq <Plug>(qf_qf_switch)
 nmap <leader>qt <Plug>(qf_qf_toggle)
+nmap <leader>qr RefreshQuickFix()<CR>

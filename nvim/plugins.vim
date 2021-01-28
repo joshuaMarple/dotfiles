@@ -52,6 +52,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'kana/vim-operator-user'
   Plug 'ojroques/vim-oscyank'
   Plug 'voldikss/vim-skylight'
+  Plug 'arp242/jumpy.vim'
+  Plug 'jeetsukumaran/vim-indentwise'
+  Plug 'svermeulen/vim-subversive'
+  Plug 'kassio/neoterm'
 
   " No such thing as too many textobjects
   Plug 'lucapette/vim-textobj-underscore'
@@ -76,6 +80,7 @@ call plug#begin('~/.vim/plugged')
   " Plug 'itchyny/lightline.vim'
   " Plug 'rakr/vim-one'
   Plug 'https://gitlab.com/jmarple/vim-one'
+  Plug 'Th3Whit3Wolf/one-nvim'
   Plug 'rakr/vim-two-firewatch'
   " Plug 'camspiers/animate.vim'
   " Plug 'camspiers/lens.vim'
