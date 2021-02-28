@@ -16,8 +16,9 @@ nnoremap <leader>r :Ranger<CR>
 nnoremap <leader>o :CocFzfList outline<CR>
 " nnoremap <leader>r :Ranger<CR>
 
+nnoremap <leader>Q <cmd>q<CR>
 nnoremap <leader>tr :T !!<CR>
-nnoremap <leader>tn :Tnew<CR>
+nnoremap <leader>tn <cmd>vsplit <bar> Tnew<CR>
 nnoremap <leader>tt :Ttoggle<CR>
 " Mapping selecting mappings
 nmap <leader><tab> <Plug>(fzf-maps-n)
@@ -80,6 +81,10 @@ noremap <C-H> <C-W><C-H>
 noremap <C-J> <C-W><C-J>
 noremap <C-K> <C-W><C-K>
 noremap <C-L> <C-W><C-L>
+noremap <C-<Left>> <C-W><C-H>
+noremap <C-<Down>> <C-W><C-J>
+noremap <C-<Up>> <C-W><C-K>
+noremap <C-<Right>> <C-W><C-L>
 
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
@@ -110,6 +115,10 @@ if has('nvim')
   tnoremap <C-J> <C-\><C-n><C-W><C-J>
   tnoremap <C-K> <C-\><C-n><C-W><C-K>
   tnoremap <C-L> <C-\><C-n><C-W><C-L>
+  tnoremap <C-<Left>> <C-\><C-n><C-W><C-H>
+  tnoremap <C-<Down>> <C-\><C-n><C-W><C-J>
+  tnoremap <C-<Up>> <C-\><C-n><C-W><C-K>
+  tnoremap <C-<Right>> <C-\><C-n><C-W><C-L>
   " tnoremap <Esc> <C-\><C-n>
   tnoremap <C-t> <C-\><C-n>:FloatermToggle<CR>
   tnoremap uu <C-\><C-n>
@@ -166,6 +175,25 @@ nmap ,,s <plug>(SubversiveSubvertRange)
 xmap ,,s <plug>(SubversiveSubvertRange)
 nmap ,,ss <plug>(SubversiveSubvertWordRange)
 
-nmap <leader>qq <Plug>(qf_qf_switch)
+nmap <leader>qs <Plug>(qf_qf_switch)
 nmap <leader>qt <Plug>(qf_qf_toggle)
-nmap <leader>qr RefreshQuickFix()<CR>
+nmap <leader>qr <cmd>RefreshQuickFix()<CR>
+nmap <leader>qq <cmd>Telescope quickfix<CR>
+
+nmap <leader>rc <cmd>so %<CR>
+nmap <leader>rp <cmd>PlugInstall<CR>
+
+let g:textobj_wordcolumn_no_default_key_mappings = 1
+
+call textobj#user#map('wordcolumn', {
+            \ 'word' : {
+            \   'select-i' : 'io',
+            \   'select-a' : 'ao',
+            \   },
+            \ 'WORD' : {
+            \   'select-i' : 'iO',
+            \   'select-a' : 'aO',
+            \   },
+            \ })
+
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>

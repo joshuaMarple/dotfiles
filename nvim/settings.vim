@@ -1,6 +1,10 @@
 autocmd BufNewFile,BufEnter * silent! lcd %:p:h
 
 set history=10000
+" Oldfiles is set from loading shada marks. Even if a file doesn't have a
+" manually set mark, the default ' mark will load, populating oldfiles.
+" https://neovim.io/doc/user/eval.html#v:oldfiles
+set shada='10000
 
 set scrolloff=5
 
@@ -64,8 +68,8 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Triger `autoread` when files changes on disk
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
 " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
-autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
-  \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
+" autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+"   \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
 
 " Notification after file change
 " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
@@ -109,7 +113,9 @@ autocmd User Startified setlocal buflisted
   let $FPP_EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
 " endif
 
-augroup EnableSyntaxHighlighting
-    autocmd! BufWinEnter * nested if exists('syntax_on') && ! exists('b:current_syntax') && ! empty(&l:filetype) | syntax enable | endif
-    autocmd! BufRead * if exists('syntax_on') && exists('b:current_syntax') && ! empty(&l:filetype) && index(split(&eventignore, ','), 'Syntax') != -1 | unlet! b:current_syntax | endif
-augroup END
+" augroup EnableSyntaxHighlighting
+"     autocmd! BufWinEnter * nested if exists('syntax_on') && ! exists('b:current_syntax') && ! empty(&l:filetype) | syntax enable | endif
+"     autocmd! BufRead * if exists('syntax_on') && exists('b:current_syntax') && ! empty(&l:filetype) && index(split(&eventignore, ','), 'Syntax') != -1 | unlet! b:current_syntax | endif
+" augroup END
+
+let g:pear_tree_ft_disabled = ['TelescopePrompt']
