@@ -31,8 +31,8 @@ imap <c-x><c-l> <Plug>(fzf-complete-line)
 " I hate horizontal help
 cabbrev h vert h
 
-" NERDTree
-map <C-n> :NERDTreeToggle<CR>
+map <C-n> :cn<CR>
+map <C-p> :cp<CR>
 
 nnoremap <leader>nt :call NumToggle()<CR>
 nnoremap <leader>nh :noh<CR>
@@ -156,6 +156,10 @@ nmap gs <Plug>(operator-ripgrep-root)
 vmap gs <Plug>(operator-ripgrep-root)
 call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(RootRelativeToCwd())')
 
+nmap gx <cmd>Rg<CR>
+vmap gx <cmd>Rg<CR>
+" call operator#user#define('rg-root', 'OperatorRg', 'call SetRipOpDir(RootRelativeToCwd())')
+
 nmap gS <Plug>(operator-ripgrep-rel)
 vmap gS <Plug>(operator-ripgrep-rel)
 call operator#user#define('ripgrep-rel', 'OperatorRip', 'call SetRipOpDir(expand("%:h"))')
@@ -183,6 +187,7 @@ nmap <leader>qq <cmd>Telescope quickfix<CR>
 nmap <leader>rc <cmd>so %<CR>
 nmap <leader>rp <cmd>PlugInstall<CR>
 
+vmap <leader>vs <cmd>VSSplitAbove<CR>
 let g:textobj_wordcolumn_no_default_key_mappings = 1
 
 call textobj#user#map('wordcolumn', {

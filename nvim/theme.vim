@@ -11,7 +11,6 @@ set background=light
 colorscheme one
 " hi Normal guibg=NONE ctermbg=NONE
 " hi Pmenu guibg=NONE guifg=NONE
-hi FloatermBorder guibg=NONE guifg=NONE
 " let g:lightline = {
 "   \ 'colorscheme': 'one',
 "   \ }
@@ -60,3 +59,5 @@ let g:bubbly_palette = #{
 \   lightgrey: "#57595e",
 \   darkgrey: "#404247",
 \ }
+
+hi FloatermBorder guibg=NONE guifg=NONE

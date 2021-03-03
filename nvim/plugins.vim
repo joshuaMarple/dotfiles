@@ -51,6 +51,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'jeetsukumaran/vim-indentwise'
   Plug 'svermeulen/vim-subversive'
   Plug 'kassio/neoterm'
+  Plug 'romainl/vim-cool'
 
   " No such thing as too many textobjects
   Plug 'kana/vim-operator-user'
@@ -60,7 +61,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'kana/vim-textobj-user'
   Plug 'kana/vim-textobj-entire'
   Plug 'kana/vim-textobj-line'
-  Plug 'glts/vim-textobj-comment'
+  " Plug 'glts/vim-textobj-comment'
   Plug 'thalesmello/vim-textobj-methodcall'
   Plug 'Julian/vim-textobj-variable-segment'
   Plug 'michaeljsmith/vim-indent-object'
