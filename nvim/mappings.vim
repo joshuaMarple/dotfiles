@@ -158,7 +158,6 @@ call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(RootR
 
 nmap gx <cmd>Rg<CR>
 vmap gx <cmd>Rg<CR>
-" call operator#user#define('rg-root', 'OperatorRg', 'call SetRipOpDir(RootRelativeToCwd())')
 
 nmap gS <Plug>(operator-ripgrep-rel)
 vmap gS <Plug>(operator-ripgrep-rel)
