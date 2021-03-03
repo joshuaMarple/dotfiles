@@ -9,8 +9,9 @@ endif
 syntax on
 set background=light
 colorscheme one
-hi Normal guibg=NONE ctermbg=NONE
-hi Pmenu guibg=NONE guifg=NONE
+" hi Normal guibg=NONE ctermbg=NONE
+" hi Pmenu guibg=NONE guifg=NONE
+hi FloatermBorder guibg=NONE guifg=NONE
 " let g:lightline = {
 "   \ 'colorscheme': 'one',
 "   \ }
