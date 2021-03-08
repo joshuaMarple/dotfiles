@@ -48,7 +48,7 @@ let g:lightline = {
 "    darkgrey = "Grey",
 " }
 let g:bubbly_palette = #{
-\   background: "#fafafa",
+\   background: "Normal background",
 \   foreground: "#c5cdd9",
 \   black: "#3e4249",
 \   red: "#ec7279",
@@ -62,3 +62,17 @@ let g:bubbly_palette = #{
 \   darkgrey: "#404247",
 \ }
 
+let g:fzf_colors =
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }

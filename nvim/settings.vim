@@ -24,6 +24,7 @@ set undofile
 set undodir=~/.vim/undo
 
 let g:netrw_banner=0
+let g:netrw_liststyle = 3
 
 " Ignore case when searching
 set ignorecase

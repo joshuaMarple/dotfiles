@@ -174,9 +174,9 @@ nmap ,s <plug>(SubversiveSubstituteRange)
 xmap ,s <plug>(SubversiveSubstituteRange)
 nmap ,ss <plug>(SubversiveSubstituteWordRange)
 
-nmap ,,s <plug>(SubversiveSubvertRange)
-xmap ,,s <plug>(SubversiveSubvertRange)
-nmap ,,ss <plug>(SubversiveSubvertWordRange)
+nmap ,S <plug>(SubversiveSubvertRange)
+xmap ,S <plug>(SubversiveSubvertRange)
+nmap ,Ss <plug>(SubversiveSubvertWordRange)
 
 nmap <leader>qs <Plug>(qf_qf_switch)
 nmap <leader>qt <Plug>(qf_qf_toggle)
