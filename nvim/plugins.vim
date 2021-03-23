@@ -1,6 +1,8 @@
 call plug#begin('~/.vim/plugged')
   " S tier plugins
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/vim-vsnip-integ'
 
   Plug 'tpope/vim-vinegar'
   Plug 'tpope/vim-repeat'
@@ -17,9 +19,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'wellle/targets.vim'
   Plug 'rhysd/clever-f.vim'
 
+  Plug 'pechorin/any-jump.vim'
+  Plug 'gfanto/fzf-lsp.nvim'
   " Plug 'nvim-lua/popup.nvim'
   " Plug 'nvim-lua/plenary.nvim'
   " Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
   " A tier
   Plug 'machakann/vim-swap'
@@ -76,5 +82,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'ryanoasis/vim-devicons'
   Plug 'psliwka/vim-smoothie'
   Plug 'https://gitlab.com/jmarple/vim-one'
+  Plug 'tjdevries/colorbuddy.vim'
+  Plug 'Th3Whit3Wolf/onebuddy'
   Plug 'datwaft/bubbly.nvim'
 call plug#end()
