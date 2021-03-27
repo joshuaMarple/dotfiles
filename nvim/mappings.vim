@@ -34,7 +34,7 @@ cabbrev h vert h
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
 
-nnoremap <leader>nt :call NumToggle()<CR>
+nnoremap <leader>nt :call NumToggletest()<CR>
 nnoremap <leader>nh :noh<CR>
 
 let g:swap_no_default_key_mappings = 1
