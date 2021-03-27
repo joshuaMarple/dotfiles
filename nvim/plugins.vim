@@ -3,6 +3,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
 
   Plug 'tpope/vim-vinegar'
   Plug 'tpope/vim-repeat'
@@ -21,9 +23,9 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'pechorin/any-jump.vim'
   Plug 'gfanto/fzf-lsp.nvim'
-  " Plug 'nvim-lua/popup.nvim'
-  " Plug 'nvim-lua/plenary.nvim'
-  " Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
