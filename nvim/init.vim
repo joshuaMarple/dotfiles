@@ -201,9 +201,6 @@ omap aX <Plug>(textobj-big-a)
 xmap iX <Plug>(textobj-big-i)
 omap iX <Plug>(textobj-big-a)
 
-" Terminal should automatically go into insert mode
-autocmd BufWinEnter,WinEnter term://* startinsert
-
 tnoremap ,, <C-\><C-n>:Buffers<CR>
 tnoremap uu <C-\><C-n>
 
