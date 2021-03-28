@@ -1,4 +1,8 @@
 call plug#begin('~/.vim/plugged')
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/nvim-compe'
+  Plug 'kabouzeid/nvim-lspinstall'
+
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -6,8 +10,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-unimpaired'
 
-  " Buffer Navigation
+  "" Buffer Navigation
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
@@ -30,11 +35,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'ojroques/vim-oscyank'
   Plug 'svermeulen/vim-subversive'
 
-  " Terminal Management
+  "" Terminal Management
   Plug 'kassio/neoterm'
   Plug 'voldikss/vim-floaterm'
 
-  " Textobjects
+  "" Textobjects
   Plug 'wellle/targets.vim'
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'kana/vim-operator-user'
@@ -47,16 +52,21 @@ call plug#begin('~/.vim/plugged')
   Plug 'Chun-Yang/vim-textobj-chunk'
   Plug 'pianohacker/vim-textobj-indented-paragraph'
 
-  " Themes
+  "" Themes
   Plug 'sheerun/vim-polyglot'
+  " Turns off highlighting intelligently
   Plug 'romainl/vim-cool'
   Plug 'ryanoasis/vim-devicons'
+  " Renders colors inline
+  Plug 'tjdevries/colorbuddy.vim'
+  " Smoothes scrolling up and down
   Plug 'psliwka/vim-smoothie'
   Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'datwaft/bubbly.nvim'
 call plug#end()
 
-runtime ~/dotfiles/nvim/functions.vim
+" Needed for compe (https://github.com/hrsh7th/nvim-compe)
+set completeopt=menuone,noselect
 
 filetype plugin indent on
 syntax on
@@ -64,18 +74,20 @@ syntax on
 " Set working directory to same as buffer
 set autochdir
 
+" How many ex commands should be stored in history
 set history=10000
 " Oldfiles is set from loading shada marks. Even if a file doesn't have a
 " manually set mark, the default ' mark will load, populating oldfiles.
 " https://neovim.io/doc/user/eval.html#v:oldfiles
 set shada='10000
 
-" Min lines that should show when scrolling
+" Min lines that should show when scrolling.
 set scrolloff=5
 
+" Relative numbers cause slow rendering, and are inconvenient for ex ranges.
 set number
 
-" set a persistent undo, and store them in one dir
+" Set a persistent undo, and store them in one dir.
 set undofile
 set undodir=~/.vim/undo
 
@@ -97,53 +109,30 @@ set inccommand=split
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
 
+set termguicolors
+
+set background=light
+colorscheme one
+
+set splitbelow
+set splitright
+
 " Max time to wait on terminal response
 set timeoutlen=1000
 set ttimeoutlen=5
 set updatetime=300
-
-" I'm not creative with ascii art
-let g:startify_custom_header = ['']
 
 " Notification after file change
 " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
 autocmd FileChangedShellPost *
   \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
-" Smart pairs are disabled by default:
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
-
-let mapleader = " "
-
-" Terminals shouldn't have linenumbers
-augroup TerminalStuff
-  au!
-  autocmd TermOpen * setlocal nonumber norelativenumber
-augroup END
-
-let g:floaterm_autoclose=1
-let g:floaterm_gitcommit=1
-autocmd User Startified setlocal buflisted
-
 " Use nvr to edit files (prevents nesting)
 let $VISUAL="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
 let $EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
 let $FPP_EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
 
-" Pear tree breaks Telescope
-let g:pear_tree_ft_disabled = ['TelescopePrompt']
-
-source ~/dotfiles/nvim/theme.vim
-
-""" Flip numline to opposite of current status
-function NumToggle()
-  set rnu!
-  set nu!
-endfunction
-
-command! ProjectFiles execute 'Files' projectroot#guess()
+let mapleader = " "
 
 """ FZF
 nnoremap <leader>s :GitStat<CR>
@@ -164,7 +153,8 @@ nnoremap <leader>H :FloatermNew htop<CR>
 
 nnoremap <leader>Q <cmd>q<CR>
 nnoremap <leader>tr :T !!<CR>
-nnoremap <leader>tn <cmd>vsplit <bar> Tnew<CR>
+nnoremap <leader>tv <cmd>vsplit <bar> Tnew<CR>
+nnoremap <leader>tn <cmd>Tnew<CR>
 nnoremap <leader>tt :Ttoggle<CR>
 
 " Mapping selecting mappings
@@ -174,8 +164,6 @@ imap <c-x><c-l> <Plug>(fzf-complete-line)
 
 " I hate horizontal splitting
 cabbrev h vert h
-set splitbelow
-set splitright
 
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
