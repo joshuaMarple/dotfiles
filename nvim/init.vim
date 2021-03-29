@@ -5,14 +5,14 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-unimpaired'
 
-  "" Buffer Navigation
+  " Buffer Navigation
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
@@ -35,11 +35,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'ojroques/vim-oscyank'
   Plug 'svermeulen/vim-subversive'
 
-  "" Terminal Management
+  " Terminal Management
   Plug 'kassio/neoterm'
   Plug 'voldikss/vim-floaterm'
 
-  "" Textobjects
+  " Textobjects
   Plug 'wellle/targets.vim'
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'kana/vim-operator-user'
@@ -52,8 +52,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'Chun-Yang/vim-textobj-chunk'
   Plug 'pianohacker/vim-textobj-indented-paragraph'
 
-  "" Themes
-  Plug 'sheerun/vim-polyglot'
+  " Themes
   " Turns off highlighting intelligently
   Plug 'romainl/vim-cool'
   Plug 'ryanoasis/vim-devicons'
@@ -191,16 +190,6 @@ tnoremap <C-J> <C-\><C-n><C-W><C-J>
 tnoremap <C-K> <C-\><C-n><C-W><C-K>
 tnoremap <C-L> <C-\><C-n><C-W><C-L>
 
-let g:textobj_comment_no_default_key_mappings = 1
-xmap ax <Plug>(textobj-comment-a)
-omap ax <Plug>(textobj-comment-a)
-xmap ix <Plug>(textobj-comment-i)
-omap ix <Plug>(textobj-comment-i)
-xmap aX <Plug>(textobj-big-a)
-omap aX <Plug>(textobj-big-a)
-xmap iX <Plug>(textobj-big-i)
-omap iX <Plug>(textobj-big-a)
-
 tnoremap ,, <C-\><C-n>:Buffers<CR>
 tnoremap uu <C-\><C-n>
 
@@ -247,6 +236,11 @@ nnoremap <A-t> :tabnext<CR>
 nnoremap <A-S-t> :tabprevious<CR>
 tnoremap <A-t> <C-\><C-n>:tabnext<CR>
 tnoremap <A-S-t> <C-\><C-n>:tabprevious<CR>
+
+" Nvim-compe
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 
 " Keep work stuff separate
 runtime ~/.config/nvim/work.vim
