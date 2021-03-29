@@ -1,3 +1,8 @@
+if exists('g:loaded_ripgrep_helpers')
+  finish
+endif
+let g:loaded_ripgrep_helpers = 1
+
 command! -bang -nargs=* PGrep
   \ call fzf#vim#grep(
   \   'git grep --line-number -- '.shellescape(<q-args>), 0,

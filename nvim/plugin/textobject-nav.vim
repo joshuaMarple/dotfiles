@@ -1,3 +1,8 @@
+if exists('g:loaded_textobject_nav')
+  finish
+endif
+let g:loaded_textobject_nav = 1
+
 function! Append(type, ...)
     normal! `]
     if a:type == 'char'

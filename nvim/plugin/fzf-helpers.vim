@@ -1,3 +1,8 @@
+if exists('g:loaded_fzf_helpers')
+  finish
+endif
+let g:loaded_fzf_helpers = 1
+
 """ Get list of bookmarks (https://github.com/urbainvaes/fzf-marks)
 command! Bookmarks call fzf#run(fzf#wrap({'source': 'cut -d: -f 2 ~/.fzf-marks | awk ''{$1=$1};1'''}))
 
