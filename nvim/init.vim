@@ -5,6 +5,7 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
+  Plug 'rafamadriz/friendly-snippets'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   Plug 'tpope/vim-surround'
@@ -34,6 +35,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'romainl/vim-qf'
   Plug 'ojroques/vim-oscyank'
   Plug 'svermeulen/vim-subversive'
+  Plug 'chip/vim-fat-finger'
 
   " Terminal Management
   Plug 'kassio/neoterm'
@@ -51,6 +53,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'michaeljsmith/vim-indent-object'
   Plug 'Chun-Yang/vim-textobj-chunk'
   Plug 'pianohacker/vim-textobj-indented-paragraph'
+
+  " Lua
+  Plug 'svermeulen/vimpeccable'
 
   " Themes
   " Turns off highlighting intelligently
@@ -146,7 +151,7 @@ nnoremap <leader>s :GitStat<CR>
 nnoremap <leader>o :Telescope treesitter<CR>
 nnoremap <leader>p :ProjectFiles<CR>
 nnoremap ,, :Buffers<CR>
-nnoremap <leader>l :Lines<CR>
+nnoremap <leader>l :Telescope current_buffer_fuzzy_find<CR>
 nnoremap <leader>h :Telescope oldfiles<CR>
 nnoremap <leader>; :Telescope command_history<CR>
 nnoremap <leader>d :Telescope help_tags<CR>
@@ -175,7 +180,7 @@ cabbrev h vert h
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
 
-nnoremap <leader>nt :call NumToggle()<CR>
+nnoremap <leader>nt :lua require('numtoggle').numToggle()<CR>
 nnoremap <leader>nh :noh<CR>
 
 nmap<leader>w :w<CR>
@@ -249,6 +254,28 @@ tnoremap <A-S-t> <C-\><C-n>:tabprevious<CR>
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+
+" vsnip
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" See https://github.com/hrsh7th/vim-vsnip/pull/50
+nmap        s   <Plug>(vsnip-select-text)
+xmap        s   <Plug>(vsnip-select-text)
+nmap        S   <Plug>(vsnip-cut-text)
+xmap        S   <Plug>(vsnip-cut-text)
 
 " Keep work stuff separate
 runtime ~/.config/nvim/work.vim
