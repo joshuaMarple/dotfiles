@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-compe'
   Plug 'kabouzeid/nvim-lspinstall'
+  Plug 'kosayoda/nvim-lightbulb'
 
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
@@ -17,6 +18,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  " Plug '~/projects/telescope.nvim'
+  Plug 'nvim-telescope/telescope-frecency.nvim'
+  Plug 'tami5/sql.nvim'
   Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'rhysd/clever-f.vim'
@@ -64,7 +68,8 @@ call plug#begin('~/.vim/plugged')
   " Renders colors inline
   Plug 'tjdevries/colorbuddy.vim'
   " Smoothes scrolling up and down
-  Plug 'psliwka/vim-smoothie'
+  " Plug 'psliwka/vim-smoothie'
+  Plug 'karb94/neoscroll.nvim'
   Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'datwaft/bubbly.nvim'
 call plug#end()
@@ -80,6 +85,8 @@ set tabstop=2
 set softtabstop=2
 " when indenting with '>', use 2 spaces width
 set shiftwidth=2
+" when shifting, should it round to the next closest width
+set shiftround
 
 syntax on
 
@@ -88,10 +95,6 @@ set autochdir
 
 " How many ex commands should be stored in history
 set history=10000
-" Oldfiles is set from loading shada marks. Even if a file doesn't have a
-" manually set mark, the default ' mark will load, populating oldfiles.
-" https://neovim.io/doc/user/eval.html#v:oldfiles
-set shada='10000
 
 " Min lines that should show when scrolling.
 set scrolloff=5
@@ -126,7 +129,6 @@ set termguicolors
 set background=light
 colorscheme one
 
-set splitbelow
 set splitright
 
 " Max time to wait on terminal response
@@ -149,19 +151,21 @@ let mapleader = " "
 """ FZF
 nnoremap <leader>s :GitStat<CR>
 nnoremap <leader>o :Telescope treesitter<CR>
-nnoremap <leader>p :ProjectFiles<CR>
+" nnoremap <leader>p :ProjectFiles<CR>
+nnoremap <leader>p :lua require('telescope.builtin.files').find_files({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap ,, :Buffers<CR>
 nnoremap <leader>l :Telescope current_buffer_fuzzy_find<CR>
-nnoremap <leader>h :Telescope oldfiles<CR>
+nnoremap <leader>h :Telescope frecency<CR>
 nnoremap <leader>; :Telescope command_history<CR>
 nnoremap <leader>d :Telescope help_tags<CR>
 nnoremap <leader>q :Telescope quickfix<CR>
-nnoremap <leader>x :Commands<CR>
-nnoremap <leader>g :Rip<CR>
+nnoremap <leader>x :Telescope commands<CR>
+nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <leader>e :Vexplore<CR>
-nnoremap <leader>f :Files<CR>
-nnoremap <leader>rr :Telescope file_browser<CR>
+nnoremap <leader>f :Telescope file_browser<CR>
+nnoremap <leader>rr :Ranger<CR>
 nnoremap <leader>H :FloatermNew htop<CR>
+nnoremap <leader>a :Telescope lsp_code_actions<CR>
 
 nnoremap <leader>Q <cmd>q<CR>
 nnoremap <leader>tr :T !!<CR>
@@ -170,20 +174,20 @@ nnoremap <leader>tn <cmd>Tnew<CR>
 nnoremap <leader>tt :Ttoggle<CR>
 
 " Mapping selecting mappings
-imap <c-x><c-k> <Plug>(fzf-complete-word)
-imap <c-x><c-f> <Plug>(fzf-complete-path)
-imap <c-x><c-l> <Plug>(fzf-complete-line)
+inoremap <c-x><c-k> <Plug>(fzf-complete-word)
+inoremap <c-x><c-f> <Plug>(fzf-complete-path)
+inoremap <c-x><c-l> <Plug>(fzf-complete-line)
 
 " I hate horizontal splitting
 cabbrev h vert h
 
-map <C-n> :cn<CR>
-map <C-p> :cp<CR>
+noremap <C-n> :cn<CR>
+noremap <C-p> :cp<CR>
 
 nnoremap <leader>nt :lua require('numtoggle').numToggle()<CR>
 nnoremap <leader>nh :noh<CR>
 
-nmap<leader>w :w<CR>
+nnoremap<leader>w :w<CR>
 
 " Allows for inserting before and after text objects
 nnoremap <silent> ,a :set opfunc=Append<CR>g@
@@ -209,42 +213,42 @@ tnoremap uu <C-\><C-n>
 nnoremap <silent> <C-t> :FloatermToggle<CR>
 tnoremap <C-t> <C-\><C-n>:FloatermToggle<CR>
 
-nmap gs <Plug>(operator-ripgrep-root)
-vmap gs <Plug>(operator-ripgrep-root)
+nnoremap gs <Plug>(operator-ripgrep-root)
+vnoremap gs <Plug>(operator-ripgrep-root)
 call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(projectroot#guess())')
 
-nmap gx <cmd>Rg<CR>
-vmap gx <cmd>Rg<CR>
+nnoremap gx <cmd>Rg<CR>
+vnoremap gx <cmd>Rg<CR>
 
-nmap g. <Plug>(operator-ripgrep-cwd)
-vmap g. <Plug>(operator-ripgrep-cwd)
+nnoremap g. <Plug>(operator-ripgrep-cwd)
+vnoremap g. <Plug>(operator-ripgrep-cwd)
 call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd())')
 
 vnoremap <leader>c :OSCYank<CR>
 
 " Textobjects subversion and substitution
-nmap ,s <plug>(SubversiveSubstituteRange)
-xmap ,s <plug>(SubversiveSubstituteRange)
-nmap ,ss <plug>(SubversiveSubstituteWordRange)
+nnoremap ,s <plug>(SubversiveSubstituteRange)
+xnoremap ,s <plug>(SubversiveSubstituteRange)
+nnoremap ,ss <plug>(SubversiveSubstituteWordRange)
 
-nmap ,S <plug>(SubversiveSubvertRange)
-xmap ,S <plug>(SubversiveSubvertRange)
-nmap ,Ss <plug>(SubversiveSubvertWordRange)
+nnoremap ,S <plug>(SubversiveSubvertRange)
+xnoremap ,S <plug>(SubversiveSubvertRange)
+nnoremap ,Ss <plug>(SubversiveSubvertWordRange)
 
 " Easier quickfix management
-nmap <leader>qs <Plug>(qf_qf_switch)
-nmap <leader>qt <Plug>(qf_qf_toggle)
-nmap <leader>qr <cmd>RefreshQuickFix()<CR>
-nmap <leader>qq <cmd>Telescope quickfix<CR>
+nnoremap <leader>qs <Plug>(qf_qf_switch)
+nnoremap <leader>qt <Plug>(qf_qf_toggle)
+nnoremap <leader>qr <cmd>RefreshQuickFix()<CR>
+nnoremap <leader>qq <cmd>Telescope quickfix<CR>
 
 " Config editing/reloading
-nmap <leader>rc <cmd>so %<CR>
-nmap <leader>rp <cmd>PlugInstall<CR>
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>rc <cmd>so %<CR>
+nnoremap <leader>rp <cmd>PlugInstall<CR>
+nnoremap <leader>ev :e $MYVIMRC<cr>
 
 " Easier nav with alt
-map <A-c> :cn<CR>
-map <A-S-c> :cp<CR>
+noremap <A-c> :cn<CR>
+noremap <A-S-c> :cp<CR>
 nnoremap <A-t> :tabnext<CR>
 nnoremap <A-S-t> :tabprevious<CR>
 tnoremap <A-t> <C-\><C-n>:tabnext<CR>
@@ -257,25 +261,25 @@ inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 
 " vsnip
 " Expand
-imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+inoremap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+snoremap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
 
 " Expand or jump
-imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+inoremap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+snoremap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 
 " Jump forward or backward
-imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+inoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+snoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+inoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+snoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
 " Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
 " See https://github.com/hrsh7th/vim-vsnip/pull/50
-nmap        s   <Plug>(vsnip-select-text)
-xmap        s   <Plug>(vsnip-select-text)
-nmap        S   <Plug>(vsnip-cut-text)
-xmap        S   <Plug>(vsnip-cut-text)
+" nnoremap s <Plug>(vsnip-select-text)
+" xnoremap s <Plug>(vsnip-select-text)
+" nnoremap S <Plug>(vsnip-cut-text)
+" xnoremap S <Plug>(vsnip-cut-text)
 
 " Keep work stuff separate
 runtime ~/.config/nvim/work.vim

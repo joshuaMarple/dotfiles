@@ -3,7 +3,7 @@ if exists('g:loaded_textobject_nav')
 endif
 let g:loaded_textobject_nav = 1
 
-function! Append(type, ...)
+function Append(type, ...)
     normal! `]
     if a:type == 'char'
         call feedkeys("a", 'n')
@@ -12,7 +12,7 @@ function! Append(type, ...)
     endif
 endfunction
 
-function! Insert(type, ...)
+function Insert(type, ...)
     normal! `[
     if a:type == 'char'
         call feedkeys("i", 'n')
