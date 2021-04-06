@@ -14,19 +14,22 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-unimpaired'
 
+  Plug 'rhysd/clever-f.vim'
+
   " Buffer Navigation
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   " Plug '~/projects/telescope.nvim'
   Plug 'nvim-telescope/telescope-frecency.nvim'
+  Plug 'nvim-telescope/telescope-project.nvim'
   Plug 'tami5/sql.nvim'
   Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'rhysd/clever-f.vim'
 
   Plug 'dbakker/vim-projectroot'
   Plug 'ervandew/supertab'
+  Plug 'vim-ctrlspace/vim-ctrlspace'
 
   Plug 'mhinz/vim-signify'
   Plug 'ntpeters/vim-better-whitespace'
@@ -64,7 +67,7 @@ call plug#begin('~/.vim/plugged')
   " Themes
   " Turns off highlighting intelligently
   Plug 'romainl/vim-cool'
-  Plug 'ryanoasis/vim-devicons'
+  Plug 'kyazdani42/nvim-web-devicons'
   " Renders colors inline
   Plug 'tjdevries/colorbuddy.vim'
   " Smoothes scrolling up and down
@@ -80,6 +83,7 @@ set completeopt=menuone,noselect
 filetype plugin indent on
 " On pressing tab, insert 2 spaces
 set expandtab
+set hidden
 " show existing tab with 2 spaces width
 set tabstop=2
 set softtabstop=2
@@ -138,8 +142,11 @@ set updatetime=300
 
 " Notification after file change
 " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
-autocmd FileChangedShellPost *
-  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+augroup filechanged
+  autocmd!
+  autocmd FileChangedShellPost *
+    \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+augroup END
 
 " Use nvr to edit files (prevents nesting)
 let $VISUAL="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
@@ -153,6 +160,7 @@ nnoremap <leader>s :GitStat<CR>
 nnoremap <leader>o :Telescope treesitter<CR>
 " nnoremap <leader>p :ProjectFiles<CR>
 nnoremap <leader>p :lua require('telescope.builtin.files').find_files({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
+nnoremap <leader>P :lua require'telescope'.extensions.project.project{}<CR>
 nnoremap ,, :Buffers<CR>
 nnoremap <leader>l :Telescope current_buffer_fuzzy_find<CR>
 nnoremap <leader>h :Telescope frecency<CR>
@@ -160,7 +168,8 @@ nnoremap <leader>; :Telescope command_history<CR>
 nnoremap <leader>d :Telescope help_tags<CR>
 nnoremap <leader>q :Telescope quickfix<CR>
 nnoremap <leader>x :Telescope commands<CR>
-nnoremap <leader>g :Telescope live_grep<CR>
+" nnoremap <leader>g :Telescope live_grep<CR>
+nnoremap <leader>g :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>f :Telescope file_browser<CR>
 nnoremap <leader>rr :Ranger<CR>
@@ -172,6 +181,8 @@ nnoremap <leader>tr :T !!<CR>
 nnoremap <leader>tv <cmd>vsplit <bar> Tnew<CR>
 nnoremap <leader>tn <cmd>Tnew<CR>
 nnoremap <leader>tt :Ttoggle<CR>
+
+let g:CtrlSpaceDefaultMappingKey = "<C-space> "
 
 " Mapping selecting mappings
 inoremap <c-x><c-k> <Plug>(fzf-complete-word)
@@ -236,10 +247,10 @@ xnoremap ,S <plug>(SubversiveSubvertRange)
 nnoremap ,Ss <plug>(SubversiveSubvertWordRange)
 
 " Easier quickfix management
-nnoremap <leader>qs <Plug>(qf_qf_switch)
-nnoremap <leader>qt <Plug>(qf_qf_toggle)
-nnoremap <leader>qr <cmd>RefreshQuickFix()<CR>
-nnoremap <leader>qq <cmd>Telescope quickfix<CR>
+nnoremap <leader>cs <Plug>(qf_qf_switch)
+nnoremap <leader>ct <Plug>(qf_qf_toggle)
+nnoremap <leader>cr <cmd>RefreshQuickFix()<CR>
+nnoremap <leader>cq <cmd>Telescope quickfix<CR>
 
 " Config editing/reloading
 nnoremap <leader>rc <cmd>so %<CR>
@@ -258,6 +269,8 @@ tnoremap <A-S-t> <C-\><C-n>:tabprevious<CR>
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+
+let g:vsnip_filetypes = {}
 
 " vsnip
 " Expand

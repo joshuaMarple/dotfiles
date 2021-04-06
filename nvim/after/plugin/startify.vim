@@ -1,4 +1,7 @@
 " I'm not creative with ascii art
 let g:startify_custom_header = ['']
-autocmd User Startified setlocal buflisted
+augroup startified
+  autocmd!
+  autocmd User Startified setlocal buflisted
+augroup END
 

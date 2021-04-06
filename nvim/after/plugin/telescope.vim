@@ -1,5 +1,6 @@
 " Sharp borders are better
 lua << EOF
+require'telescope'.load_extension('project')
 require('telescope').setup{
   defaults = {
    borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
