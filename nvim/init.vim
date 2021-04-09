@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/nvim-compe'
   Plug 'kabouzeid/nvim-lspinstall'
   Plug 'kosayoda/nvim-lightbulb'
+  Plug 'onsails/lspkind-nvim'
 
   " Plug 'hrsh7th/vim-vsnip'
   " Plug 'hrsh7th/vim-vsnip-integ'
