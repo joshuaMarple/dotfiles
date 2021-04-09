@@ -4,9 +4,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'kabouzeid/nvim-lspinstall'
   Plug 'kosayoda/nvim-lightbulb'
 
-  Plug 'hrsh7th/vim-vsnip'
-  Plug 'hrsh7th/vim-vsnip-integ'
-  Plug 'rafamadriz/friendly-snippets'
+  " Plug 'hrsh7th/vim-vsnip'
+  " Plug 'hrsh7th/vim-vsnip-integ'
+  " Plug 'rafamadriz/friendly-snippets'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   Plug 'tpope/vim-surround'
@@ -28,21 +28,16 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
   Plug 'dbakker/vim-projectroot'
-  Plug 'ervandew/supertab'
-  Plug 'vim-ctrlspace/vim-ctrlspace'
 
   Plug 'mhinz/vim-signify'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'mhinz/vim-startify'
   Plug 'tmsvg/pear-tree'
-  Plug 'tommcdo/vim-exchange'
   Plug 'jremmen/vim-ripgrep'
   Plug 'stefandtw/quickfix-reflector.vim'
-  Plug 'qpkorr/vim-bufkill'
   Plug 'romainl/vim-qf'
   Plug 'ojroques/vim-oscyank'
   Plug 'svermeulen/vim-subversive'
-  Plug 'chip/vim-fat-finger'
 
   " Terminal Management
   Plug 'kassio/neoterm'
@@ -71,8 +66,8 @@ call plug#begin('~/.vim/plugged')
   " Renders colors inline
   Plug 'tjdevries/colorbuddy.vim'
   " Smoothes scrolling up and down
-  " Plug 'psliwka/vim-smoothie'
-  Plug 'karb94/neoscroll.nvim'
+  Plug 'psliwka/vim-smoothie'
+  " Plug 'karb94/neoscroll.nvim'
   Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'datwaft/bubbly.nvim'
 call plug#end()
@@ -169,7 +164,7 @@ nnoremap <leader>d :Telescope help_tags<CR>
 nnoremap <leader>q :Telescope quickfix<CR>
 nnoremap <leader>x :Telescope commands<CR>
 " nnoremap <leader>g :Telescope live_grep<CR>
-nnoremap <leader>g :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
+nnoremap <leader>g :lua require('telescope.builtin.files').grep_string({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>f :Telescope file_browser<CR>
 nnoremap <leader>rr :Ranger<CR>
@@ -182,12 +177,10 @@ nnoremap <leader>tv <cmd>vsplit <bar> Tnew<CR>
 nnoremap <leader>tn <cmd>Tnew<CR>
 nnoremap <leader>tt :Ttoggle<CR>
 
-let g:CtrlSpaceDefaultMappingKey = "<C-space> "
-
 " Mapping selecting mappings
-inoremap <c-x><c-k> <Plug>(fzf-complete-word)
-inoremap <c-x><c-f> <Plug>(fzf-complete-path)
-inoremap <c-x><c-l> <Plug>(fzf-complete-line)
+imap <c-x><c-k> <Plug>(fzf-complete-word)
+imap <c-x><c-f> <Plug>(fzf-complete-path)
+imap <c-x><c-l> <Plug>(fzf-complete-line)
 
 " I hate horizontal splitting
 cabbrev h vert h
@@ -269,30 +262,10 @@ tnoremap <A-S-t> <C-\><C-n>:tabprevious<CR>
 inoremap <silent><expr> <C-Space> compe#complete()
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-
-let g:vsnip_filetypes = {}
-
-" vsnip
-" Expand
-inoremap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-snoremap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
-
-" Expand or jump
-inoremap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-snoremap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
-
-" Jump forward or backward
-inoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-snoremap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-inoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-snoremap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-
-" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
-" See https://github.com/hrsh7th/vim-vsnip/pull/50
-" nnoremap s <Plug>(vsnip-select-text)
-" xnoremap s <Plug>(vsnip-select-text)
-" nnoremap S <Plug>(vsnip-cut-text)
-" xnoremap S <Plug>(vsnip-cut-text)
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Keep work stuff separate
 runtime ~/.config/nvim/work.vim
