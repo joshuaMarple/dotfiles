@@ -1,7 +1,13 @@
-" Sharp borders are better
+if !exists('g:loaded_telescope')
+  finish
+endif
+
 lua << EOF
 require'telescope'.load_extension('project')
+require"telescope".load_extension("frecency")
+
 require('telescope').setup{
+  -- Sharp borders are better
   defaults = {
    borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
   },
