@@ -5,9 +5,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'kosayoda/nvim-lightbulb'
   Plug 'onsails/lspkind-nvim'
 
-  " Plug 'hrsh7th/vim-vsnip'
-  " Plug 'hrsh7th/vim-vsnip-integ'
-  " Plug 'rafamadriz/friendly-snippets'
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'rafamadriz/friendly-snippets'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   Plug 'tpope/vim-surround'
@@ -260,8 +259,10 @@ tnoremap <A-t> <C-\><C-n>:tabnext<CR>
 tnoremap <A-S-t> <C-\><C-n>:tabprevious<CR>
 
 " Nvim-compe
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+" inoremap <silent><expr> <C-Space> compe#complete()
+
+inoremap <silent><expr> <C-Space> compe#confirm('<CR>')
+inoremap <silent><expr> <C-y>     compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
