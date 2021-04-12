@@ -1,4 +1,3 @@
-lua << EOF
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
@@ -83,4 +82,3 @@ local servers = require'lspinstall'.installed_servers()
 for _, server in pairs(servers) do
   require'lspconfig'[server].setup{ on_attach = on_attach, capabilities = capabilities }
 end
-EOF

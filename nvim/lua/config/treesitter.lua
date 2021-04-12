@@ -1,4 +1,13 @@
-lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    custom_captures = {
+      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+      ["foo.bar"] = "Identifier",
+    },
+  },
+}
+
 require'nvim-treesitter.configs'.setup {
   textobjects = {
     select = {
@@ -7,6 +16,8 @@ require'nvim-treesitter.configs'.setup {
         -- You can use the capture groups defined in textobjects.scm
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
+        ["aI"] = "@conditional.outer",
+        ["iI"] = "@conditional.inner",
         ["aC"] = "@class.outer",
         ["iC"] = "@class.inner",
         ["aB"] = "@block.outer",
@@ -57,4 +68,3 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
-EOF

@@ -61,15 +61,14 @@ call plug#begin('~/.vim/plugged')
 
   " Themes
   " Turns off highlighting intelligently
-  Plug 'romainl/vim-cool'
   Plug 'kyazdani42/nvim-web-devicons'
   " Renders colors inline
   Plug 'tjdevries/colorbuddy.vim'
   " Smoothes scrolling up and down
   Plug 'psliwka/vim-smoothie'
-  " Plug 'karb94/neoscroll.nvim'
   Plug 'https://gitlab.com/jmarple/vim-one'
-  Plug 'datwaft/bubbly.nvim'
+  " Plug 'datwaft/bubbly.nvim'
+  Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 call plug#end()
 
 " Needed for compe (https://github.com/hrsh7th/nvim-compe)
@@ -141,6 +140,12 @@ augroup filechanged
   autocmd!
   autocmd FileChangedShellPost *
     \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+augroup END
+
+augroup vimrc-incsearch-highlight
+  autocmd!
+  autocmd CmdlineEnter /,\? :set hlsearch
+  autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
 
 " Use nvr to edit files (prevents nesting)
@@ -240,9 +245,9 @@ xnoremap ,S <plug>(SubversiveSubvertRange)
 nnoremap ,Ss <plug>(SubversiveSubvertWordRange)
 
 " Easier quickfix management
-nnoremap <leader>cs <Plug>(qf_qf_switch)
-nnoremap <leader>ct <Plug>(qf_qf_toggle)
-nnoremap <leader>cr <cmd>RefreshQuickFix()<CR>
+nmap <leader>cc <Plug>(qf_qf_switch)
+nmap <leader>ct <Plug>(qf_qf_toggle)
+nmap <leader>cr <cmd>RefreshQuickFix()<CR>
 nnoremap <leader>cq <cmd>Telescope quickfix<CR>
 
 " Config editing/reloading
@@ -268,6 +273,14 @@ inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Jump forward or backward
+imap <expr> <C-F>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <C-F>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <C-B> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <C-B> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" Some files are easier to specify in lua.
+lua require('config')
 
 " Keep work stuff separate
 runtime ~/.config/nvim/work.vim
