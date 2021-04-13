@@ -60,7 +60,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'svermeulen/vimpeccable'
 
   " Themes
-  " Turns off highlighting intelligently
   Plug 'kyazdani42/nvim-web-devicons'
   " Smoothes scrolling up and down
   Plug 'psliwka/vim-smoothie'
