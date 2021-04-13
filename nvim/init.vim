@@ -62,14 +62,15 @@ call plug#begin('~/.vim/plugged')
   " Themes
   " Turns off highlighting intelligently
   Plug 'kyazdani42/nvim-web-devicons'
-  " Renders colors inline
-  Plug 'tjdevries/colorbuddy.vim'
   " Smoothes scrolling up and down
   Plug 'psliwka/vim-smoothie'
   Plug 'https://gitlab.com/jmarple/vim-one'
   " Plug 'datwaft/bubbly.nvim'
   Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 call plug#end()
+
+" This is in the statusline, I don't need it elsewhere
+set noshowmode
 
 " Needed for compe (https://github.com/hrsh7th/nvim-compe)
 set completeopt=menuone,noselect
@@ -161,9 +162,9 @@ nnoremap <leader>o :Telescope treesitter<CR>
 " nnoremap <leader>p :ProjectFiles<CR>
 nnoremap <leader>p :lua require('telescope.builtin.files').find_files({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>P :lua require'telescope'.extensions.project.project{}<CR>
-nnoremap ,, :Buffers<CR>
+nnoremap ,, :Telescope buffers<CR>
 nnoremap <leader>l :Telescope current_buffer_fuzzy_find<CR>
-nnoremap <leader>h :Telescope frecency<CR>
+nnoremap <leader>h :Telescope oldfiles<CR>
 nnoremap <leader>; :Telescope command_history<CR>
 nnoremap <leader>d :Telescope help_tags<CR>
 nnoremap <leader>q :Telescope quickfix<CR>
@@ -172,7 +173,8 @@ nnoremap <leader>x :Telescope commands<CR>
 nnoremap <leader>g :lua require('telescope.builtin.files').grep_string({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>f :Telescope file_browser<CR>
-nnoremap <leader>rr :Ranger<CR>
+nnoremap <leader>ra :Ranger<CR>
+nnoremap <leader>re :Telescope frecency<CR>
 nnoremap <leader>H :FloatermNew htop<CR>
 nnoremap <leader>a :Telescope lsp_code_actions<CR>
 
@@ -265,6 +267,8 @@ tnoremap <A-S-t> <C-\><C-n>:tabprevious<CR>
 
 " Nvim-compe
 " inoremap <silent><expr> <C-Space> compe#complete()
+" Compe is really noisy for some reason
+set shortmess+=c
 
 inoremap <silent><expr> <C-Space> compe#confirm('<CR>')
 inoremap <silent><expr> <C-y>     compe#confirm('<CR>')
