@@ -23,6 +23,7 @@ call plug#begin('~/.vim/plugged')
   " Plug '~/projects/telescope.nvim'
   Plug 'nvim-telescope/telescope-frecency.nvim'
   Plug 'nvim-telescope/telescope-project.nvim'
+  Plug 'nvim-telescope/telescope-fzy-native.nvim'
   Plug 'tami5/sql.nvim'
   Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -169,7 +170,7 @@ nnoremap <leader>d :Telescope help_tags<CR>
 nnoremap <leader>q :Telescope quickfix<CR>
 nnoremap <leader>x :Telescope commands<CR>
 " nnoremap <leader>g :Telescope live_grep<CR>
-nnoremap <leader>g :lua require('telescope.builtin.files').grep_string({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
+nnoremap <leader>g :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>f :Telescope file_browser<CR>
 nnoremap <leader>ra :Ranger<CR>

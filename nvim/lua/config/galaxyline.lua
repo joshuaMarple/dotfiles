@@ -26,6 +26,13 @@ local colors = {
     nord = "#81A1C1",
 }
 
+local treesitter_func_not_empty = function()
+  if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
+    return true
+  end
+  return false
+end
+
 local buffer_not_empty = function()
   if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
     return true
@@ -33,7 +40,7 @@ local buffer_not_empty = function()
   return false
 end
 
-local mode_color = {n = colors.blue, i = colors.green,v=colors.purple,
+local mode_color = {n = colors.blue, i = colors.fg_green,v=colors.purple,
   [''] = colors.purple,V=colors.purple,
   c = colors.red,no = colors.red,s = colors.orange,
   S=colors.orange,[''] = colors.orange,
@@ -217,28 +224,61 @@ gls.left[16] = {
     }
 }
 
-gls.right[1] = {
-    projectIcon = {
-        provider = function()
-            return "  "
-        end,
-        highlight = {colors.blue, colors.line_bg},
-        condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
-    }
-}
+HasFunction = nil;
+
+-- gls.right[1] = {
+--   funcIcon = {
+--     provider = function ()
+--       return " "
+--     end,
+--     highlight = {colors.yellow, colors.bg},
+--     condition = function()
+--       print(vim.api.nvim_eval('nvim_treesitter#statusline(90)'))
+--       return vim.api.nvim_eval('nvim_treesitter#statusline(90)') ~= nil and checkwidth() and buffer_not_empty() and not is_term()
+--     end,
+--   }
+-- }
 
 gls.right[2] = {
-  project = {
+  funcText = {
     provider = function ()
-      local path = vim.api.nvim_eval('projectroot#guess()')
-      return string.match(path, '[^/]+$')
+      local statusLine = vim.api.nvim_eval('nvim_treesitter#statusline(90)')
+      local funcName = string.match(statusLine, '%s(%w+)%(')
+      if funcName ~= nil and string.len(funcName) > 0 then
+        return " " .. funcName
+      else
+        return ""
+      end
     end,
-    highlight = {colors.blue, colors.bg},
+    highlight = {colors.nord, colors.bg},
     condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
   }
 }
 
 gls.right[3] = {
+    projectIcon = {
+        provider = function()
+            return "  "
+        end,
+        highlight = {colors.purple, colors.line_bg},
+        separator = " ",
+        separator_highlight = {colors.fg, colors.bg},
+        condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
+    }
+}
+
+gls.right[4] = {
+  project = {
+    provider = function ()
+      local path = vim.api.nvim_eval('projectroot#guess()')
+      return string.match(path, '[^/]+$')
+    end,
+    highlight = {colors.purple, colors.bg},
+    condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
+  }
+}
+
+gls.right[5] = {
     LSPIcon = {
         provider = function()
             return " 煉"
@@ -252,7 +292,7 @@ gls.right[3] = {
     }
 }
 
-gls.right[4] = {
+gls.right[6] = {
   LSP = {
     provider = "GetLspClient",
     highlight = {colors.fg, colors.bg},
@@ -262,7 +302,7 @@ gls.right[4] = {
   }
 }
 
-gls.right[5] = {
+gls.right[7] = {
     GitIcon = {
         provider = function()
             return "  "
@@ -276,7 +316,7 @@ gls.right[5] = {
     }
 }
 
-gls.right[6] = {
+gls.right[8] = {
     GitBranch = {
         provider = "GitBranch",
         condition = function()
@@ -286,7 +326,7 @@ gls.right[6] = {
     }
 }
 
-gls.right[7] = {
+gls.right[9] = {
     SizeIcon = {
         provider = function()
             return " "
@@ -298,7 +338,7 @@ gls.right[7] = {
     }
 }
 
-gls.right[8] = {
+gls.right[10] = {
     FileSize = {
         provider = "FileSize",
         condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
@@ -306,7 +346,7 @@ gls.right[8] = {
     }
 }
 
-gls.right[9] = {
+gls.right[11] = {
     right_LeftRounded = {
         provider = function()
             return ""
@@ -318,14 +358,14 @@ gls.right[9] = {
 }
 
 
-gls.right[10] = {
+gls.right[12] = {
     PerCent = {
         provider = "LinePercent",
         highlight = {colors.fg, colors.lightbg},
     }
 }
 
-gls.right[11] = {
+gls.right[13] = {
     Column = {
         provider = "LineColumn",
         highlight = {colors.bg, colors.fg},
@@ -334,7 +374,7 @@ gls.right[11] = {
     }
 }
 
-gls.right[12] = {
+gls.right[14] = {
     rightRounded = {
         provider = function()
             return ""
