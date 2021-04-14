@@ -243,7 +243,7 @@ gls.right[2] = {
   funcText = {
     provider = function ()
       local statusLine = vim.api.nvim_eval('nvim_treesitter#statusline(90)')
-      local funcName = string.match(statusLine, '%s(%w+)%(')
+      local funcName = statusLine ~= nil and string.match(statusLine, '%s*(%w+)%(') or nil
       if funcName ~= nil and string.len(funcName) > 0 then
         return " " .. funcName
       else
