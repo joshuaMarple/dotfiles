@@ -8,6 +8,9 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+vim.g.foldmethod = 'expr'
+vim.g.foldexpr = 'nvim_treesitter#foldexpr()'
+
 require'nvim-treesitter.configs'.setup {
   textobjects = {
     select = {

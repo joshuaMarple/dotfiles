@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/plugged') "{{{
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-compe'
   Plug 'kabouzeid/nvim-lspinstall'
@@ -30,7 +30,7 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'dbakker/vim-projectroot'
 
-  Plug 'mhinz/vim-signify'
+  " Plug 'mhinz/vim-signify'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'mhinz/vim-startify'
   Plug 'tmsvg/pear-tree'
@@ -67,7 +67,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'https://gitlab.com/jmarple/vim-one'
   " Plug 'datwaft/bubbly.nvim'
   Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
-call plug#end()
+call plug#end() "}}}
 
 " This is in the statusline, I don't need it elsewhere
 set noshowmode
@@ -135,12 +135,25 @@ set timeoutlen=1000
 set ttimeoutlen=5
 set updatetime=300
 
+" Set folding
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+augroup openFolds
+  autocmd!
+  autocmd BufEnter * normal zR
+augroup END
+
 " Notification after file change
 " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
 augroup filechanged
   autocmd!
   autocmd FileChangedShellPost *
     \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+augroup END
+
+augroup UpdateProjectRoot
+  autocmd!
+  autocmd BufEnter * :let b:projectroot = projectroot#guess()
 augroup END
 
 augroup vimrc-incsearch-highlight
@@ -160,7 +173,8 @@ let mapleader = " "
 nnoremap <leader>s :GitStat<CR>
 nnoremap <leader>o :Telescope treesitter<CR>
 " nnoremap <leader>p :ProjectFiles<CR>
-nnoremap <leader>p :lua require('telescope.builtin.files').find_files({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
+nnoremap <leader>fp :lua require('telescope.builtin.files').find_files({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
+nnoremap <leader>pt :ProfileToggle<CR>
 nnoremap <leader>P :lua require'telescope'.extensions.project.project{}<CR>
 nnoremap ,, :Telescope buffers<CR>
 nnoremap <leader>l :Telescope current_buffer_fuzzy_find<CR>
@@ -172,9 +186,9 @@ nnoremap <leader>x :Telescope commands<CR>
 " nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <leader>g :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>e :Vexplore<CR>
-nnoremap <leader>f :Telescope file_browser<CR>
-nnoremap <leader>ra :Ranger<CR>
-nnoremap <leader>re :Telescope frecency<CR>
+nnoremap <leader>ff :Telescope file_browser<CR>
+nnoremap <leader>fr :Ranger<CR>
+nnoremap <leader>fe :Telescope frecency<CR>
 nnoremap <leader>H :FloatermNew htop<CR>
 nnoremap <leader>a :Telescope lsp_code_actions<CR>
 
@@ -183,6 +197,10 @@ nnoremap <leader>tr :T !!<CR>
 nnoremap <leader>tv <cmd>vsplit <bar> Tnew<CR>
 nnoremap <leader>tn <cmd>Tnew<CR>
 nnoremap <leader>tt :Ttoggle<CR>
+
+" Folding
+" Close everything besides what I'm in
+nnoremap <leader>zz zMzv
 
 " Mapping selecting mappings
 imap <c-x><c-k> <Plug>(fzf-complete-word)

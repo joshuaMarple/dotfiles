@@ -242,7 +242,7 @@ HasFunction = nil;
 gls.right[2] = {
   funcText = {
     provider = function ()
-      local statusLine = vim.api.nvim_eval('nvim_treesitter#statusline(90)')
+      local statusLine = vim.api.nvim_eval('nvim_treesitter#statusline(120)')
       local funcName = statusLine ~= nil and string.match(statusLine, '%s*(%w+)%(') or nil
       if funcName ~= nil and string.len(funcName) > 0 then
         return " " .. funcName
@@ -270,8 +270,8 @@ gls.right[3] = {
 gls.right[4] = {
   project = {
     provider = function ()
-      local path = vim.api.nvim_eval('projectroot#guess()')
-      return string.match(path, '[^/]+$')
+      -- local path = vim.api.nvim_eval('projectroot#guess()')
+      return string.match(vim.b.projectroot, '[^/]+$')
     end,
     highlight = {colors.purple, colors.bg},
     condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
