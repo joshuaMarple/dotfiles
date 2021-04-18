@@ -239,21 +239,40 @@ HasFunction = nil;
 --   }
 -- }
 
-gls.right[2] = {
-  funcText = {
-    provider = function ()
-      local statusLine = vim.api.nvim_eval('nvim_treesitter#statusline(120)')
-      local funcName = statusLine ~= nil and string.match(statusLine, '%s*(%w+)%(') or nil
-      if funcName ~= nil and string.len(funcName) > 0 then
-        return " " .. funcName
-      else
-        return ""
-      end
-    end,
-    highlight = {colors.nord, colors.bg},
-    condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
+  gls.right[1] = {
+    funcText = {
+      provider = function ()
+        local statusLine = vim.api.nvim_eval('nvim_treesitter#statusline(120)')
+        local funcName = statusLine ~= nil and string.match(statusLine, '%s*(%w+)%(') or nil
+        if funcName ~= nil and string.len(funcName) > 0 then
+          return " " .. funcName
+        else
+          return ""
+        end
+      end,
+      separator = " ",
+      separator_highlight = {colors.fg, colors.bg},
+      highlight = {colors.nord, colors.bg},
+      condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
+    }
   }
-}
+
+  gls.right[2] = {
+    foldText = {
+      provider = function ()
+        return "祈" .. vim.wo.foldlevel
+      end,
+      highlight = {colors.magenta, colors.bg},
+      condition = function()
+        if (vim.wo.foldlevel > 0) then
+          return true
+        end
+        return false
+      end,
+      separator = " ",
+      separator_highlight = {colors.fg, colors.bg},
+    }
+  }
 
 gls.right[3] = {
     projectIcon = {

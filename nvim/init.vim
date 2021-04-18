@@ -4,6 +4,8 @@ call plug#begin('~/.vim/plugged') "{{{
   Plug 'kabouzeid/nvim-lspinstall'
   Plug 'kosayoda/nvim-lightbulb'
   Plug 'onsails/lspkind-nvim'
+  Plug 'pseewald/vim-anyfold'
+  Plug 'arecarn/vim-fold-cycle'
 
   Plug 'hrsh7th/vim-vsnip'
   Plug 'rafamadriz/friendly-snippets'
@@ -136,12 +138,9 @@ set ttimeoutlen=5
 set updatetime=300
 
 " Set folding
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-augroup openFolds
-  autocmd!
-  autocmd BufEnter * normal zR
-augroup END
+let ftToIgnore = ['startify']
+autocmd Filetype * if index(ftToIgnore, &ft) < 0 | AnyFoldActivate
+let g:anyfold_fold_toplevel=1
 
 " Notification after file change
 " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
