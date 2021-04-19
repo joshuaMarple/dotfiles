@@ -1,9 +1,12 @@
 call plug#begin('~/.vim/plugged') "{{{
+  " LSP
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-compe'
   Plug 'kabouzeid/nvim-lspinstall'
   Plug 'kosayoda/nvim-lightbulb'
   Plug 'onsails/lspkind-nvim'
+
+  " Folds
   Plug 'pseewald/vim-anyfold'
   Plug 'arecarn/vim-fold-cycle'
 
@@ -11,6 +14,7 @@ call plug#begin('~/.vim/plugged') "{{{
   Plug 'rafamadriz/friendly-snippets'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+  " Tpope section
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-commentary'
@@ -32,7 +36,6 @@ call plug#begin('~/.vim/plugged') "{{{
 
   Plug 'dbakker/vim-projectroot'
 
-  " Plug 'mhinz/vim-signify'
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'mhinz/vim-startify'
   Plug 'tmsvg/pear-tree'
@@ -53,6 +56,7 @@ call plug#begin('~/.vim/plugged') "{{{
   Plug 'kana/vim-textobj-user'
   Plug 'kana/vim-textobj-entire'
   Plug 'kana/vim-textobj-line'
+  Plug 'kana/vim-textobj-fold'
   Plug 'glts/vim-textobj-comment'
   Plug 'Julian/vim-textobj-variable-segment'
   Plug 'michaeljsmith/vim-indent-object'
@@ -70,6 +74,8 @@ call plug#begin('~/.vim/plugged') "{{{
   " Plug 'datwaft/bubbly.nvim'
   Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 call plug#end() "}}}
+
+set cursorline
 
 " This is in the statusline, I don't need it elsewhere
 set noshowmode
@@ -138,9 +144,12 @@ set ttimeoutlen=5
 set updatetime=300
 
 " Set folding
-let ftToIgnore = ['startify']
+let ftToIgnore = ['startify', 'vim-plug']
 autocmd Filetype * if index(ftToIgnore, &ft) < 0 | AnyFoldActivate
 let g:anyfold_fold_toplevel=1
+
+" Set textobj-comment
+let g:textobj_comment_no_default_key_mappings = 1
 
 " Notification after file change
 " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
@@ -245,23 +254,23 @@ nnoremap gs <Plug>(operator-ripgrep-root)
 vnoremap gs <Plug>(operator-ripgrep-root)
 call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(projectroot#guess())')
 
-nnoremap gx <cmd>Rg<CR>
-vnoremap gx <cmd>Rg<CR>
+nmap gx <cmd>Rg<CR>
+vmap gx <cmd>Rg<CR>
 
-nnoremap g. <Plug>(operator-ripgrep-cwd)
-vnoremap g. <Plug>(operator-ripgrep-cwd)
+nmap g. <Plug>(operator-ripgrep-cwd)
+vmap g. <Plug>(operator-ripgrep-cwd)
 call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd())')
 
 vnoremap <leader>c :OSCYank<CR>
 
 " Textobjects subversion and substitution
-nnoremap ,s <plug>(SubversiveSubstituteRange)
-xnoremap ,s <plug>(SubversiveSubstituteRange)
-nnoremap ,ss <plug>(SubversiveSubstituteWordRange)
+nmap ,s <plug>(SubversiveSubstituteRange)
+xmap ,s <plug>(SubversiveSubstituteRange)
+nmap ,ss <plug>(SubversiveSubstituteWordRange)
 
-nnoremap ,S <plug>(SubversiveSubvertRange)
-xnoremap ,S <plug>(SubversiveSubvertRange)
-nnoremap ,Ss <plug>(SubversiveSubvertWordRange)
+nmap ,S <plug>(SubversiveSubvertRange)
+xmap ,S <plug>(SubversiveSubvertRange)
+nmap ,Ss <plug>(SubversiveSubvertWordRange)
 
 " Easier quickfix management
 nmap <leader>cc <Plug>(qf_qf_switch)

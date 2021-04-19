@@ -414,7 +414,7 @@ gls.short_line_left[1] = {
 gls.short_line_left[2] = {
     ShortFileIcon = {
         provider = "FileIcon",
-        highlight = {require("galaxyline.provider_fileinfo").get_file_icon_color, colors.lightbg}
+        highlight = {colors.fg, colors.lightbg}
     }
 }
 
