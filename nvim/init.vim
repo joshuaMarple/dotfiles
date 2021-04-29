@@ -59,9 +59,7 @@ call plug#begin('~/.vim/plugged') "{{{
   " Themes
   Plug 'kyazdani42/nvim-web-devicons'
   " Smoothes scrolling up and down
-  Plug 'psliwka/vim-smoothie'
   Plug 'https://gitlab.com/jmarple/vim-one'
-  " Plug 'datwaft/bubbly.nvim'
   Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 call plug#end() "}}}
 
