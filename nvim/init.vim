@@ -6,10 +6,6 @@ call plug#begin('~/.vim/plugged') "{{{
   Plug 'kosayoda/nvim-lightbulb'
   Plug 'onsails/lspkind-nvim'
 
-  " Folds
-  Plug 'pseewald/vim-anyfold'
-  Plug 'arecarn/vim-fold-cycle'
-
   Plug 'hrsh7th/vim-vsnip'
   Plug 'rafamadriz/friendly-snippets'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -56,7 +52,6 @@ call plug#begin('~/.vim/plugged') "{{{
   Plug 'kana/vim-textobj-user'
   Plug 'kana/vim-textobj-entire'
   Plug 'kana/vim-textobj-line'
-  Plug 'kana/vim-textobj-fold'
   Plug 'glts/vim-textobj-comment'
   Plug 'Julian/vim-textobj-variable-segment'
   Plug 'michaeljsmith/vim-indent-object'
@@ -142,11 +137,6 @@ set splitright
 set timeoutlen=1000
 set ttimeoutlen=5
 set updatetime=300
-
-" Set folding
-let ftToIgnore = ['startify', 'vim-plug']
-autocmd Filetype * if index(ftToIgnore, &ft) < 0 | AnyFoldActivate
-let g:anyfold_fold_toplevel=1
 
 " Set textobj-comment
 let g:textobj_comment_no_default_key_mappings = 1
