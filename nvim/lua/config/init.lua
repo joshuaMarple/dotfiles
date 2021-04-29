@@ -1,0 +1,5 @@
+require('config.galaxyline')
+require('config.nvim-lsp')
+require('config.web-devicons')
+require('config.telescope')
+require('config.treesitter')

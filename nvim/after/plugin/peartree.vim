@@ -1,0 +1,7 @@
+" Smart pairs are disabled by default:
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
+
+" Peartree breaks telescope
+let g:pear_tree_ft_disabled = ['TelescopePrompt', 'frecency']
