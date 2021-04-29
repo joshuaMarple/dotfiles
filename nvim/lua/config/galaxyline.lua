@@ -282,7 +282,7 @@ gls.right[3] = {
         highlight = {colors.purple, colors.line_bg},
         separator = " ",
         separator_highlight = {colors.fg, colors.bg},
-        condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
+        condition = function() return checkwidth() and buffer_not_empty() and not is_term() and vim.b.projectroot ~= nil end,
     }
 }
 
@@ -290,6 +290,7 @@ gls.right[4] = {
   project = {
     provider = function ()
       -- local path = vim.api.nvim_eval('projectroot#guess()')
+      if vim.b.projectroot == nil then return "" end
       return string.match(vim.b.projectroot, '[^/]+$')
     end,
     highlight = {colors.purple, colors.bg},

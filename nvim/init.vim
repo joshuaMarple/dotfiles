@@ -23,10 +23,7 @@ call plug#begin('~/.vim/plugged') "{{{
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   " Plug '~/projects/telescope.nvim'
-  Plug 'nvim-telescope/telescope-frecency.nvim'
-  Plug 'nvim-telescope/telescope-project.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
-  Plug 'tami5/sql.nvim'
   Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
@@ -35,9 +32,7 @@ call plug#begin('~/.vim/plugged') "{{{
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'mhinz/vim-startify'
   Plug 'tmsvg/pear-tree'
-  Plug 'jremmen/vim-ripgrep'
   Plug 'stefandtw/quickfix-reflector.vim'
-  Plug 'romainl/vim-qf'
   Plug 'ojroques/vim-oscyank'
   Plug 'svermeulen/vim-subversive'
 
@@ -141,6 +136,19 @@ set updatetime=300
 " Set textobj-comment
 let g:textobj_comment_no_default_key_mappings = 1
 
+" Use rg for grepping
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --no-heading
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
+" Easier quickfix management
+augroup quickfix
+    autocmd!
+    autocmd QuickFixCmdPost [^l]* botright cwindow
+    autocmd QuickFixCmdPost l* botright lwindow
+augroup END
+
 " Notification after file change
 " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
 augroup filechanged
@@ -183,6 +191,7 @@ nnoremap <leader>q :Telescope quickfix<CR>
 nnoremap <leader>x :Telescope commands<CR>
 " nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <leader>g :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
+nnoremap <leader>G :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>ff :Telescope file_browser<CR>
 nnoremap <leader>fr :Ranger<CR>
@@ -244,8 +253,8 @@ nnoremap gs <Plug>(operator-ripgrep-root)
 vnoremap gs <Plug>(operator-ripgrep-root)
 call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(projectroot#guess())')
 
-nmap gx <cmd>Rg<CR>
-vmap gx <cmd>Rg<CR>
+nmap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
+vmap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 
 nmap g. <Plug>(operator-ripgrep-cwd)
 vmap g. <Plug>(operator-ripgrep-cwd)
@@ -263,8 +272,7 @@ xmap ,S <plug>(SubversiveSubvertRange)
 nmap ,Ss <plug>(SubversiveSubvertWordRange)
 
 " Easier quickfix management
-nmap <leader>cc <Plug>(qf_qf_switch)
-nmap <leader>ct <Plug>(qf_qf_toggle)
+nmap <leader>cc :call ToggleQuickFix()<cr>
 nmap <leader>cr <cmd>RefreshQuickFix()<CR>
 nnoremap <leader>cq <cmd>Telescope quickfix<CR>
 
