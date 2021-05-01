@@ -5,6 +5,7 @@ call plug#begin('~/.vim/plugged') "{{{
   Plug 'kabouzeid/nvim-lspinstall'
   Plug 'kosayoda/nvim-lightbulb'
   Plug 'onsails/lspkind-nvim'
+  Plug 'liuchengxu/vista.vim'
 
   Plug 'hrsh7th/vim-vsnip'
   Plug 'rafamadriz/friendly-snippets'
@@ -196,6 +197,7 @@ nnoremap <leader>fr :Ranger<CR>
 nnoremap <leader>fe :Telescope frecency<CR>
 nnoremap <leader>H :FloatermNew htop<CR>
 nnoremap <leader>a :Telescope lsp_code_actions<CR>
+nnoremap <leader>v :Vista!!<CR>
 
 nnoremap <leader>Q <cmd>q<CR>
 nnoremap <leader>tr :T !!<CR>

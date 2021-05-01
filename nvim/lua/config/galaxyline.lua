@@ -349,7 +349,7 @@ gls.right[8] = {
 gls.right[9] = {
     SizeIcon = {
         provider = function()
-            return " "
+            return "  "
         end,
         condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
         highlight = {colors.cyan, colors.line_bg},
