@@ -307,6 +307,11 @@ smap <expr> <C-F>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab
 imap <expr> <C-B> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <C-B> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
+" tab while using incsearch
+" https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/
+cnoremap <expr> <Tab>   getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>/<C-r>/" : "<C-z>"
+cnoremap <expr> <S-Tab> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>?<C-r>/" : "<S-Tab>"
+
 " Some files are easier to specify in lua.
 lua require('config')
 
