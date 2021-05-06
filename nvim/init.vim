@@ -1,14 +1,10 @@
-call plug#begin('~/.vim/plugged') "{{{
+call plug#begin('~/.vim/plugged') "{{
   " LSP
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-compe'
   Plug 'kabouzeid/nvim-lspinstall'
-  Plug 'kosayoda/nvim-lightbulb'
-  Plug 'onsails/lspkind-nvim'
   Plug 'liuchengxu/vista.vim'
 
-  Plug 'hrsh7th/vim-vsnip'
-  Plug 'rafamadriz/friendly-snippets'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   " Tpope section
@@ -17,25 +13,19 @@ call plug#begin('~/.vim/plugged') "{{{
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-unimpaired'
 
-  Plug 'rhysd/clever-f.vim'
-
   " Buffer Navigation
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-  " Plug '~/projects/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
   Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
   Plug 'dbakker/vim-projectroot'
 
-  Plug 'ntpeters/vim-better-whitespace'
   Plug 'mhinz/vim-startify'
-  Plug 'tmsvg/pear-tree'
   Plug 'stefandtw/quickfix-reflector.vim'
   Plug 'ojroques/vim-oscyank'
-  Plug 'svermeulen/vim-subversive'
 
   " Terminal Management
   Plug 'kassio/neoterm'
@@ -43,16 +33,7 @@ call plug#begin('~/.vim/plugged') "{{{
 
   " Textobjects
   Plug 'wellle/targets.vim'
-  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'kana/vim-operator-user'
-  Plug 'kana/vim-textobj-user'
-  Plug 'kana/vim-textobj-entire'
-  Plug 'kana/vim-textobj-line'
-  Plug 'glts/vim-textobj-comment'
-  Plug 'Julian/vim-textobj-variable-segment'
-  Plug 'michaeljsmith/vim-indent-object'
-  Plug 'Chun-Yang/vim-textobj-chunk'
-  Plug 'pianohacker/vim-textobj-indented-paragraph'
 
   " Lua
   Plug 'svermeulen/vimpeccable'
@@ -229,10 +210,6 @@ nnoremap<leader>w :w<CR>
 nnoremap <silent> ,a :set opfunc=Append<CR>g@
 nnoremap <silent> ,i :set opfunc=Insert<CR>g@
 
-" semicolon is easier than colon, and smart-f takes precedence
-nnoremap ; :
-vnoremap ; :
-
 " easier window nav
 noremap <C-H> <C-W><C-H>
 noremap <C-J> <C-W><C-J>
@@ -261,15 +238,6 @@ vmap g. <Plug>(operator-ripgrep-cwd)
 call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd())')
 
 vnoremap <leader>c :OSCYank<CR>
-
-" Textobjects subversion and substitution
-nmap ,s <plug>(SubversiveSubstituteRange)
-xmap ,s <plug>(SubversiveSubstituteRange)
-nmap ,ss <plug>(SubversiveSubstituteWordRange)
-
-nmap ,S <plug>(SubversiveSubvertRange)
-xmap ,S <plug>(SubversiveSubvertRange)
-nmap ,Ss <plug>(SubversiveSubvertWordRange)
 
 " Easier quickfix management
 nmap <leader>cc :call ToggleQuickFix()<cr>
@@ -301,11 +269,14 @@ inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" Jump forward or backward
-imap <expr> <C-F>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-smap <expr> <C-F>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-imap <expr> <C-B> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-smap <expr> <C-B> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
 
 " tab while using incsearch
 " https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/
