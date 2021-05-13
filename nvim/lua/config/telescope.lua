@@ -4,5 +4,14 @@ require('telescope').setup{
   -- Sharp borders are better
   defaults = {
    borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
+   layout_strategy = "vertical",
+   layout_defaults = {
+      vertical = {
+        width_padding = 0.05,
+        height_padding = 1,
+        preview_height = 0.5,
+        mirror = false,
+      }
+   }
   },
 }
