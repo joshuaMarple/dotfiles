@@ -21,6 +21,8 @@ let s:actions = {
 
 let s:base_rip = 'rg --column --line-number --no-heading --hidden --follow --color "never"'
 
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . shellescape(<q-args>), 1, {"dir": b:projectroot})
+
 function! s:CallRipGrep(smartcase, where, ...) abort
   let args = copy(a:000)
   let flags = []

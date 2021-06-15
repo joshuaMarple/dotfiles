@@ -51,7 +51,7 @@ local mode_color = {n = colors.blue, i = colors.fg_green,v=colors.purple,
 
 
 local is_term = function()
-  return vim.bo.filetype == "neoterm"
+  return vim.bo.filetype == "neoterm" or vim.bo.filetype == "floaterm"
 end
 
 gls.left[1] = {

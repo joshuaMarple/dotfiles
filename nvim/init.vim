@@ -3,7 +3,6 @@ call plug#begin('~/.vim/plugged') "{{
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-compe'
   Plug 'kabouzeid/nvim-lspinstall'
-  Plug 'liuchengxu/vista.vim'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -171,6 +170,7 @@ nnoremap <leader>q :Telescope quickfix<CR>
 nnoremap <leader>x :Telescope commands<CR>
 " nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <leader>g :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
+nnoremap <leader>g :Rg<CR>
 nnoremap <leader>G :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>ff :Telescope file_browser<CR>
@@ -215,10 +215,12 @@ noremap <C-H> <C-W><C-H>
 noremap <C-J> <C-W><C-J>
 noremap <C-K> <C-W><C-K>
 noremap <C-L> <C-W><C-L>
+noremap <C-Space> <C-^>
 tnoremap <C-H> <C-\><C-n><C-W><C-H>
 tnoremap <C-J> <C-\><C-n><C-W><C-J>
 tnoremap <C-K> <C-\><C-n><C-W><C-K>
 tnoremap <C-L> <C-\><C-n><C-W><C-L>
+tnoremap <C-Space> <C-\><C-n><C-^>
 
 tnoremap ,, <C-\><C-n>:Buffers<CR>
 tnoremap uu <C-\><C-n>
@@ -230,7 +232,7 @@ nnoremap gs <Plug>(operator-ripgrep-root)
 vnoremap gs <Plug>(operator-ripgrep-root)
 call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(projectroot#guess())')
 
-nmap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
+nnoremap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 vmap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 
 nmap g. <Plug>(operator-ripgrep-cwd)
@@ -240,9 +242,11 @@ call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd
 vnoremap <leader>c :OSCYank<CR>
 
 " Easier quickfix management
-nmap <leader>cc :call ToggleQuickFix()<cr>
+nnoremap <leader>cc :call ToggleQuickFix()<cr>
 nmap <leader>cr <cmd>RefreshQuickFix()<CR>
 nnoremap <leader>cq <cmd>Telescope quickfix<CR>
+nnoremap <leader>co :colder<cr>
+nnoremap <leader>cn :cnewer<cr>
 
 " Config editing/reloading
 nnoremap <leader>rc <cmd>so %<CR>
@@ -269,14 +273,13 @@ inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
+" inoremap " ""<left>
+" inoremap ' ''<left>
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>O
+" inoremap {;<CR> {<CR>};<ESC>O
 
 " tab while using incsearch
 " https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/
