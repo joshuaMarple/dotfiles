@@ -1,8 +1,9 @@
 call plug#begin('~/.vim/plugged') "{{
   " LSP
   Plug 'neovim/nvim-lspconfig'
-  Plug 'hrsh7th/nvim-compe'
+  " Plug 'hrsh7th/nvim-compe'
   Plug 'kabouzeid/nvim-lspinstall'
+  Plug 'ludovicchabant/vim-gutentags'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -17,10 +18,15 @@ call plug#begin('~/.vim/plugged') "{{
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
+  Plug 'AckslD/nvim-neoclip.lua'
   Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
   Plug 'dbakker/vim-projectroot'
+
+    " To use Python remote plugin features in Vim, can be skipped
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 
   Plug 'mhinz/vim-startify'
   Plug 'stefandtw/quickfix-reflector.vim'
@@ -29,6 +35,7 @@ call plug#begin('~/.vim/plugged') "{{
   " Terminal Management
   Plug 'kassio/neoterm'
   Plug 'voldikss/vim-floaterm'
+  " Plug 'numToStr/FTerm.nvim'
 
   " Textobjects
   Plug 'wellle/targets.vim'
@@ -235,6 +242,8 @@ call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(proje
 nnoremap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 vmap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 
+nnoremap gt :silent !ctags -R <C-r>=b:projectroot<CR><CR>
+
 nmap g. <Plug>(operator-ripgrep-cwd)
 vmap g. <Plug>(operator-ripgrep-cwd)
 call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd())')
@@ -285,6 +294,19 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/
 cnoremap <expr> <Tab>   getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>/<C-r>/" : "<C-z>"
 cnoremap <expr> <S-Tab> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>?<C-r>/" : "<S-Tab>"
+
+autocmd BufLeave *.css,*.less,*scss normal! mC
+autocmd BufLeave BUILD normal! mB
+autocmd BufLeave *.proto normal! mP
+autocmd BufLeave *.html normal! mH
+autocmd BufLeave *.java normal! mJ
+autocmd BufLeave term://* normal! mT
+autocmd BufLeave vimrc,*.vim normal! mV
+"if the file name has "test" in it, mark it T.
+autocmd BufLeave *
+    \ | if (expand("<afile>")) =~ ".*test.*"
+    \ | execute 'normal! mT'
+    \ | endif
 
 " Some files are easier to specify in lua.
 lua require('config')

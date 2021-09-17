@@ -1,2 +1,2 @@
-hi FloatermBorder guibg=NONE guifg=NONE
-setlocal nonumber norelativenumber
+" hi FloatermBorder guibg=NONE guifg=NONE
+" setlocal nonumber norelativenumber
