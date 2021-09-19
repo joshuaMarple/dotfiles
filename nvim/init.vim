@@ -24,10 +24,6 @@ call plug#begin('~/.vim/plugged') "{{
 
   Plug 'dbakker/vim-projectroot'
 
-    " To use Python remote plugin features in Vim, can be skipped
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-
   Plug 'mhinz/vim-startify'
   Plug 'stefandtw/quickfix-reflector.vim'
   Plug 'ojroques/vim-oscyank'
