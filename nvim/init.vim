@@ -298,11 +298,6 @@ autocmd BufLeave *.html normal! mH
 autocmd BufLeave *.java normal! mJ
 autocmd BufLeave term://* normal! mT
 autocmd BufLeave vimrc,*.vim normal! mV
-"if the file name has "test" in it, mark it T.
-autocmd BufLeave *
-    \ | if (expand("<afile>")) =~ ".*test.*"
-    \ | execute 'normal! mT'
-    \ | endif
 
 " Some files are easier to specify in lua.
 lua require('config')
