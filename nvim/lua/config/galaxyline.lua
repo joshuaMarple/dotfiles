@@ -51,7 +51,7 @@ local mode_color = {n = colors.blue, i = colors.fg_green,v=colors.purple,
 
 
 local is_term = function()
-  return vim.bo.filetype == "neoterm"
+  return vim.bo.filetype == "neoterm" or vim.bo.filetype == "floaterm"
 end
 
 gls.left[1] = {
@@ -78,7 +78,7 @@ gls.left[3] = {
             local alias = {
                 n = "normal ",
                 i = "insert ",
-                c = "command ",
+                c = "cmd-line ",
                 V = "visual ",
                 [""] = "visual ",
                 v = "visual ",
@@ -239,42 +239,42 @@ HasFunction = nil;
 --   }
 -- }
 
-  gls.right[1] = {
-    funcText = {
-      provider = function ()
-        local statusLine = vim.api.nvim_eval('nvim_treesitter#statusline(120)')
-        local funcName = statusLine ~= nil and string.match(statusLine, '%s*(%w+)%(') or nil
-        if funcName ~= nil and string.len(funcName) > 0 then
-          return " " .. funcName
-        else
-          return ""
-        end
-      end,
-      separator = " ",
-      separator_highlight = {colors.fg, colors.bg},
-      highlight = {colors.nord, colors.bg},
-      condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
-    }
-  }
+  -- gls.right[1] = {
+  --   funcText = {
+  --     provider = function ()
+  --       local statusLine = vim.api.nvim_eval('nvim_treesitter#statusline(120)')
+  --       local funcName = statusLine ~= nil and string.match(statusLine, '%s*(%w+)%(') or nil
+  --       if funcName ~= nil and string.len(funcName) > 0 then
+  --         return " " .. funcName
+  --       else
+  --         return ""
+  --       end
+  --     end,
+  --     separator = " ",
+  --     separator_highlight = {colors.fg, colors.bg},
+  --     highlight = {colors.nord, colors.bg},
+  --     condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
+  --   }
+  -- }
 
-  gls.right[2] = {
-    foldText = {
-      provider = function ()
-        return "祈" .. vim.wo.foldlevel
-      end,
-      highlight = {colors.magenta, colors.bg},
-      condition = function()
-        if (vim.wo.foldlevel > 0) then
-          return true
-        end
-        return false
-      end,
-      separator = " ",
-      separator_highlight = {colors.fg, colors.bg},
-    }
-  }
+--   gls.right[2] = {
+--     foldText = {
+--       provider = function ()
+--         return "祈" .. vim.wo.foldlevel
+--       end,
+--       highlight = {colors.magenta, colors.bg},
+--       condition = function()
+--         if (vim.wo.foldlevel > 0) then
+--           return true
+--         end
+--         return false
+--       end,
+--       separator = " ",
+--       separator_highlight = {colors.fg, colors.bg},
+--     }
+--   }
 
-gls.right[3] = {
+gls.right[1] = {
     projectIcon = {
         provider = function()
             return "  "
@@ -286,7 +286,7 @@ gls.right[3] = {
     }
 }
 
-gls.right[4] = {
+gls.right[2] = {
   project = {
     provider = function ()
       -- local path = vim.api.nvim_eval('projectroot#guess()')
@@ -298,7 +298,7 @@ gls.right[4] = {
   }
 }
 
-gls.right[5] = {
+gls.right[3] = {
     LSPIcon = {
         provider = function()
             return " 煉"
@@ -312,7 +312,7 @@ gls.right[5] = {
     }
 }
 
-gls.right[6] = {
+gls.right[4] = {
   LSP = {
     provider = "GetLspClient",
     highlight = {colors.fg, colors.bg},
@@ -322,7 +322,7 @@ gls.right[6] = {
   }
 }
 
-gls.right[7] = {
+gls.right[5] = {
     GitIcon = {
         provider = function()
             return "  "
@@ -336,7 +336,7 @@ gls.right[7] = {
     }
 }
 
-gls.right[8] = {
+gls.right[6] = {
     GitBranch = {
         provider = "GitBranch",
         condition = function()
@@ -346,7 +346,7 @@ gls.right[8] = {
     }
 }
 
-gls.right[9] = {
+gls.right[7] = {
     SizeIcon = {
         provider = function()
             return "  "
@@ -358,7 +358,7 @@ gls.right[9] = {
     }
 }
 
-gls.right[10] = {
+gls.right[8] = {
     FileSize = {
         provider = "FileSize",
         condition = function() return checkwidth() and buffer_not_empty() and not is_term() end,
@@ -366,7 +366,7 @@ gls.right[10] = {
     }
 }
 
-gls.right[11] = {
+gls.right[9] = {
     right_LeftRounded = {
         provider = function()
             return ""
@@ -378,14 +378,14 @@ gls.right[11] = {
 }
 
 
-gls.right[12] = {
+gls.right[10] = {
     PerCent = {
         provider = "LinePercent",
         highlight = {colors.fg, colors.lightbg},
     }
 }
 
-gls.right[13] = {
+gls.right[11] = {
     Column = {
         provider = "LineColumn",
         highlight = {colors.bg, colors.fg},
@@ -394,7 +394,7 @@ gls.right[13] = {
     }
 }
 
-gls.right[14] = {
+gls.right[12] = {
     rightRounded = {
         provider = function()
             return ""

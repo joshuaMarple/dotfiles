@@ -1,14 +1,10 @@
-call plug#begin('~/.vim/plugged') "{{{
+call plug#begin('~/.vim/plugged') "{{
   " LSP
   Plug 'neovim/nvim-lspconfig'
-  Plug 'hrsh7th/nvim-compe'
+  " Plug 'hrsh7th/nvim-compe'
   Plug 'kabouzeid/nvim-lspinstall'
-  Plug 'kosayoda/nvim-lightbulb'
-  Plug 'onsails/lspkind-nvim'
-  Plug 'liuchengxu/vista.vim'
+  Plug 'ludovicchabant/vim-gutentags'
 
-  Plug 'hrsh7th/vim-vsnip'
-  Plug 'rafamadriz/friendly-snippets'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
   " Tpope section
@@ -17,42 +13,29 @@ call plug#begin('~/.vim/plugged') "{{{
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-unimpaired'
 
-  Plug 'rhysd/clever-f.vim'
-
   " Buffer Navigation
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
-  " Plug '~/projects/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
+  Plug 'AckslD/nvim-neoclip.lua'
   Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
   Plug 'dbakker/vim-projectroot'
 
-  Plug 'ntpeters/vim-better-whitespace'
   Plug 'mhinz/vim-startify'
-  Plug 'tmsvg/pear-tree'
   Plug 'stefandtw/quickfix-reflector.vim'
   Plug 'ojroques/vim-oscyank'
-  Plug 'svermeulen/vim-subversive'
 
   " Terminal Management
   Plug 'kassio/neoterm'
   Plug 'voldikss/vim-floaterm'
+  " Plug 'numToStr/FTerm.nvim'
 
   " Textobjects
   Plug 'wellle/targets.vim'
-  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
   Plug 'kana/vim-operator-user'
-  Plug 'kana/vim-textobj-user'
-  Plug 'kana/vim-textobj-entire'
-  Plug 'kana/vim-textobj-line'
-  Plug 'glts/vim-textobj-comment'
-  Plug 'Julian/vim-textobj-variable-segment'
-  Plug 'michaeljsmith/vim-indent-object'
-  Plug 'Chun-Yang/vim-textobj-chunk'
-  Plug 'pianohacker/vim-textobj-indented-paragraph'
 
   " Lua
   Plug 'svermeulen/vimpeccable'
@@ -190,6 +173,7 @@ nnoremap <leader>q :Telescope quickfix<CR>
 nnoremap <leader>x :Telescope commands<CR>
 " nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <leader>g :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
+nnoremap <leader>g :Rg<CR>
 nnoremap <leader>G :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>ff :Telescope file_browser<CR>
@@ -229,19 +213,17 @@ nnoremap<leader>w :w<CR>
 nnoremap <silent> ,a :set opfunc=Append<CR>g@
 nnoremap <silent> ,i :set opfunc=Insert<CR>g@
 
-" semicolon is easier than colon, and smart-f takes precedence
-nnoremap ; :
-vnoremap ; :
-
 " easier window nav
 noremap <C-H> <C-W><C-H>
 noremap <C-J> <C-W><C-J>
 noremap <C-K> <C-W><C-K>
 noremap <C-L> <C-W><C-L>
+noremap <C-Space> <C-^>
 tnoremap <C-H> <C-\><C-n><C-W><C-H>
 tnoremap <C-J> <C-\><C-n><C-W><C-J>
 tnoremap <C-K> <C-\><C-n><C-W><C-K>
 tnoremap <C-L> <C-\><C-n><C-W><C-L>
+tnoremap <C-Space> <C-\><C-n><C-^>
 
 tnoremap ,, <C-\><C-n>:Buffers<CR>
 tnoremap uu <C-\><C-n>
@@ -253,8 +235,10 @@ nnoremap gs <Plug>(operator-ripgrep-root)
 vnoremap gs <Plug>(operator-ripgrep-root)
 call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(projectroot#guess())')
 
-nmap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
+nnoremap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 vmap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
+
+nnoremap gt :silent !ctags -R <C-r>=b:projectroot<CR><CR>
 
 nmap g. <Plug>(operator-ripgrep-cwd)
 vmap g. <Plug>(operator-ripgrep-cwd)
@@ -262,19 +246,12 @@ call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd
 
 vnoremap <leader>c :OSCYank<CR>
 
-" Textobjects subversion and substitution
-nmap ,s <plug>(SubversiveSubstituteRange)
-xmap ,s <plug>(SubversiveSubstituteRange)
-nmap ,ss <plug>(SubversiveSubstituteWordRange)
-
-nmap ,S <plug>(SubversiveSubvertRange)
-xmap ,S <plug>(SubversiveSubvertRange)
-nmap ,Ss <plug>(SubversiveSubvertWordRange)
-
 " Easier quickfix management
-nmap <leader>cc :call ToggleQuickFix()<cr>
+nnoremap <leader>cc :call ToggleQuickFix()<cr>
 nmap <leader>cr <cmd>RefreshQuickFix()<CR>
 nnoremap <leader>cq <cmd>Telescope quickfix<CR>
+nnoremap <leader>co :colder<cr>
+nnoremap <leader>cn :cnewer<cr>
 
 " Config editing/reloading
 nnoremap <leader>rc <cmd>so %<CR>
@@ -301,11 +278,26 @@ inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" Jump forward or backward
-imap <expr> <C-F>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-smap <expr> <C-F>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-imap <expr> <C-B> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-smap <expr> <C-B> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+" inoremap " ""<left>
+" inoremap ' ''<left>
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>O
+" inoremap {;<CR> {<CR>};<ESC>O
+
+" tab while using incsearch
+" https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/
+cnoremap <expr> <Tab>   getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>/<C-r>/" : "<C-z>"
+cnoremap <expr> <S-Tab> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>?<C-r>/" : "<S-Tab>"
+
+autocmd BufLeave *.css,*.less,*scss normal! mC
+autocmd BufLeave BUILD normal! mB
+autocmd BufLeave *.proto normal! mP
+autocmd BufLeave *.html normal! mH
+autocmd BufLeave *.java normal! mJ
+autocmd BufLeave term://* normal! mT
+autocmd BufLeave vimrc,*.vim normal! mV
 
 " Some files are easier to specify in lua.
 lua require('config')
