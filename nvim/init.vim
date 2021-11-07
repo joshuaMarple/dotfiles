@@ -1,9 +1,8 @@
 call plug#begin('~/.vim/plugged') "{{
   " LSP
   Plug 'neovim/nvim-lspconfig'
-  " Plug 'hrsh7th/nvim-compe'
+  Plug 'hrsh7th/nvim-compe'
   Plug 'kabouzeid/nvim-lspinstall'
-  Plug 'ludovicchabant/vim-gutentags'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
