@@ -44,7 +44,7 @@ call plug#begin('~/.vim/plugged') "{{
   Plug 'kyazdani42/nvim-web-devicons'
   " Smoothes scrolling up and down
   Plug 'https://gitlab.com/jmarple/vim-one'
-  Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+  Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
 call plug#end() "}}}
 
 set cursorline

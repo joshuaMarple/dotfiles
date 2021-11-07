@@ -107,7 +107,7 @@ gls.left[4] = {
           return " "
         end,
         condition = buffer_not_empty,
-        highlight = {require("galaxyline.provider_fileinfo").get_file_icon_color, colors.lightbg}
+        highlight = {require("galaxyline.providers.fileinfo").get_file_icon_color, colors.lightbg}
     }
 }
 
@@ -115,7 +115,7 @@ gls.left[5] = {
     FileIcon = {
         provider = "FileIcon",
         condition = function() return buffer_not_empty() and not is_term() end,
-        highlight = {require("galaxyline.provider_fileinfo").get_file_icon_color, colors.lightbg}
+        highlight = {require("galaxyline.providers.fileinfo").get_file_icon_color, colors.lightbg}
     }
 }
 
