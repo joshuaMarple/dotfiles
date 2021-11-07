@@ -22,27 +22,6 @@ sudo -S apt-get -y install \
 
 sudo -S apt-get autoremove
 
-npm install -g @angular/cli
-
-while true; do
-  read -p "Would you like to backup your existing dotfiles? [yn]" yn
-  case $yn in
-      [Yy]* ) mkdir ~/.old/; \
-           mv ~/.bash_aliases \
-           ~/.zshrc \
-           ~/.tmux.conf \
-           ~/.config/nvim/init.vim \
-           ~/.old/; \
-           break;;
-      [Nn]* ) rm ~/.bash_aliases \
-           ~/.zshrc \
-           ~/.tmux.conf \
-           ~/.config/nvim/init.vim;
-           break;;
-      * ) echo "Please answer yes or no.";;
-  esac
-done
-
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
@@ -57,7 +36,7 @@ nvim +'PlugInstall --sync' +qa
 
 # setup tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/denysdovhan/gnome-terminal-one/master/one-dark.sh)" # fancy colors
+
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh # install plugins
 
 # setup zgen
@@ -66,31 +45,13 @@ git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
 # setup fonts
 wget https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Inconsolata/complete/Inconsolata%20Nerd%20Font%20Complete.otf -P ~/.fonts
 
-# install pathpicker
-mkdir projects
-cd projects
-git clone https://github.com/facebook/PathPicker.git
-cd PathPicker/debian
-./package.sh
-cd ..
-sudo -S apt install ./pathpicker*.deb
-
 # setup fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
-
-# install YCM (separate steps in case one fails)
-python3 ~/.vim/plugged/YouCompleteMe/install.py --all
-python3 ~/.vim/plugged/YouCompleteMe/install.py --java-completer
-python3 ~/.vim/plugged/YouCompleteMe/install.py --ts-completer
 
 # setup git
 git config --global user.name "Joshua Marple"
 git config --global user.email "joshua.d.marple@gmail.com"
 git config --global --unset core.editor
 git config --local --unset core.editor
-
-# put update script into /usr/bin/local
-sudo -S ln -sf ~/dotfiles/update.sh /usr/local/bin/update
-sudo -S ln -sf ~/dotfiles/pause.sh /usr/local/bin/pause
 

@@ -17,7 +17,6 @@ call plug#begin('~/.vim/plugged') "{{
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
-  Plug 'AckslD/nvim-neoclip.lua'
   Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
@@ -29,8 +28,6 @@ call plug#begin('~/.vim/plugged') "{{
 
   " Terminal Management
   Plug 'kassio/neoterm'
-  Plug 'voldikss/vim-floaterm'
-  " Plug 'numToStr/FTerm.nvim'
 
   " Textobjects
   Plug 'wellle/targets.vim'
@@ -41,7 +38,6 @@ call plug#begin('~/.vim/plugged') "{{
 
   " Themes
   Plug 'kyazdani42/nvim-web-devicons'
-  " Smoothes scrolling up and down
   Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
 call plug#end() "}}}
@@ -159,7 +155,6 @@ let mapleader = " "
 """ FZF
 nnoremap <leader>s :GitStat<CR>
 nnoremap <leader>o :Telescope treesitter<CR>
-" nnoremap <leader>p :ProjectFiles<CR>
 nnoremap <leader>fp :lua require('telescope.builtin.files').find_files({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>pt :ProfileToggle<CR>
 nnoremap <leader>P :lua require'telescope'.extensions.project.project{}<CR>
@@ -170,9 +165,7 @@ nnoremap <leader>; :Telescope command_history<CR>
 nnoremap <leader>d :Telescope help_tags<CR>
 nnoremap <leader>q :Telescope quickfix<CR>
 nnoremap <leader>x :Telescope commands<CR>
-" nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <leader>g :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
-nnoremap <leader>g :Rg<CR>
 nnoremap <leader>G :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>ff :Telescope file_browser<CR>
@@ -180,7 +173,6 @@ nnoremap <leader>fr :Ranger<CR>
 nnoremap <leader>fe :Telescope frecency<CR>
 nnoremap <leader>H :FloatermNew htop<CR>
 nnoremap <leader>a :Telescope lsp_code_actions<CR>
-nnoremap <leader>v :Vista!!<CR>
 
 nnoremap <leader>Q <cmd>q<CR>
 nnoremap <leader>tr :T !!<CR>
@@ -265,8 +257,6 @@ nnoremap <A-S-t> :tabprevious<CR>
 tnoremap <A-t> <C-\><C-n>:tabnext<CR>
 tnoremap <A-S-t> <C-\><C-n>:tabprevious<CR>
 
-" Nvim-compe
-" inoremap <silent><expr> <C-Space> compe#complete()
 " Compe is really noisy for some reason
 set shortmess+=c
 
@@ -277,13 +267,6 @@ inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" inoremap " ""<left>
-" inoremap ' ''<left>
-" inoremap ( ()<left>
-" inoremap [ []<left>
-" inoremap { {}<left>
-" inoremap {<CR> {<CR>}<ESC>O
-" inoremap {;<CR> {<CR>};<ESC>O
 
 " tab while using incsearch
 " https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/

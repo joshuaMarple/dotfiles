@@ -1,6 +1,6 @@
 require('telescope').load_extension('fzy_native')
-require('telescope').load_extension('neoclip')
-require('neoclip').setup()
+-- require('telescope').load_extension('neoclip')
+-- require('neoclip').setup()
 
 require('telescope').setup{
   -- Sharp borders are better
