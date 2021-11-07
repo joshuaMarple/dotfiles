@@ -2,7 +2,6 @@
 sudo -S apt-get update
 sudo -S apt-get -y dist-upgrade
 sudo -S apt-get -y install \
-  neovim \
   ranger \
   tmux \
   zsh \
@@ -18,7 +17,14 @@ sudo -S apt-get -y install \
   python3-dev \
   ruby \
   nodejs \
-  npm
+  npm \
+  zoxide \
+  spell 
+
+## Install neovim
+wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -P ~/bin
+chmod u+x ~/bin/nvim.appimage
+ln -s ~/bin/nvim.appimage ~/bin/nvim
 
 sudo -S apt-get autoremove
 

@@ -28,6 +28,7 @@ call plug#begin('~/.vim/plugged') "{{
 
   " Terminal Management
   Plug 'kassio/neoterm'
+  Plug 'christoomey/vim-tmux-navigator'
 
   " Textobjects
   Plug 'wellle/targets.vim'
