@@ -41,6 +41,7 @@ call plug#begin('~/.vim/plugged') "{{
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
+  Plug 'norcalli/nvim-colorizer.lua'
 call plug#end() "}}}
 
 set cursorline

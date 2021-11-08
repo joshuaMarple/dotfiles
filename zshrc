@@ -24,6 +24,10 @@ ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 bindkey -v
 
+bindkey '^P' fuzzy-search-and-edit
+
+bindkey '^O' repl-set
+
 SPACESHIP_PROMPT_ORDER=(
   time          # Time stamps section
   user          # Username section
@@ -111,6 +115,11 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
+stty stop ''
+stty start ''
+stty -ixon
+stty -ixoff
+
 eval enable-fzf-tab
 
 () {
@@ -118,20 +127,18 @@ eval enable-fzf-tab
   PROMPT='${${${$(spaceship_prompt)//\%\%/'$z'}//\%B}//'$z'/%%}'
 }
 
-autoload -Uz compinit
-compinit
+# autoload -Uz compinit
+# compinit
 
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
 
-eval "$(zoxide init zsh)"
+# eval "$(zoxide init zsh --cmd cd)"
 
-export BAT_THEME="base16-256"
+export BAT_THEME="ansi-light"
 
-# source <(antibody init)
+setopt +o nomatch
 
-# antibody bundle < ~/.zsh_plugins.txt
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-# # Tell antibody that you're done
-# antibody apply
 # zprof

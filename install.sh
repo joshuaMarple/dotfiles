@@ -5,26 +5,20 @@ sudo -S apt-get -y install \
   ranger \
   tmux \
   zsh \
-  gnome-terminal \
   openjdk-11-jdk \
   default-jre \
-  urlview \
-  python \
-  python3 \
-  python3-pip \
-  build-essential \
-  cmake \
-  python3-dev \
-  ruby \
-  nodejs \
-  npm \
-  zoxide \
   spell 
 
 ## Install neovim
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -P ~/bin
 chmod u+x ~/bin/nvim.appimage
 ln -s ~/bin/nvim.appimage ~/bin/nvim
+
+## Install latest zoxide
+curl -sS https://webinstall.dev/zoxide | bash
+
+## Install Kitty
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
 sudo -S apt-get autoremove
 
