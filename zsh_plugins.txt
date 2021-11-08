@@ -1,6 +1,6 @@
+Aloxaf/fzf-tab
 denysdovhan/spaceship-prompt
 ohmyzsh/ohmyzsh path:plugins/git
-Aloxaf/fzf-tab
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 # zsh-users/zsh-syntax-highlighting
 urbainvaes/fzf-marks

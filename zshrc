@@ -6,16 +6,21 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
+skip_global_compinit=1
 autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-	compinit;
-else
-	compinit -C;
-fi;
+# if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+# 	compinit;
+# else
+# 	compinit -C;
+# fi;
+compinit -C
 
 source ~/.zsh_plugins.sh
 
 source ~/.bash_aliases
+
+compinit;
+
 
 bindkey '^ ' autosuggest-execute
 
@@ -115,23 +120,23 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-eval enable-fzf-tab
+# () {
+#   local z=$'\0'
+#   PROMPT='${${${$(spaceship_prompt)//\%\%/'$z'}//\%B}//'$z'/%%}'
+# }
 
-() {
-  local z=$'\0'
-  PROMPT='${${${$(spaceship_prompt)//\%\%/'$z'}//\%B}//'$z'/%%}'
-}
-
-autoload -Uz compinit
-compinit
+# autoload -Uz compinit
+# compinit 
 
 # Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
+# kitty + complete setup zsh | source /dev/stdin
 
 # eval "$(zoxide init zsh --cmd cd)"
 
 export BAT_THEME="ansi-light"
 
 setopt +o nomatch
+
+# ~/.zshrc
 
 # zprof
