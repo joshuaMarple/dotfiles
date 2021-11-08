@@ -115,11 +115,6 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-stty stop ''
-stty start ''
-stty -ixon
-stty -ixoff
-
 eval enable-fzf-tab
 
 () {
@@ -127,8 +122,8 @@ eval enable-fzf-tab
   PROMPT='${${${$(spaceship_prompt)//\%\%/'$z'}//\%B}//'$z'/%%}'
 }
 
-# autoload -Uz compinit
-# compinit
+autoload -Uz compinit
+compinit
 
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
@@ -138,7 +133,5 @@ kitty + complete setup zsh | source /dev/stdin
 export BAT_THEME="ansi-light"
 
 setopt +o nomatch
-
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # zprof
