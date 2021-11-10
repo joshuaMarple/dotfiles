@@ -33,8 +33,12 @@ bindkey '^P' fuzzy-search-and-edit
 
 bindkey '^O' repl-set
 
+SPACESHIP_TIME_SHOW=true
+SPACESHIP_VI_MODE_INSERT=""
+SPACESHIP_VI_MODE_NORMAL="[NORMAL]"
+SPACESHIP_VI_MODE_COLOR="red"
+
 SPACESHIP_PROMPT_ORDER=(
-  time          # Time stamps section
   user          # Username section
   dir           # Current directory section
   host          # Hostname section
@@ -63,9 +67,10 @@ SPACESHIP_PROMPT_ORDER=(
   #terraform     # Terraform workspace section
   exec_time     # Execution time
   battery       # Battery level and status
-  # vi_mode       # Vi-mode indicator
   jobs          # Background jobs indicator
   exit_code     # Exit code section
+  time          # Time stamps section
+  vi_mode       # Vi-mode indicator
   line_sep      # Line break
   char          # Prompt character
 )
@@ -100,14 +105,6 @@ function zle-keymap-select() {
 
 zle -N zle-keymap-select
 
-function vi_mode_prompt_info() {
-  echo "${${KEYMAP/vicmd/[% NORMAL]%}/(main|viins)/%}"
-}
-
-# define right prompt, regardless of whether the theme defined it
-RPS1='$(vi_mode_prompt_info)'
-RPS2=$RPS1
-
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
@@ -120,23 +117,13 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-# () {
-#   local z=$'\0'
-#   PROMPT='${${${$(spaceship_prompt)//\%\%/'$z'}//\%B}//'$z'/%%}'
-# }
-
-# autoload -Uz compinit
-# compinit 
-
-# Completion for kitty
+# Completion for kitty (disabled due to impact on startup times)
 # kitty + complete setup zsh | source /dev/stdin
 
-# eval "$(zoxide init zsh --cmd cd)"
+eval "$(zoxide init zsh)"
 
 export BAT_THEME="ansi-light"
 
 setopt +o nomatch
-
-# ~/.zshrc
 
 # zprof

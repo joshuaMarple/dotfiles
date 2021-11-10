@@ -31,6 +31,8 @@ ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
 mkdir ~/.config
 mkdir ~/.config/nvim
 ln -s ~/dotfiles/nvimrc ~/.config/nvim/init.vim
+mkdir ~/.config/kitty
+ln -s ~/dotfiles/kitty ~/.config/kitty
 
 nvim +'PlugInstall --sync' +qa
 
