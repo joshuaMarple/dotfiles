@@ -13,4 +13,4 @@ cd dotfiles
 ./install.sh
 ~~~
 
-This will symlink the above dotfiles to the appropriate location. 
+This will symlink the above dotfiles to the appropriate location and install a number of applications. 
