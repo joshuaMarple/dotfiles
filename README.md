@@ -8,7 +8,7 @@ To install, clone the repo into the home directory and run the install script:
 
 ~~~
 cd
-git clone gitlab.com/jmarple/dotfiles
+git clone https://gitlab.com/jmarple/dotfiles.git
 cd dotfiles
 ./install.sh
 ~~~
