@@ -1,4 +1,3 @@
-source ~/dotfiles/zsh-snap/znap.zsh
 # Uncomment this and comment at bottom to profile zsh load time
 # zmodload zsh/zprof
 
