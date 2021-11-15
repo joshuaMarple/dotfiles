@@ -1,27 +1,12 @@
+source ~/dotfiles/zsh-snap/znap.zsh
 # Uncomment this and comment at bottom to profile zsh load time
 # zmodload zsh/zprof
 
 ## Zsh Core Settings
-### Settings
 bindkey -v
 
 # Its really annoying when zsh tries to match * for files
 setopt +o nomatch
-
-### Environment Vars
-#### Path Configuration
-export PATH="$PATH:$HOME/bin"
-export PATH="$PATH:/usr/local/bin"
-export PATH="$PATH:$HOME/.local/bin"
-
-export TERM=vte-256color
-
-if [ -z "$VISUAL" ]
-then
-	export EDITOR='nvim'
-	export VISUAL='nvim'
-	export FPP_EDITOR='nvim'
-fi
 
 ### History settings
 HISTFILE=~/.zsh_history
@@ -52,7 +37,6 @@ bindkey '^ ' autosuggest-execute
 
 ### Configure ZSH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=bold,underline"
 ZSH_AUTOSUGGEST_USE_ASYNC=true
@@ -63,49 +47,11 @@ bindkey '^O' repl-set
 
 eval "$(zoxide init zsh)"
 
-fancy-ctrl-z () {
-  if [[ $#BUFFER -eq 0 ]]; then
-    BUFFER="fg"
-    zle accept-line
-  else
-    zle push-input
-    zle clear-screen
-  fi
-}
-zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
-
 export BAT_THEME="ansi-light"
 
-### Prompt
-SPACESHIP_TIME_SHOW=true
-SPACESHIP_VI_MODE_INSERT=""
-SPACESHIP_VI_MODE_NORMAL="[NORMAL]"
-SPACESHIP_VI_MODE_COLOR="red"
+source ~/dotfiles/zsh/scripts/*
 
-SPACESHIP_PROMPT_ORDER=(
-  user          # Username section
-  dir           # Current directory section
-  host          # Hostname section
-  git           # Git section (git_branch + git_status)
-  hg            # Mercurial section (hg_branch  + hg_status)
-  package       # Package version
-  node          # Node.js section
-  ruby          # Ruby section
-  docker        # Docker section
-  aws           # Amazon Web Services section
-  gcloud        # Google Cloud Platform section
-  venv          # virtualenv section
-  conda         # conda virtualenv section
-  pyenv         # Pyenv section
-  exec_time     # Execution time
-  battery       # Battery level and status
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
-  time          # Time stamps section
-  vi_mode       # Vi-mode indicator
-  line_sep      # Line break
-  char          # Prompt character
-)
+### Prompt
+source ~/dotfiles/zsh/spaceship.zsh
 
 # zprof

@@ -280,7 +280,6 @@ autocmd BufLeave BUILD normal! mB
 autocmd BufLeave *.proto normal! mP
 autocmd BufLeave *.html normal! mH
 autocmd BufLeave *.java normal! mJ
-autocmd BufLeave term://* normal! mT
 autocmd BufLeave vimrc,*.vim normal! mV
 
 " Some files are easier to specify in lua.
