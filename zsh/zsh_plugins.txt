@@ -1,9 +1,0 @@
-Aloxaf/fzf-tab
-denysdovhan/spaceship-prompt
-mafredri/zsh-async
-zsh-users/zsh-autosuggestions
-seletskiy/zsh-fuzzy-search-and-edit
-MenkeTechnologies/zsh-expand
-jandamm/instant-repl.zsh
-mfaerevaag/wd
-Valiev/almostontop
