@@ -1,6 +1,27 @@
 # Uncomment this and comment at bottom to profile zsh load time
 # zmodload zsh/zprof
 
+# Download Znap, if it's not there yet.
+[[ -f ~/dotfiles/zsh/znap/zsh-snap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/dotfiles/zsh/znap/zsh-snap
+
+source ~/dotfiles/zsh/znap/zsh-snap/znap.zsh
+
+znap prompt denysdovhan/spaceship-prompt
+
+znap source Aloxaf/fzf-tab
+znap source zsh-users/zsh-autosuggestions
+znap source mafredri/zsh-async
+znap source seletskiy/zsh-fuzzy-search-and-edit
+znap source MenkeTechnologies/zsh-expand
+znap source jandamm/instant-repl.zsh
+znap source mfaerevaag/wd
+znap source Valiev/almostontop
+
+### Prompt
+source ~/dotfiles/zsh/spaceship.zsh
+
 ## Zsh Core Settings
 bindkey -v
 
@@ -24,14 +45,6 @@ bindkey "^v" edit-command-line
 
 source ~/.bash_aliases
 
-## Plugin Configuration
-### Compinit loading
-skip_global_compinit=1
-autoload -Uz compinit
-compinit -C
-source ~/.zsh_plugins.sh
-compinit
-
 bindkey '^ ' autosuggest-execute
 
 ### Configure ZSH
@@ -49,8 +62,5 @@ eval "$(zoxide init zsh)"
 export BAT_THEME="ansi-light"
 
 source ~/dotfiles/zsh/scripts/*
-
-### Prompt
-source ~/dotfiles/zsh/spaceship.zsh
 
 # zprof

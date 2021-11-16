@@ -5,6 +5,5 @@ vim/undo/
 vim/plugged/
 tags
 *.log
-zsh/snap/
+zsh/znap/
 *.zwc
-                
