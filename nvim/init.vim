@@ -1,4 +1,5 @@
-call plug#begin('~/.vim/plugged') "{{
+" Plugins {{{
+call plug#begin('~/.vim/plugged')
   " LSP
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-compe'
@@ -42,9 +43,13 @@ call plug#begin('~/.vim/plugged') "{{
   Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
   Plug 'norcalli/nvim-colorizer.lua'
-call plug#end() "}}}
+call plug#end() 
+"}}}
 
+" {{{ Settings
 set cursorline
+
+set foldmethod=marker
 
 " This is in the statusline, I don't need it elsewhere
 set noshowmode
@@ -121,6 +126,15 @@ if executable("rg")
   set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
+" Use nvr to edit files (prevents nesting)
+let $VISUAL="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
+let $EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
+let $FPP_EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
+
+let mapleader = " "
+"}}}
+
+" Augroups {{{
 " Easier quickfix management
 augroup quickfix
     autocmd!
@@ -147,13 +161,18 @@ augroup vimrc-incsearch-highlight
   autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
 
-" Use nvr to edit files (prevents nesting)
-let $VISUAL="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
-let $EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
-let $FPP_EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
+augroup bufmarks
+  autocmd!
+  autocmd BufLeave *.css,*.less,*scss normal! mC
+  autocmd BufLeave BUILD normal! mB
+  autocmd BufLeave *.proto normal! mP
+  autocmd BufLeave *.html normal! mH
+  autocmd BufLeave *.java normal! mJ
+  autocmd BufLeave vimrc,*.vim normal! mV
+augroup END
+" }}}
 
-let mapleader = " "
-
+" Mappings {{{
 """ FZF
 nnoremap <leader>s :GitStat<CR>
 nnoremap <leader>o :Telescope treesitter<CR>
@@ -274,16 +293,12 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/
 cnoremap <expr> <Tab>   getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>/<C-r>/" : "<C-z>"
 cnoremap <expr> <S-Tab> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>?<C-r>/" : "<S-Tab>"
+" }}}
 
-autocmd BufLeave *.css,*.less,*scss normal! mC
-autocmd BufLeave BUILD normal! mB
-autocmd BufLeave *.proto normal! mP
-autocmd BufLeave *.html normal! mH
-autocmd BufLeave *.java normal! mJ
-autocmd BufLeave vimrc,*.vim normal! mV
-
+" Imports {{{
 " Some files are easier to specify in lua.
 lua require('config')
 
 " Keep work stuff separate
 runtime ~/.config/nvim/work.vim
+" }}}
