@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'kabouzeid/nvim-lspinstall'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
   " Tpope section
   Plug 'tpope/vim-surround'
