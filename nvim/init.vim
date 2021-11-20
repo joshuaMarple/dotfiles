@@ -2,17 +2,17 @@
 call plug#begin('~/.vim/plugged')
   " LSP
   Plug 'neovim/nvim-lspconfig'
-  Plug 'hrsh7th/nvim-compe'
+  Plug 'hrsh7th/nvim-compe', {'tag': 'v2.0.0'}
   Plug 'williamboman/nvim-lsp-installer'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
   " Tpope section
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-abolish'
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-surround', {'tag': 'v2.2'}
+  Plug 'tpope/vim-abolish', {'tag': 'v1.1'}
+  Plug 'tpope/vim-commentary', {'tag': 'v1.3'}
+  Plug 'tpope/vim-unimpaired', {'tag': 'v2.0'}
 
   " Buffer Navigation
   Plug 'nvim-lua/popup.nvim'
@@ -22,19 +22,16 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
-  Plug 'dbakker/vim-projectroot'
+  Plug 'joshuaMarple/vim-projectroot'
 
-  Plug 'mhinz/vim-startify'
-  Plug 'stefandtw/quickfix-reflector.vim'
+  Plug 'stefandtw/quickfix-reflector.vim', {'tag': 'v0.1'}
   Plug 'ojroques/vim-oscyank'
 
   " Terminal Management
-  Plug 'kassio/neoterm'
-  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'christoomey/vim-tmux-navigator', {'tag': 'v1.0'}
 
   " Textobjects
-  Plug 'wellle/targets.vim'
-  Plug 'kana/vim-operator-user'
+  Plug 'wellle/targets.vim', {'tag' : 'v0.5.0'}
 
   " Navigation
   Plug 'ggandor/lightspeed.nvim'
@@ -243,18 +240,10 @@ tnoremap uu <C-\><C-n>
 nnoremap <silent> <C-t> :FloatermToggle<CR>
 tnoremap <C-t> <C-\><C-n>:FloatermToggle<CR>
 
-nnoremap gs <Plug>(operator-ripgrep-root)
-vnoremap gs <Plug>(operator-ripgrep-root)
-call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(projectroot#guess())')
-
 nnoremap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 vmap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 
 nnoremap gt :silent !ctags -R <C-r>=b:projectroot<CR><CR>
-
-nmap g. <Plug>(operator-ripgrep-cwd)
-vmap g. <Plug>(operator-ripgrep-cwd)
-call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd())')
 
 vnoremap <leader>c :OSCYank<CR>
 
