@@ -16,8 +16,9 @@ znap source mafredri/zsh-async
 znap source seletskiy/zsh-fuzzy-search-and-edit
 znap source MenkeTechnologies/zsh-expand
 znap source jandamm/instant-repl.zsh
-znap source mfaerevaag/wd
+znap source mfaerevaag/wd wd.sh
 znap source Valiev/almostontop
+znap source knu/zsh-manydots-magic manydots-magic
 
 ### Prompt
 source ~/dotfiles/zsh/spaceship.zsh

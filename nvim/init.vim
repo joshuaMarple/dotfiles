@@ -36,6 +36,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'wellle/targets.vim'
   Plug 'kana/vim-operator-user'
 
+  " Navigation
+  Plug 'ggandor/lightspeed.nvim'
+
   " Lua
   Plug 'svermeulen/vimpeccable'
 
