@@ -2,48 +2,40 @@
 call plug#begin('~/.vim/plugged')
   " LSP
   Plug 'neovim/nvim-lspconfig'
-  Plug 'hrsh7th/nvim-compe'
-  Plug 'kabouzeid/nvim-lspinstall'
+  Plug 'hrsh7th/nvim-compe', {'tag': 'v2.0.0'}
+  Plug 'williamboman/nvim-lsp-installer'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
   " Tpope section
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-abolish'
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-surround', {'tag': 'v2.2'}
+  Plug 'tpope/vim-abolish', {'tag': 'v1.1'}
+  Plug 'tpope/vim-commentary', {'tag': 'v1.3'}
+  Plug 'tpope/vim-unimpaired', {'tag': 'v2.0'}
 
   " Buffer Navigation
-  Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
   Plug 'junegunn/fzf.vim', {'branch': 'master'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
-  Plug 'dbakker/vim-projectroot'
+  Plug 'joshuaMarple/vim-projectroot'
 
-  Plug 'mhinz/vim-startify'
-  Plug 'stefandtw/quickfix-reflector.vim'
+  Plug 'stefandtw/quickfix-reflector.vim', {'tag': 'v0.1'}
   Plug 'ojroques/vim-oscyank'
 
   " Terminal Management
-  Plug 'kassio/neoterm'
-  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'christoomey/vim-tmux-navigator', {'tag': 'v1.0'}
 
   " Textobjects
-  Plug 'wellle/targets.vim'
-  Plug 'kana/vim-operator-user'
-
-  " Lua
-  Plug 'svermeulen/vimpeccable'
+  Plug 'wellle/targets.vim', {'tag' : 'v0.5.0'}
 
   " Themes
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
-  Plug 'norcalli/nvim-colorizer.lua'
 call plug#end() 
 "}}}
 
@@ -191,16 +183,10 @@ nnoremap <leader>g :lua require('telescope.builtin.files').live_grep({search_dir
 nnoremap <leader>G :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>ff :Telescope file_browser<CR>
-nnoremap <leader>fr :Ranger<CR>
 nnoremap <leader>fe :Telescope frecency<CR>
-nnoremap <leader>H :FloatermNew htop<CR>
 nnoremap <leader>a :Telescope lsp_code_actions<CR>
 
 nnoremap <leader>Q <cmd>q<CR>
-nnoremap <leader>tr :T !!<CR>
-nnoremap <leader>tv <cmd>vsplit <bar> Tnew<CR>
-nnoremap <leader>tn <cmd>Tnew<CR>
-nnoremap <leader>tt :Ttoggle<CR>
 
 " Folding
 " Close everything besides what I'm in
@@ -222,10 +208,6 @@ nnoremap <leader>nh :noh<CR>
 
 nnoremap<leader>w :w<CR>
 
-" Allows for inserting before and after text objects
-nnoremap <silent> ,a :set opfunc=Append<CR>g@
-nnoremap <silent> ,i :set opfunc=Insert<CR>g@
-
 " easier window nav
 noremap <C-H> <C-W><C-H>
 noremap <C-J> <C-W><C-J>
@@ -238,24 +220,16 @@ tnoremap <C-K> <C-\><C-n><C-W><C-K>
 tnoremap <C-L> <C-\><C-n><C-W><C-L>
 tnoremap <C-Space> <C-\><C-n><C-^>
 
-tnoremap ,, <C-\><C-n>:Buffers<CR>
+tnoremap ,, <C-\><C-n>:Telescope buffers<CR>
 tnoremap uu <C-\><C-n>
 
 nnoremap <silent> <C-t> :FloatermToggle<CR>
 tnoremap <C-t> <C-\><C-n>:FloatermToggle<CR>
 
-nnoremap gs <Plug>(operator-ripgrep-root)
-vnoremap gs <Plug>(operator-ripgrep-root)
-call operator#user#define('ripgrep-root', 'OperatorRip', 'call SetRipOpDir(projectroot#guess())')
-
 nnoremap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 vmap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 
 nnoremap gt :silent !ctags -R <C-r>=b:projectroot<CR><CR>
-
-nmap g. <Plug>(operator-ripgrep-cwd)
-vmap g. <Plug>(operator-ripgrep-cwd)
-call operator#user#define('ripgrep-cwd', 'OperatorRip', 'call SetRipOpDir(getcwd())')
 
 vnoremap <leader>c :OSCYank<CR>
 
