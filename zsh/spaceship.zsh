@@ -1,4 +1,3 @@
-spaceship_vi_mode_enable # https://github.com/spaceship-prompt/spaceship-prompt/issues/157
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_VI_MODE_INSERT=""
 SPACESHIP_VI_MODE_NORMAL="[NORMAL]"

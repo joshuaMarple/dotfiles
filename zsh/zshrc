@@ -6,7 +6,9 @@
     git clone --depth 1 -- \
         https://github.com/marlonrichert/zsh-snap.git ~/dotfiles/zsh/snap/zsh-snap
 
+# source spaceship before starting prompt to speed it up even more
 source ~/dotfiles/zsh/snap/zsh-snap/znap.zsh
+source ~/dotfiles/zsh/spaceship.zsh
 
 znap prompt denysdovhan/spaceship-prompt
 
@@ -16,12 +18,12 @@ znap source mafredri/zsh-async
 znap source seletskiy/zsh-fuzzy-search-and-edit
 znap source MenkeTechnologies/zsh-expand
 znap source jandamm/instant-repl.zsh
-znap source mfaerevaag/wd wd.sh
+znap source mfaerevaag/wd
 znap source Valiev/almostontop
 znap source knu/zsh-manydots-magic manydots-magic
 
 ### Prompt
-source ~/dotfiles/zsh/spaceship.zsh
+spaceship_vi_mode_enable # https://github.com/spaceship-prompt/spaceship-prompt/issues/157
 
 ## Zsh Core Settings
 bindkey -v

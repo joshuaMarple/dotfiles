@@ -15,7 +15,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-unimpaired', {'tag': 'v2.0'}
 
   " Buffer Navigation
-  Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
@@ -32,9 +31,6 @@ call plug#begin('~/.vim/plugged')
 
   " Textobjects
   Plug 'wellle/targets.vim', {'tag' : 'v0.5.0'}
-
-  " Navigation
-  Plug 'ggandor/lightspeed.nvim'
 
   " Themes
   Plug 'kyazdani42/nvim-web-devicons'
@@ -187,16 +183,10 @@ nnoremap <leader>g :lua require('telescope.builtin.files').live_grep({search_dir
 nnoremap <leader>G :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>ff :Telescope file_browser<CR>
-nnoremap <leader>fr :Ranger<CR>
 nnoremap <leader>fe :Telescope frecency<CR>
-nnoremap <leader>H :FloatermNew htop<CR>
 nnoremap <leader>a :Telescope lsp_code_actions<CR>
 
 nnoremap <leader>Q <cmd>q<CR>
-nnoremap <leader>tr :T !!<CR>
-nnoremap <leader>tv <cmd>vsplit <bar> Tnew<CR>
-nnoremap <leader>tn <cmd>Tnew<CR>
-nnoremap <leader>tt :Ttoggle<CR>
 
 " Folding
 " Close everything besides what I'm in
@@ -218,10 +208,6 @@ nnoremap <leader>nh :noh<CR>
 
 nnoremap<leader>w :w<CR>
 
-" Allows for inserting before and after text objects
-nnoremap <silent> ,a :set opfunc=Append<CR>g@
-nnoremap <silent> ,i :set opfunc=Insert<CR>g@
-
 " easier window nav
 noremap <C-H> <C-W><C-H>
 noremap <C-J> <C-W><C-J>
@@ -234,7 +220,7 @@ tnoremap <C-K> <C-\><C-n><C-W><C-K>
 tnoremap <C-L> <C-\><C-n><C-W><C-L>
 tnoremap <C-Space> <C-\><C-n><C-^>
 
-tnoremap ,, <C-\><C-n>:Buffers<CR>
+tnoremap ,, <C-\><C-n>:Telescope buffers<CR>
 tnoremap uu <C-\><C-n>
 
 nnoremap <silent> <C-t> :FloatermToggle<CR>
