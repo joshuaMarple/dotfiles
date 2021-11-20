@@ -1,4 +1,3 @@
-require'colorizer'.setup()
 require('config.galaxyline')
 require('config.nvim-lsp')
 require('config.web-devicons')

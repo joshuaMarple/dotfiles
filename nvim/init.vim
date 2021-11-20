@@ -3,7 +3,7 @@ call plug#begin('~/.vim/plugged')
   " LSP
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-compe'
-  Plug 'kabouzeid/nvim-lspinstall'
+  Plug 'williamboman/nvim-lsp-installer'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -39,14 +39,10 @@ call plug#begin('~/.vim/plugged')
   " Navigation
   Plug 'ggandor/lightspeed.nvim'
 
-  " Lua
-  Plug 'svermeulen/vimpeccable'
-
   " Themes
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
-  Plug 'norcalli/nvim-colorizer.lua'
 call plug#end() 
 "}}}
 
