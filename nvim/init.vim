@@ -2,7 +2,16 @@
 call plug#begin('~/.vim/plugged')
   " LSP
   Plug 'neovim/nvim-lspconfig'
-  Plug 'hrsh7th/nvim-compe', {'tag': 'v2.0.0'}
+  
+  " cmp-nvim
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
+
   Plug 'williamboman/nvim-lsp-installer'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -50,8 +59,7 @@ set foldmethod=marker
 " This is in the statusline, I don't need it elsewhere
 set noshowmode
 
-" Needed for compe (https://github.com/hrsh7th/nvim-compe)
-set completeopt=menuone,noselect
+set completeopt=menu,menuone,noselect
 
 filetype plugin indent on
 " On pressing tab, insert 2 spaces
@@ -259,11 +267,11 @@ tnoremap <A-S-t> <C-\><C-n>:tabprevious<CR>
 " Compe is really noisy for some reason
 set shortmess+=c
 
-inoremap <silent><expr> <C-Space> compe#confirm('<CR>')
-inoremap <silent><expr> <C-y>     compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+" inoremap <silent><expr> <C-Space> compe#confirm('<CR>')
+" inoremap <silent><expr> <C-y>     compe#confirm('<CR>')
+" inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+" inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+" inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
