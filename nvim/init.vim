@@ -36,6 +36,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
+
+  " Profiling
+  " Plug 'dstein64/vim-startuptime'
 call plug#end() 
 "}}}
 
