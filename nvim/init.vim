@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
+  Plug 'lukas-reineke/cmp-rg'
 
   Plug 'williamboman/nvim-lsp-installer'
 
@@ -33,7 +34,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'joshuaMarple/vim-projectroot'
 
   Plug 'stefandtw/quickfix-reflector.vim', {'tag': 'v0.1'}
-  Plug 'ojroques/vim-oscyank'
+  Plug 'joshuaMarple/vim-oscyank'
 
   " Terminal Management
   Plug 'christoomey/vim-tmux-navigator', {'tag': 'v1.0'}
@@ -42,7 +43,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'wellle/targets.vim', {'tag' : 'v0.5.0'}
 
   " Themes
-  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'joshuaMarple/nvim-web-devicons'
   Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
 
@@ -190,8 +191,10 @@ nnoremap <leader>; :Telescope command_history<CR>
 nnoremap <leader>d :Telescope help_tags<CR>
 nnoremap <leader>q :Telescope quickfix<CR>
 nnoremap <leader>x :Telescope commands<CR>
-nnoremap <leader>g :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
-nnoremap <leader>G :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
+nnoremap <leader>gg :Telescope live_grep<CR>
+nnoremap <leader>gp :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
+nnoremap <leader>Gg :silent grep 
+nnoremap <leader>Gp :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>ff :Telescope file_browser<CR>
 nnoremap <leader>fe :Telescope frecency<CR>
