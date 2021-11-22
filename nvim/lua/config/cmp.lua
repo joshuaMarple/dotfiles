@@ -24,10 +24,8 @@ cmp.setup({
   },
   {
     { name = 'buffer' },
-  },
-  {
-    { name = 'rg' }
-  })
+  }
+  )
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

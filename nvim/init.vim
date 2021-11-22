@@ -11,7 +11,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
-  Plug 'lukas-reineke/cmp-rg'
 
   Plug 'williamboman/nvim-lsp-installer'
 
@@ -45,6 +44,7 @@ call plug#begin('~/.vim/plugged')
   " Themes
   Plug 'joshuaMarple/nvim-web-devicons'
   Plug 'https://gitlab.com/jmarple/vim-one'
+  Plug 'https://gitlab.com/jmarple/dotline.nvim', {'branch': 'main'}
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
 
   " Profiling
@@ -270,11 +270,6 @@ tnoremap <A-S-t> <C-\><C-n>:tabprevious<CR>
 " Compe is really noisy for some reason
 set shortmess+=c
 
-" inoremap <silent><expr> <C-Space> compe#confirm('<CR>')
-" inoremap <silent><expr> <C-y>     compe#confirm('<CR>')
-" inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-" inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-" inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
