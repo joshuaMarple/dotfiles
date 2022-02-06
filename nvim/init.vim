@@ -27,8 +27,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
-  Plug 'junegunn/fzf.vim', {'branch': 'master'}
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'nvim-telescope/telescope-file-browser.nvim'
 
   Plug 'joshuaMarple/vim-projectroot'
 
@@ -206,11 +205,6 @@ nnoremap <leader>Q <cmd>q<CR>
 " Close everything besides what I'm in
 nnoremap <leader>zz zMzv
 
-" Mapping selecting mappings
-imap <c-x><c-k> <Plug>(fzf-complete-word)
-imap <c-x><c-f> <Plug>(fzf-complete-path)
-imap <c-x><c-l> <Plug>(fzf-complete-line)
-
 " I hate horizontal splitting
 cabbrev h vert h
 
@@ -237,13 +231,10 @@ tnoremap <C-Space> <C-\><C-n><C-^>
 tnoremap ,, <C-\><C-n>:Telescope buffers<CR>
 tnoremap uu <C-\><C-n>
 
-nnoremap <silent> <C-t> :FloatermToggle<CR>
-tnoremap <C-t> <C-\><C-n>:FloatermToggle<CR>
-
 nnoremap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 vmap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 
-nnoremap gt :silent !ctags -R <C-r>=b:projectroot<CR><CR>
+nnoremap <leader>gt :silent !ctags -R <C-r>=b:projectroot<CR><CR>
 
 vnoremap <leader>c :OSCYank<CR>
 
@@ -269,9 +260,6 @@ tnoremap <A-S-t> <C-\><C-n>:tabprevious<CR>
 
 " Compe is really noisy for some reason
 set shortmess+=c
-
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " tab while using incsearch
 " https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/
