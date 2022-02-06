@@ -2,7 +2,16 @@
 call plug#begin('~/.vim/plugged')
   " LSP
   Plug 'neovim/nvim-lspconfig'
-  Plug 'hrsh7th/nvim-compe', {'tag': 'v2.0.0'}
+  
+  " cmp-nvim
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
+
   Plug 'williamboman/nvim-lsp-installer'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -24,7 +33,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'joshuaMarple/vim-projectroot'
 
   Plug 'stefandtw/quickfix-reflector.vim', {'tag': 'v0.1'}
-  Plug 'ojroques/vim-oscyank'
+  Plug 'joshuaMarple/vim-oscyank'
 
   " Terminal Management
   Plug 'christoomey/vim-tmux-navigator', {'tag': 'v1.0'}
@@ -33,8 +42,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'wellle/targets.vim', {'tag' : 'v0.5.0'}
 
   " Themes
-  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'joshuaMarple/nvim-web-devicons'
   Plug 'https://gitlab.com/jmarple/vim-one'
+  Plug 'https://gitlab.com/jmarple/dotline.nvim', {'branch': 'main'}
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
 
   " Profiling
@@ -50,8 +60,7 @@ set foldmethod=marker
 " This is in the statusline, I don't need it elsewhere
 set noshowmode
 
-" Needed for compe (https://github.com/hrsh7th/nvim-compe)
-set completeopt=menuone,noselect
+set completeopt=menu,menuone,noselect
 
 filetype plugin indent on
 " On pressing tab, insert 2 spaces
@@ -182,8 +191,10 @@ nnoremap <leader>; :Telescope command_history<CR>
 nnoremap <leader>d :Telescope help_tags<CR>
 nnoremap <leader>q :Telescope quickfix<CR>
 nnoremap <leader>x :Telescope commands<CR>
-nnoremap <leader>g :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
-nnoremap <leader>G :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
+nnoremap <leader>gg :Telescope live_grep<CR>
+nnoremap <leader>gp :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
+nnoremap <leader>Gg :silent grep 
+nnoremap <leader>Gp :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>ff :Telescope file_browser<CR>
 nnoremap <leader>fe :Telescope frecency<CR>
@@ -259,11 +270,6 @@ tnoremap <A-S-t> <C-\><C-n>:tabprevious<CR>
 " Compe is really noisy for some reason
 set shortmess+=c
 
-inoremap <silent><expr> <C-Space> compe#confirm('<CR>')
-inoremap <silent><expr> <C-y>     compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
