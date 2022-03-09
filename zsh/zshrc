@@ -4,23 +4,20 @@
 # Download Znap, if it's not there yet.
 [[ -f ~/dotfiles/zsh/snap/zsh-snap/znap.zsh ]] ||
     git clone --depth 1 -- \
-        https://github.com/marlonrichert/zsh-snap.git ~/dotfiles/zsh/snap/zsh-snap
+        https://github.com/joshuaMarple/zsh-snap.git ~/dotfiles/zsh/snap/zsh-snap
 
 # source spaceship before starting prompt to speed it up even more
 source ~/dotfiles/zsh/snap/zsh-snap/znap.zsh
 source ~/dotfiles/zsh/spaceship.zsh
 
-znap prompt denysdovhan/spaceship-prompt
+znap prompt joshuaMarple/spaceship-prompt
 
 znap source Aloxaf/fzf-tab
 znap source zsh-users/zsh-autosuggestions
 znap source mafredri/zsh-async
 znap source seletskiy/zsh-fuzzy-search-and-edit
 znap source MenkeTechnologies/zsh-expand
-znap source jandamm/instant-repl.zsh
-znap source mfaerevaag/wd
 znap source Valiev/almostontop
-znap source knu/zsh-manydots-magic manydots-magic
 
 ### Prompt
 spaceship_vi_mode_enable # https://github.com/spaceship-prompt/spaceship-prompt/issues/157
@@ -58,7 +55,8 @@ ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 bindkey '^P' fuzzy-search-and-edit
 
-bindkey '^O' repl-set
+# https://github.com/spaceship-prompt/spaceship-prompt/issues/91
+bindkey "^?" backward-delete-char
 
 eval "$(zoxide init zsh)"
 

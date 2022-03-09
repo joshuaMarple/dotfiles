@@ -1,5 +1,4 @@
 require('config.nvim-lsp')
-require('config.cmp')
 require('config.web-devicons')
 require('config.telescope')
 require('config.treesitter')
