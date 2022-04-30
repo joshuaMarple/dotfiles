@@ -37,8 +37,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'https://gitlab.com/jmarple/dotline.nvim', {'branch': 'main'}
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
 
+  Plug 'norcalli/nvim-colorizer.lua'
+
   " Profiling
-  " Plug 'dstein64/vim-startuptime'
+  Plug 'dstein64/vim-startuptime'
 call plug#end() 
 "}}}
 
@@ -133,8 +135,8 @@ let mapleader = " "
 " Easier quickfix management
 augroup quickfix
     autocmd!
-    autocmd QuickFixCmdPost [^l]* botright cwindow
-    autocmd QuickFixCmdPost l* botright lwindow
+    autocmd QuickFixCmdPost [^l]* botright cwindow | :norm! w
+    autocmd QuickFixCmdPost l* botright lwindow | :norm! w
 augroup END
 
 " Notification after file change
@@ -156,15 +158,6 @@ augroup vimrc-incsearch-highlight
   autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
 
-augroup bufmarks
-  autocmd!
-  autocmd BufLeave *.css,*.less,*scss normal! mC
-  autocmd BufLeave BUILD normal! mB
-  autocmd BufLeave *.proto normal! mP
-  autocmd BufLeave *.html normal! mH
-  autocmd BufLeave *.java normal! mJ
-  autocmd BufLeave vimrc,*.vim normal! mV
-augroup END
 " }}}
 
 " Mappings {{{

@@ -7,3 +7,5 @@ tags
 *.log
 zsh/snap/
 *.zwc
+tags.lock
+*.bak
