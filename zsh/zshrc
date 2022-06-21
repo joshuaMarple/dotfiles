@@ -9,15 +9,11 @@
 # source spaceship before starting prompt to speed it up even more
 source ~/dotfiles/zsh/snap/zsh-snap/znap.zsh
 # source ~/dotfiles/zsh/spaceship.zsh
-PROMPT="%F{#50a14f}%(!.#.) %f"
-RPROMPT="%(?..✘) %2~"
-setopt TRANSIENT_RPROMPT
-precmd() { print "" }
 ZVM_CURSOR_STYLE_ENABLED=true
 ZVM_LAZY_KEYBINDINGS=false
 ZVM_INIT_MODE=sourcing
 
-# znap prompt joshuaMarple/spaceship-prompt
+znap source https://gitlab.com/jmarple/refined
 
 znap source Aloxaf/fzf-tab
 znap source zsh-users/zsh-autosuggestions
@@ -26,6 +22,8 @@ znap source seletskiy/zsh-fuzzy-search-and-edit
 znap source MenkeTechnologies/zsh-expand
 # znap source Valiev/almostontop
 znap source jeffreytse/zsh-vi-mode
+
+# source ~/projects/refined/refined.plugin.zsh
 
 ### Prompt
 # spaceship_vi_mode_enable # https://github.com/spaceship-prompt/spaceship-prompt/issues/157
@@ -61,9 +59,14 @@ alias j=cdr
 setopt complete_in_word
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
+# no need for cd
+setopt auto_cd
+
 source ~/.bash_aliases
 
 bindkey '^ ' autosuggest-execute
+
+bindkey '^F' fzf-file-widget
 
 ### Configure ZSH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -84,35 +87,5 @@ eval "$(zoxide init zsh)"
 export BAT_THEME="ansi-light"
 
 source ~/dotfiles/zsh/scripts/*
-
-strlen () {
-    FOO=$1
-    local zero='%([BSUbfksu]|([FB]|){*})'
-    LEN=${#${(S%%)FOO//$~zero/}}
-    echo $LEN
-}
-
-# show right prompt with date ONLY when command is executed
-preexec () {
-    DATE=$( date +"[%H:%M:%S]" )
-    local len_right=$( strlen "$DATE" )
-    len_right=$(( $len_right+1 ))
-    local right_start=$(($COLUMNS - $len_right))
-
-    local len_cmd=$( strlen "$@" )
-    local len_prompt=$(strlen "$PROMPT" )
-    local len_left=$(($len_cmd+$len_prompt))
-
-    RDATE="\033[${right_start}C ${DATE}"
-
-    # if [ $len_left -lt $right_start ]; then
-        # command does not overwrite right prompt
-        # ok to move up one line
-        echo -e "\033[1A${RDATE}"
-    # else
-    #     echo -e "${RDATE}"
-    # fi
-
-}
 
 # zprof
