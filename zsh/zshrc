@@ -4,26 +4,29 @@
 # Download Znap, if it's not there yet.
 [[ -f ~/dotfiles/zsh/snap/zsh-snap/znap.zsh ]] ||
     git clone --depth 1 -- \
-        https://github.com/marlonrichert/zsh-snap.git ~/dotfiles/zsh/snap/zsh-snap
+        https://github.com/joshuaMarple/zsh-snap.git ~/dotfiles/zsh/snap/zsh-snap
 
 # source spaceship before starting prompt to speed it up even more
 source ~/dotfiles/zsh/snap/zsh-snap/znap.zsh
-source ~/dotfiles/zsh/spaceship.zsh
+# source ~/dotfiles/zsh/spaceship.zsh
+ZVM_CURSOR_STYLE_ENABLED=true
+ZVM_LAZY_KEYBINDINGS=false
+ZVM_INIT_MODE=sourcing
 
-znap prompt denysdovhan/spaceship-prompt
+znap source https://gitlab.com/jmarple/refined
 
 znap source Aloxaf/fzf-tab
 znap source zsh-users/zsh-autosuggestions
 znap source mafredri/zsh-async
 znap source seletskiy/zsh-fuzzy-search-and-edit
 znap source MenkeTechnologies/zsh-expand
-znap source jandamm/instant-repl.zsh
-znap source mfaerevaag/wd
-znap source Valiev/almostontop
-znap source knu/zsh-manydots-magic manydots-magic
+# znap source Valiev/almostontop
+znap source jeffreytse/zsh-vi-mode
+
+# source ~/projects/refined/refined.plugin.zsh
 
 ### Prompt
-spaceship_vi_mode_enable # https://github.com/spaceship-prompt/spaceship-prompt/issues/157
+# spaceship_vi_mode_enable # https://github.com/spaceship-prompt/spaceship-prompt/issues/157
 
 ## Zsh Core Settings
 bindkey -v
@@ -46,9 +49,24 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^v" edit-command-line
 
+# Autojump
+# https://duganchen.ca/the-simplest-autojump-implementation-for-zsh/
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-default yes
+zstyle ':completion:*' recent-dirs-insert always
+alias j=cdr
+setopt complete_in_word
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+
+# no need for cd
+setopt auto_cd
+
 source ~/.bash_aliases
 
 bindkey '^ ' autosuggest-execute
+
+bindkey '^F' fzf-file-widget
 
 ### Configure ZSH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -58,7 +76,11 @@ ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 bindkey '^P' fuzzy-search-and-edit
 
-bindkey '^O' repl-set
+stty -ixon
+bindkey '^q' push-line-or-edit
+
+# https://github.com/spaceship-prompt/spaceship-prompt/issues/91
+bindkey "^?" backward-delete-char
 
 eval "$(zoxide init zsh)"
 

@@ -47,6 +47,6 @@ require'nvim-treesitter.configs'.setup {
         ["[]"] = "@class.outer",
       },
     },
-  }
+  },
 }
 

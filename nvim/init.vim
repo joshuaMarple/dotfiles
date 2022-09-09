@@ -3,15 +3,6 @@ call plug#begin('~/.vim/plugged')
   " LSP
   Plug 'neovim/nvim-lspconfig'
   
-  " cmp-nvim
-  Plug 'hrsh7th/cmp-nvim-lsp'
-  Plug 'hrsh7th/cmp-buffer'
-  Plug 'hrsh7th/cmp-path'
-  Plug 'hrsh7th/cmp-cmdline'
-  Plug 'hrsh7th/nvim-cmp'
-  Plug 'hrsh7th/cmp-vsnip'
-  Plug 'hrsh7th/vim-vsnip'
-
   Plug 'williamboman/nvim-lsp-installer'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -46,8 +37,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'https://gitlab.com/jmarple/dotline.nvim', {'branch': 'main'}
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
 
+  Plug 'norcalli/nvim-colorizer.lua'
+
   " Profiling
-  " Plug 'dstein64/vim-startuptime'
+  Plug 'dstein64/vim-startuptime'
 call plug#end() 
 "}}}
 
@@ -142,8 +135,8 @@ let mapleader = " "
 " Easier quickfix management
 augroup quickfix
     autocmd!
-    autocmd QuickFixCmdPost [^l]* botright cwindow
-    autocmd QuickFixCmdPost l* botright lwindow
+    autocmd QuickFixCmdPost [^l]* botright cwindow | :norm! w
+    autocmd QuickFixCmdPost l* botright lwindow | :norm! w
 augroup END
 
 " Notification after file change
@@ -165,20 +158,11 @@ augroup vimrc-incsearch-highlight
   autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
 
-augroup bufmarks
-  autocmd!
-  autocmd BufLeave *.css,*.less,*scss normal! mC
-  autocmd BufLeave BUILD normal! mB
-  autocmd BufLeave *.proto normal! mP
-  autocmd BufLeave *.html normal! mH
-  autocmd BufLeave *.java normal! mJ
-  autocmd BufLeave vimrc,*.vim normal! mV
-augroup END
 " }}}
 
 " Mappings {{{
 """ FZF
-nnoremap <leader>s :GitStat<CR>
+nnoremap <leader>s :Telescope git_status<CR>
 nnoremap <leader>o :Telescope treesitter<CR>
 nnoremap <leader>fp :lua require('telescope.builtin.files').find_files({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>pt :ProfileToggle<CR>
@@ -261,10 +245,35 @@ tnoremap <A-S-t> <C-\><C-n>:tabprevious<CR>
 " Compe is really noisy for some reason
 set shortmess+=c
 
+inoremap ,, <C-x><C-o><C-r>=pumvisible() ? "\<lt>Down>\<lt>C-p>\<lt>Down>" : ""<CR>
+inoremap ,; <C-n><C-r>=pumvisible() ? "\<lt>Down>\<lt>C-p>\<lt>Down>" : ""<CR>
+inoremap ,: <C-x><C-f><C-r>=pumvisible() ? "\<lt>Down>\<lt>C-p>\<lt>Down>" : ""<CR>
+inoremap ,= <C-x><C-l><C-r>=pumvisible() ? "\<lt>Down>\<lt>C-p>\<lt>Down>" : ""<CR>
+
 " tab while using incsearch
 " https://www.reddit.com/r/vim/comments/4gjbqn/what_tricks_do_you_use_instead_of_popular_plugins/
 cnoremap <expr> <Tab>   getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>/<C-r>/" : "<C-z>"
 cnoremap <expr> <S-Tab> getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<CR>?<C-r>/" : "<S-Tab>"
+
+" last change pseudo-text objects
+" ik ak
+xnoremap ik `]o`[
+onoremap ik :<C-u>normal vik<CR>
+onoremap ak :<C-u>normal vikV<CR>
+
+function! VisualNumber()
+	call search('\d\([^0-9\.]\|$\)', 'cW')
+	normal v
+	call search('\(^\|[^0-9\.]\d\)', 'becW')
+endfunction
+xnoremap in :<C-u>call VisualNumber()<CR>
+onoremap in :<C-u>normal vin<CR>
+
+nnoremap <A-g> g;
+nnoremap <A-S-g> g,
+
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 " }}}
 
 " Imports {{{

@@ -46,9 +46,6 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 lsp_installer.on_server_ready(function(server)
     local opts = {}
     opts.on_attach = on_attach
