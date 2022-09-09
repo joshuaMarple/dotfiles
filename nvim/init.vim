@@ -185,6 +185,8 @@ nnoremap <leader>a :Telescope lsp_code_actions<CR>
 
 nnoremap <leader>Q <cmd>q<CR>
 
+nnoremap <Esc> :
+
 " Folding
 " Close everything besides what I'm in
 nnoremap <leader>zz zMzv
