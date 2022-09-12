@@ -2,6 +2,9 @@
 call plug#begin('~/.vim/plugged')
   " LSP
   Plug 'neovim/nvim-lspconfig'
+
+  Plug 'echasnovski/mini.nvim', {'tag': 'v0.5.0'}
+  Plug 'ggandor/leap.nvim'
   
   Plug 'williamboman/nvim-lsp-installer'
 
@@ -11,13 +14,11 @@ call plug#begin('~/.vim/plugged')
   " Tpope section
   Plug 'tpope/vim-surround', {'tag': 'v2.2'}
   Plug 'tpope/vim-abolish', {'tag': 'v1.1'}
-  Plug 'tpope/vim-commentary', {'tag': 'v1.3'}
   Plug 'tpope/vim-unimpaired', {'tag': 'v2.0'}
 
   " Buffer Navigation
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
-  Plug 'nvim-telescope/telescope-fzy-native.nvim'
+  Plug 'nvim-telescope/telescope.nvim', {'tag': 'nvim-0.6'}
   Plug 'nvim-telescope/telescope-file-browser.nvim'
 
   Plug 'joshuaMarple/vim-projectroot'
@@ -27,9 +28,6 @@ call plug#begin('~/.vim/plugged')
 
   " Terminal Management
   Plug 'christoomey/vim-tmux-navigator', {'tag': 'v1.0'}
-
-  " Textobjects
-  Plug 'wellle/targets.vim', {'tag' : 'v0.5.0'}
 
   " Themes
   Plug 'joshuaMarple/nvim-web-devicons'
@@ -51,6 +49,12 @@ set foldmethod=marker
 
 " This is in the statusline, I don't need it elsewhere
 set noshowmode
+
+" Show a single, global, statusline
+set laststatus=3
+
+" Hide the cmdline (only appears when typing in cmd-line mode)
+" set cmdheight=0
 
 set completeopt=menu,menuone,noselect
 
@@ -106,6 +110,9 @@ set termguicolors
 
 set background=light
 colorscheme one
+
+" Hide nontext '~' marker for line padding https://stackoverflow.com/questions/3813059/is-it-possible-to-not-display-a-for-blank-lines-in-vim-neovim
+hi NonText guifg=bg
 
 set splitright
 
@@ -164,7 +171,7 @@ augroup END
 """ FZF
 nnoremap <leader>s :Telescope git_status<CR>
 nnoremap <leader>o :Telescope treesitter<CR>
-nnoremap <leader>fp :lua require('telescope.builtin.files').find_files({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
+nnoremap <leader>fp :lua require('telescope.builtin').find_files({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>pt :ProfileToggle<CR>
 nnoremap <leader>P :lua require'telescope'.extensions.project.project{}<CR>
 nnoremap ,, :Telescope buffers<CR>
@@ -175,7 +182,7 @@ nnoremap <leader>d :Telescope help_tags<CR>
 nnoremap <leader>q :Telescope quickfix<CR>
 nnoremap <leader>x :Telescope commands<CR>
 nnoremap <leader>gg :Telescope live_grep<CR>
-nnoremap <leader>gp :lua require('telescope.builtin.files').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
+nnoremap <leader>gp :lua require('telescope.builtin').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>Gg :silent grep 
 nnoremap <leader>Gp :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
 nnoremap <leader>e :Vexplore<CR>
