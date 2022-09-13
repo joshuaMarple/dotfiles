@@ -1,3 +1,7 @@
+if not vim.g.loaded_telescope then
+  return
+end
+
 require("telescope").load_extension "file_browser"
 
 require('telescope').setup{

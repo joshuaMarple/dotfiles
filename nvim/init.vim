@@ -112,7 +112,7 @@ set lazyredraw
 set termguicolors
 
 set background=light
-colorscheme one
+silent! colorscheme one
 
 " Hide nontext '~' marker for line padding https://stackoverflow.com/questions/3813059/is-it-possible-to-not-display-a-for-blank-lines-in-vim-neovim
 hi NonText guifg=bg
@@ -154,10 +154,12 @@ augroup filechanged
     \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 augroup END
 
-augroup UpdateProjectRoot
-  autocmd!
-  autocmd BufEnter * :let b:projectroot = projectroot#guess()
-augroup END
+if exists('g:loaded_projectroot')
+  augroup UpdateProjectRoot
+    autocmd!
+    autocmd BufEnter * :let b:projectroot = projectroot#guess()
+  augroup END
+endif
 
 augroup vimrc-incsearch-highlight
   autocmd!
@@ -292,7 +294,7 @@ nnoremap <A-S-g> g,
 
 " Imports {{{
 " Some files are easier to specify in lua.
-lua require('config')
+" lua require('config')
 
 " Keep work stuff separate
 runtime ~/.config/nvim/work.vim
