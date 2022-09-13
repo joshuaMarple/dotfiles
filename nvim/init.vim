@@ -92,6 +92,9 @@ set undodir=~/.vim/undo
 let g:netrw_banner=0
 let g:netrw_liststyle = 3
 
+set wildcharm=<C-z>
+set wildignorecase
+
 " Ignore case when searching
 set ignorecase
 
@@ -120,9 +123,6 @@ set splitright
 set timeoutlen=1000
 set ttimeoutlen=5
 set updatetime=300
-
-" Set textobj-comment
-let g:textobj_comment_no_default_key_mappings = 1
 
 " Use rg for grepping
 if executable("rg")
@@ -173,8 +173,8 @@ nnoremap <leader>s :Telescope git_status<CR>
 nnoremap <leader>o :Telescope treesitter<CR>
 nnoremap <leader>fp :lua require('telescope.builtin').find_files({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>pt :ProfileToggle<CR>
-nnoremap <leader>P :lua require'telescope'.extensions.project.project{}<CR>
 nnoremap ,, :Telescope buffers<CR>
+nnoremap <leader>b :Telescope buffers<CR>
 nnoremap <leader>l :Telescope current_buffer_fuzzy_find<CR>
 nnoremap <leader>h :Telescope oldfiles<CR>
 nnoremap <leader>; :Telescope command_history<CR>
@@ -187,10 +187,18 @@ nnoremap <leader>Gg :silent grep
 nnoremap <leader>Gp :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
 nnoremap <leader>e :Vexplore<CR>
 nnoremap <leader>ff :Telescope file_browser<CR>
-nnoremap <leader>fe :Telescope frecency<CR>
 nnoremap <leader>a :Telescope lsp_code_actions<CR>
 
 nnoremap <leader>Q <cmd>q<CR>
+
+" Vanilla Key Bindings
+nnoremap <leader>B :buffer <C-z><S-Tab>
+nnoremap <leader>H :browse oldfiles<CR>
+nnoremap <leader>D :help 
+nnoremap <leader>G :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
+nnoremap <leader>E :Vexplore<CR>
+nnoremap <leader>Ff :e <C-Z><S-TAB>
+nnoremap <leader>Fp :e <C-r>=b:projectroot<CR>/**/*
 
 nnoremap <Esc> :
 
@@ -280,9 +288,6 @@ onoremap in :<C-u>normal vin<CR>
 
 nnoremap <A-g> g;
 nnoremap <A-S-g> g,
-
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
 " }}}
 
 " Imports {{{
