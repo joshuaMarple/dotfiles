@@ -4,8 +4,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'neovim/nvim-lspconfig'
 
   Plug 'echasnovski/mini.nvim', {'tag': 'v0.5.0'}
-  Plug 'ggandor/leap.nvim'
-  
+
   Plug 'williamboman/nvim-lsp-installer'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -24,6 +23,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'joshuaMarple/vim-projectroot'
 
   Plug 'stefandtw/quickfix-reflector.vim', {'tag': 'v0.1'}
+  Plug 'romainl/vim-qf', {'tag': 'v0.0.4'}
   Plug 'joshuaMarple/vim-oscyank'
 
   " Terminal Management
@@ -139,13 +139,6 @@ let mapleader = " "
 "}}}
 
 " Augroups {{{
-" Easier quickfix management
-augroup quickfix
-    autocmd!
-    autocmd QuickFixCmdPost [^l]* botright cwindow | :norm! w
-    autocmd QuickFixCmdPost l* botright lwindow | :norm! w
-augroup END
-
 " Notification after file change
 " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
 augroup filechanged
@@ -153,13 +146,6 @@ augroup filechanged
   autocmd FileChangedShellPost *
     \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 augroup END
-
-if exists('g:loaded_projectroot')
-  augroup UpdateProjectRoot
-    autocmd!
-    autocmd BufEnter * :let b:projectroot = projectroot#guess()
-  augroup END
-endif
 
 augroup vimrc-incsearch-highlight
   autocmd!
@@ -253,6 +239,9 @@ nnoremap <leader>rc <cmd>so %<CR>
 nnoremap <leader>rp <cmd>PlugInstall<CR>
 nnoremap <leader>ev :e $MYVIMRC<cr>
 
+" Reload file
+nnoremap <leader>rr :e %
+
 " Easier nav with alt
 noremap <A-c> :cn<CR>
 noremap <A-S-c> :cp<CR>
@@ -280,21 +269,14 @@ xnoremap ik `]o`[
 onoremap ik :<C-u>normal vik<CR>
 onoremap ak :<C-u>normal vikV<CR>
 
-function! VisualNumber()
-	call search('\d\([^0-9\.]\|$\)', 'cW')
-	normal v
-	call search('\(^\|[^0-9\.]\d\)', 'becW')
-endfunction
-xnoremap in :<C-u>call VisualNumber()<CR>
-onoremap in :<C-u>normal vin<CR>
+xnoremap iN :<C-u>call VisualNumber()<CR>
+onoremap iN :<C-u>normal vin<CR>
 
 nnoremap <A-g> g;
 nnoremap <A-S-g> g,
 " }}}
 
 " Imports {{{
-" Some files are easier to specify in lua.
-" lua require('config')
 
 " Keep work stuff separate
 runtime ~/.config/nvim/work.vim

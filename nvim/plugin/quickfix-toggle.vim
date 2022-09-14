@@ -1,7 +1,7 @@
-if exists('g:quickfix_toggle')
+if exists('g:loaded_quickfix_toggle')
   finish
 endif
-let g:loaded_fzf_helpers = 1
+let g:loaded_quickfix_toggle = 1
 
 function! ToggleQuickFix()
     if empty(filter(getwininfo(), 'v:val.quickfix'))
