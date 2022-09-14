@@ -14,6 +14,7 @@ ZVM_LAZY_KEYBINDINGS=false
 ZVM_INIT_MODE=sourcing
 
 znap source https://gitlab.com/jmarple/refined
+# source ~/projects/refined/refined.plugin.zsh
 
 znap source Aloxaf/fzf-tab
 znap source zsh-users/zsh-autosuggestions
@@ -23,10 +24,8 @@ znap source MenkeTechnologies/zsh-expand
 # znap source Valiev/almostontop
 znap source jeffreytse/zsh-vi-mode
 
-# source ~/projects/refined/refined.plugin.zsh
-
-### Prompt
-# spaceship_vi_mode_enable # https://github.com/spaceship-prompt/spaceship-prompt/issues/157
+autoload -U select-word-style
+select-word-style bash
 
 ## Zsh Core Settings
 bindkey -v
