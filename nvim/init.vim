@@ -20,6 +20,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope.nvim', {'tag': 'nvim-0.6'}
   Plug 'nvim-telescope/telescope-file-browser.nvim'
 
+  Plug 'whiteinge/diffconflicts'
+
   Plug 'joshuaMarple/vim-projectroot'
 
   Plug 'stefandtw/quickfix-reflector.vim', {'tag': 'v0.1'}
