@@ -33,7 +33,6 @@ call plug#begin('~/.vim/plugged')
 
   " Themes
   Plug 'joshuaMarple/nvim-web-devicons'
-  Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'https://gitlab.com/jmarple/dotline.nvim', {'branch': 'main'}
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
 
