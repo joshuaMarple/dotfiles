@@ -3,44 +3,44 @@ call plug#begin('~/.vim/plugged')
   " LSP
   Plug 'neovim/nvim-lspconfig'
 
-  Plug 'echasnovski/mini.nvim', {'tag': 'v0.5.0'}
+  Plug 'jmarple/mini.nvim'
 
-  Plug 'williamboman/nvim-lsp-installer'
+  " Plug 'williamboman/nvim-lsp-installer'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
   " Tpope section
-  Plug 'tpope/vim-surround', {'tag': 'v2.2'}
-  Plug 'tpope/vim-abolish', {'tag': 'v1.1'}
-  Plug 'tpope/vim-unimpaired', {'tag': 'v2.0'}
+  " Plug 'tpope/vim-surround', {'tag': 'v2.2'}
+  Plug 'joshuaMarple/vim-abolish'
+  Plug 'joshuaMarple/vim-unimpaired'
 
   " Buffer Navigation
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim', {'tag': 'nvim-0.6'}
   Plug 'nvim-telescope/telescope-file-browser.nvim'
 
-  Plug 'whiteinge/diffconflicts'
+  Plug 'joshuaMarple/diffconflicts'
 
   Plug 'joshuaMarple/vim-projectroot'
 
-  Plug 'stefandtw/quickfix-reflector.vim', {'tag': 'v0.1'}
-  Plug 'romainl/vim-qf', {'tag': 'v0.0.4'}
+  Plug 'joshuaMarple/quickfix-reflector.vim'
+  Plug 'joshuaMarple/vim-qf'
   Plug 'joshuaMarple/vim-oscyank'
 
   " Terminal Management
-  Plug 'christoomey/vim-tmux-navigator', {'tag': 'v1.0'}
+  Plug 'joshuaMarple/vim-tmux-navigator'
 
   " Themes
   Plug 'joshuaMarple/nvim-web-devicons'
-  Plug 'https://gitlab.com/jmarple/vim-one'
+  " Plug 'https://gitlab.com/jmarple/vim-one'
   Plug 'https://gitlab.com/jmarple/dotline.nvim', {'branch': 'main'}
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
 
-  Plug 'norcalli/nvim-colorizer.lua'
+  " Plug 'joshuaMarple/nvim-colorizer.lua'
 
   " Profiling
-  Plug 'dstein64/vim-startuptime'
+  " Plug 'joshuaMarple/vim-startuptime'
 call plug#end() 
 "}}}
 
@@ -158,26 +158,10 @@ augroup END
 " }}}
 
 " Mappings {{{
-""" FZF
-nnoremap <leader>s :Telescope git_status<CR>
-nnoremap <leader>o :Telescope treesitter<CR>
-nnoremap <leader>fp :lua require('telescope.builtin').find_files({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>pt :ProfileToggle<CR>
-nnoremap ,, :Telescope buffers<CR>
-nnoremap <leader>b :Telescope buffers<CR>
-nnoremap <leader>l :Telescope current_buffer_fuzzy_find<CR>
-nnoremap <leader>h :Telescope oldfiles<CR>
-nnoremap <leader>; :Telescope command_history<CR>
-nnoremap <leader>d :Telescope help_tags<CR>
-nnoremap <leader>q :Telescope quickfix<CR>
-nnoremap <leader>x :Telescope commands<CR>
-nnoremap <leader>gg :Telescope live_grep<CR>
-nnoremap <leader>gp :lua require('telescope.builtin').live_grep({search_dirs={vim.api.nvim_eval('projectroot#guess()')}})<CR>
 nnoremap <leader>Gg :silent grep 
 nnoremap <leader>Gp :silent grep  <C-r>=b:projectroot<CR><S-Left><Left>
 nnoremap <leader>e :Vexplore<CR>
-nnoremap <leader>ff :Telescope file_browser<CR>
-nnoremap <leader>a :Telescope lsp_code_actions<CR>
 
 nnoremap <leader>Q <cmd>q<CR>
 
@@ -202,7 +186,7 @@ cabbrev h vert h
 noremap <C-n> :cn<CR>
 noremap <C-p> :cp<CR>
 
-nnoremap <leader>nt :lua require('numtoggle').numToggle()<CR>
+" nnoremap <leader>nt :lua require('numtoggle').numToggle()<CR>
 nnoremap <leader>nh :noh<CR>
 
 nnoremap<leader>w :w<CR>
@@ -219,7 +203,6 @@ tnoremap <C-K> <C-\><C-n><C-W><C-K>
 tnoremap <C-L> <C-\><C-n><C-W><C-L>
 tnoremap <C-Space> <C-\><C-n><C-^>
 
-tnoremap ,, <C-\><C-n>:Telescope buffers<CR>
 tnoremap uu <C-\><C-n>
 
 nnoremap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
@@ -232,7 +215,6 @@ vnoremap <leader>c :OSCYank<CR>
 " Easier quickfix management
 nnoremap <leader>cc :call ToggleQuickFix()<cr>
 nmap <leader>cr <cmd>RefreshQuickFix()<CR>
-nnoremap <leader>cq <cmd>Telescope quickfix<CR>
 nnoremap <leader>co :colder<cr>
 nnoremap <leader>cn :cnewer<cr>
 
