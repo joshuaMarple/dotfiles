@@ -5,7 +5,8 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'joshuaMarple/mini.nvim'
 
-  " Plug 'williamboman/nvim-lsp-installer'
+  Plug 'williamboman/mason.nvim'
+  Plug 'williamboman/mason-lspconfig.nvim'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -185,7 +186,6 @@ cabbrev h vert h
 noremap <C-n> :cn<CR>
 noremap <C-p> :cp<CR>
 
-" nnoremap <leader>nt :lua require('numtoggle').numToggle()<CR>
 nnoremap <leader>nh :noh<CR>
 
 nnoremap<leader>w :w<CR>
