@@ -209,6 +209,7 @@ vmap gx :silent grep <cword> <C-r>=b:projectroot<CR><CR>
 
 nnoremap <leader>gt :silent !ctags -R <C-r>=b:projectroot<CR><CR>
 
+let g:oscyank_term = 'default'
 vnoremap <leader>c :OSCYank<CR>
 
 " Easier quickfix management
@@ -223,7 +224,7 @@ nnoremap <leader>rp <cmd>PlugInstall<CR>
 nnoremap <leader>ev :e $MYVIMRC<cr>
 
 " Reload file
-nnoremap <leader>rr :e %
+nnoremap <leader>rr :e %<CR>
 
 " Easier nav with alt
 noremap <A-c> :cn<CR>

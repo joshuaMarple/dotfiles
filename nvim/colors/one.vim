@@ -27,7 +27,7 @@ let g:colors_name = 'one'
 let g:loaded_one = 1
 
 if !exists('g:one_allow_italics')
-  let g:one_allow_italics = 0
+  let g:one_allow_italics = 1
 endif
 
 let s:italic = ''
