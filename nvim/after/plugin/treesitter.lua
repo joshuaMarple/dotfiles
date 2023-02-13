@@ -3,6 +3,15 @@ if not vim.g.loaded_nvim_treesitter then
 end
 
 require'nvim-treesitter.configs'.setup {
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "<CR>",
+      node_incremental = "<CR>",
+      scope_incremental = "<S-CR>",
+      node_decremental = "<BS>",
+    },
+  },
   highlight = {
     enable = true,
   },
@@ -53,4 +62,11 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
-
+--
+-- vim.wo.foldmethod = "expr"
+-- vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.wo.foldtext =
+--     [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) ]]
+-- vim.wo.fillchars = "fold:\\"
+-- vim.wo.foldnestmax = 3
+-- vim.wo.foldminlines = 1

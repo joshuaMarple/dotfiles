@@ -29,6 +29,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'joshuaMarple/vim-qf'
   Plug 'joshuaMarple/vim-oscyank'
 
+  Plug 'joshuaMarple/undotree'
+
+  Plug 'dcampos/nvim-snippy'
+  Plug 'honza/vim-snippets'
+
   " Terminal Management
   Plug 'joshuaMarple/vim-tmux-navigator'
 
@@ -36,8 +41,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'joshuaMarple/nvim-web-devicons'
   Plug 'https://gitlab.com/jmarple/dotline.nvim', {'branch': 'main'}
   Plug 'joshuaMarple/galaxyline.nvim' , {'branch': 'main'}
+  " Plug 'vimpostor/vim-tpipeline'
+  " Plug '~/projects/dotline.nvim/'
 
-  " Plug 'joshuaMarple/nvim-colorizer.lua'
+  Plug 'joshuaMarple/nvim-colorizer.lua'
 
   " Profiling
   " Plug 'joshuaMarple/vim-startuptime'
@@ -47,7 +54,8 @@ call plug#end()
 " {{{ Settings
 set cursorline
 
-set foldmethod=marker
+set foldmethod=indent
+set nofoldenable
 
 " This is in the statusline, I don't need it elsewhere
 set noshowmode
@@ -179,6 +187,10 @@ nnoremap <Esc> :
 " Folding
 " Close everything besides what I'm in
 nnoremap <leader>zz zMzv
+" set foldtext=getline(v:foldstart).'...'.trim(getline(v:foldend))
+set fillchars=fold:\ 
+set foldnestmax=3
+set foldminlines=1
 
 " I hate horizontal splitting
 cabbrev h vert h
