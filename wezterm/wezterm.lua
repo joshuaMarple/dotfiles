@@ -3,7 +3,7 @@ local wezterm = require 'wezterm'
 return {
   line_height = 1.4,
   cell_width = 1.05,
-  color_scheme = 'AtomOneLight',
+  color_scheme = "jmarple_one",
   hide_tab_bar_if_only_one_tab = true,
   font_size = 11.0,
   keys = {

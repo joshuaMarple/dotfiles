@@ -343,7 +343,7 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
     let s:syntax_accent = ['#526fff', '63']
     let s:syntax_accent_2 = ['#0083be', '31']
 
-    let s:vertsplit    = ['#e7e9e1', '188']
+    let s:vertsplit    = ['#9e9e9e', '188']
     let s:special_grey = ['#d3d3d3', '251']
     let s:visual_grey  = ['#d0d0d0', '251']
     let s:pmenu        = ['#dfdfdf', '253']
