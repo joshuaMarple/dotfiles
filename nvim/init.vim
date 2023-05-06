@@ -18,7 +18,7 @@ call plug#begin('~/.vim/plugged')
 
   " Buffer Navigation
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim', {'tag': 'nvim-0.6'}
+  Plug 'nvim-telescope/telescope.nvim', {'tag': '0.1.1'}
   Plug 'nvim-telescope/telescope-file-browser.nvim'
 
   Plug 'joshuaMarple/diffconflicts'
@@ -146,6 +146,10 @@ let $EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
 let $FPP_EDITOR="nvr -cc vsplit --remote-wait +'set bufhidden=wipe'"
 
 let mapleader = " "
+
+" .vimrc
+let g:tpipeline_autoembed = 0
+" let g:tpipeline_statusline = '%f'
 "}}}
 
 " Augroups {{{
@@ -207,12 +211,12 @@ noremap <C-H> <C-W><C-H>
 noremap <C-J> <C-W><C-J>
 noremap <C-K> <C-W><C-K>
 noremap <C-L> <C-W><C-L>
-noremap <C-Space> <C-^>
+" noremap <C-Space> <C-^>
 tnoremap <C-H> <C-\><C-n><C-W><C-H>
 tnoremap <C-J> <C-\><C-n><C-W><C-J>
 tnoremap <C-K> <C-\><C-n><C-W><C-K>
 tnoremap <C-L> <C-\><C-n><C-W><C-L>
-tnoremap <C-Space> <C-\><C-n><C-^>
+" tnoremap <C-Space> <C-\><C-n><C-^>
 
 tnoremap uu <C-\><C-n>
 
@@ -270,7 +274,14 @@ onoremap iN :<C-u>normal vin<CR>
 
 nnoremap <A-g> g;
 nnoremap <A-S-g> g,
-" }}}
+
+nmap <leader>ccs :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 " Imports {{{
 
