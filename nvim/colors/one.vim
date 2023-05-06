@@ -412,6 +412,32 @@ if has('gui_running') || has('termguicolors') || &t_Co == 88 || &t_Co == 256
   call <sid>X('helpSectionDelim', s:mono_3,  '', '')
   " 
 
+  " LSP Highlighting ---------------------------------------------------
+  call <sid>X('LspDiagnosticsDefaultError', s:hue_5, '', '')
+  call <sid>X('LspDiagnosticsDefaultWarning',          s:hue_6_2 , '', '')
+  call <sid>X('LspDiagnosticsDefaultInformation',      s:hue_1 , '', '')
+  call <sid>X('LspDiagnosticsDefaultHint',             s:hue_4 , '', '')
+  call <sid>X('LspDiagnosticsVirtualTextError',       s:hue_5 , '', '')
+  call <sid>X('LspDiagnosticsVirtualTextWarning',     s:hue_6_2 , '', '')
+  call <sid>X('LspDiagnosticsVirtualTextInformation', s:hue_1 , '', '')
+  call <sid>X('LspDiagnosticsVirtualTextHint',        s:hue_4 , '', '')
+  call <sid>X('LspDiagnosticsUnderlineError',         s:hue_5 , '',  'underline')
+  call <sid>X('LspDiagnosticsUnderlineWarning',       s:hue_6_2 , '', 'underline')
+  call <sid>X('LspDiagnosticsUnderlineInformation',   s:hue_1 , '', 'underline' )
+  call <sid>X('LspDiagnosticsUnderlineHint',          s:hue_4 , '', 'underline' )
+  call <sid>X('LspDiagnosticsFloatingError',          s:hue_5 , pmenu, '')
+  call <sid>X('LspDiagnosticsFloatingWarning',        s:hue_6_2 , pmenu, '')
+  call <sid>X('LspDiagnosticsFloatingInformation',    s:hue_1 , pmenu, '')
+  call <sid>X('LspDiagnosticsFloatingHint',           s:hue_4 , pmenu, '')
+  call <sid>X('LspDiagnosticsSignError',              s:hue_5 , '', '')
+  call <sid>X('LspDiagnosticsSignWarning',            s:hue_6_2 , '', '')
+  call <sid>X('LspDiagnosticsSignInformation',        s:hue_1 , '', '')
+  call <sid>X('LspDiagnosticsSignHint',               s:hue_4 , '', '')
+  call <sid>X('LspReferenceText',                     '', '', 'reverse')
+  call <sid>X('LspReferenceRead',                     '', '', 'reverse')
+  call <sid>X('LspReferenceWrite',                    s:hue_6_2,'', 'reverse')
+  " 
+
   " Standard syntax highlighting --------------------------------------------
   call <sid>X('Comment',        s:mono_3,        '',          s:italic)
   call <sid>X('Constant',       s:hue_4,         '',          '')
