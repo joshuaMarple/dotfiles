@@ -11,7 +11,9 @@ local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
+
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
@@ -28,7 +30,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
   if client.server_capabilities.document_formatting then
@@ -64,3 +66,27 @@ require("mason-lspconfig").setup_handlers {
     }
   end
 }
+
+_G.lsp_import_on_completion = function()
+    local completed_item = vim.v.completed_item
+    if not (completed_item and completed_item.user_data and
+        completed_item.user_data.nvim and completed_item.user_data.nvim.lsp and
+        completed_item.user_data.nvim.lsp.completion_item) then return end
+
+    local item = completed_item.user_data.nvim.lsp.completion_item
+    local bufnr = vim.api.nvim_get_current_buf()
+    vim.lsp.buf_request(bufnr, "completionItem/resolve", item,
+                    function(_, _, result)
+        if result and result.additionalTextEdits then
+            vim.lsp.util.apply_text_edits(result.additionalTextEdits, bufnr)
+        end
+    end)
+end
+
+-- define autocmd to listen for CompleteDone
+vim.api.nvim_exec([[
+augroup LSPImportOnCompletion
+    autocmd!
+    autocmd CompleteDone * lua lsp_import_on_completion()
+augroup END
+]], false)
