@@ -163,6 +163,11 @@ augroup filechanged
     \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 augroup END
 
+augroup autoresize
+  autocmd! 
+  autocmd VimResized * wincmd =
+augroup end
+
 augroup vimrc-incsearch-highlight
   autocmd!
   autocmd CmdlineEnter /,\? :set hlsearch
@@ -213,7 +218,7 @@ noremap <C-H> <C-W><C-H>
 noremap <C-J> <C-W><C-J>
 noremap <C-K> <C-W><C-K>
 noremap <C-L> <C-W><C-L>
-" noremap <C-Space> <C-^>
+noremap <C-Space> <C-^>
 tnoremap <C-H> <C-\><C-n><C-W><C-H>
 tnoremap <C-J> <C-\><C-n><C-W><C-J>
 tnoremap <C-K> <C-\><C-n><C-W><C-K>

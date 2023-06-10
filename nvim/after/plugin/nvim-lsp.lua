@@ -11,7 +11,6 @@ local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
 
@@ -56,7 +55,7 @@ end
 
 require("mason").setup {}
 require("mason-lspconfig").setup{
-  ensure_installed = {"sumneko_lua", "tsserver", "vimls"},
+  -- ensure_installed = {"sumneko_lua", "tsserver", "vimls"},
 }
 
 require("mason-lspconfig").setup_handlers {
