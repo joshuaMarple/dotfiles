@@ -14,7 +14,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'chrisgrieser/nvim-various-textobjs'
 
   " Tpope section
-  " Plug 'tpope/vim-surround', {'tag': 'v2.2'}
   Plug 'joshuaMarple/vim-abolish'
   Plug 'joshuaMarple/vim-unimpaired'
 
@@ -32,9 +31,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'joshuaMarple/vim-oscyank'
 
   Plug 'joshuaMarple/undotree'
-
-  Plug 'dcampos/nvim-snippy'
-  Plug 'honza/vim-snippets'
 
   " Terminal Management
   Plug 'joshuaMarple/vim-tmux-navigator'

@@ -11,8 +11,7 @@ local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
-
+  vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
@@ -29,7 +28,6 @@ vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
   if client.server_capabilities.document_formatting then
