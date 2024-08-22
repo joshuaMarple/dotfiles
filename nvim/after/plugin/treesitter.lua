@@ -39,7 +39,7 @@ require'nvim-treesitter.configs'.setup {
       goto_next_start = {
         ["]m"] = "@function.outer",
         ["]b"] = "@block.outer",
-        ["]c"] = "@call.outer",
+        -- ["]c"] = "@call.outer",
         ["]x"] = "@comment.outer",
         ["]s"] = "@statement.outer",
         ["]N"] = "@number.inner",
@@ -55,7 +55,7 @@ require'nvim-treesitter.configs'.setup {
       goto_previous_start = {
         ["[m"] = "@function.outer",
         ["[b"] = "@block.outer",
-        ["[c"] = "@call.outer",
+        -- ["[c"] = "@call.outer",
         ["[["] = "@class.outer",
         ["[x"] = "@comment.outer",
         ["[s"] = "@statement.outer",

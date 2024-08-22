@@ -20,6 +20,7 @@ m.nmap('<leader>q', '<CMD>Telescope quickfix<CR>')
 m.nmap('<leader>x', '<CMD>Telescope commands<CR>')
 m.nmap('<leader>ff', '<CMD>Telescope file_browser<CR>')
 m.nmap('<leader>a', '<CMD>Telescope lsp_code_actions<CR>')
+m.nmap('<leader>tr', '<CMD>Telescope resume<CR>')
 
 require("telescope").load_extension "file_browser"
 
@@ -37,4 +38,14 @@ require('telescope').setup{
       }
    }
   },
+  extensions = {
+      ast_grep = {
+          command = {
+              "sg",
+              "--json=stream",
+          }, -- must have --json=stream
+          grep_open_files = false, -- search in opened files
+          lang = nil, -- string value, specify language for ast-grep `nil` for default
+    }
+  }
 }

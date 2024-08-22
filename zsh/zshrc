@@ -89,3 +89,10 @@ export BAT_THEME="ansi-light"
 source ~/dotfiles/zsh/scripts/*
 
 # zprof
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+
+# Added by Amplify CLI binary installer
+export PATH="$HOME/.amplify/bin:$PATH"

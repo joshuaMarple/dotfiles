@@ -24,8 +24,9 @@ call plug#begin('~/.vim/plugged')
 
   " Buffer Navigation
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim', {'tag': '0.1.1'}
+  Plug 'nvim-telescope/telescope.nvim', {'tag': '0.1.8'}
   Plug 'nvim-telescope/telescope-file-browser.nvim'
+  Plug 'Marskey/telescope-sg'
 
   Plug 'joshuaMarple/diffconflicts'
 
@@ -51,6 +52,8 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'cshuaimin/ssr.nvim'
 
+  Plug 'olimorris/onedarkpro.nvim'
+  Plug 'sainnhe/edge'
   " Profiling
   " Plug 'joshuaMarple/vim-startuptime'
 call plug#end() 
@@ -127,7 +130,7 @@ set lazyredraw
 set termguicolors
 
 set background=light
-silent! colorscheme one
+silent! colorscheme edge
 
 " Hide nontext '~' marker for line padding https://stackoverflow.com/questions/3813059/is-it-possible-to-not-display-a-for-blank-lines-in-vim-neovim
 hi NonText guifg=bg
