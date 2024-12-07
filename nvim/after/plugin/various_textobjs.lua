@@ -7,10 +7,10 @@ end
 require("various-textobjs").setup {
 	-- lines to seek forwards for "small" textobjs (mostly characterwise textobjs)
 	-- set to 0 to only look in the current line
-	lookForwardSmall = 5, 
+	-- forwardLooking.small = 5, 
 
 	-- lines to seek forwards for "big" textobjs (linewise textobjs & url textobj)
-	lookForwardBig = 15,
+	-- forwardLooking.big = 15,
 
 	-- use suggested keymaps (see README)
 	useDefaultKeymaps = true, 
