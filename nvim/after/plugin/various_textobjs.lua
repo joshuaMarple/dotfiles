@@ -13,5 +13,5 @@ require("various-textobjs").setup {
 	-- forwardLooking.big = 15,
 
 	-- use suggested keymaps (see README)
-	useDefaultKeymaps = true, 
+	-- keymaps.useDefaults = true,
 }
