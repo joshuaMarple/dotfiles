@@ -13,8 +13,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
 
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+  " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
   Plug 'chrisgrieser/nvim-various-textobjs'
 
@@ -26,6 +26,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim', {'tag': '0.1.8'}
   Plug 'nvim-telescope/telescope-file-browser.nvim'
+  Plug 'nvim-telescope/telescope-ui-select.nvim'
   Plug 'Marskey/telescope-sg'
 
   Plug 'joshuaMarple/diffconflicts'
@@ -54,9 +55,18 @@ call plug#begin('~/.vim/plugged')
 
   Plug 'olimorris/onedarkpro.nvim'
   Plug 'sainnhe/edge'
-  " Profiling
+  " Profling
   " Plug 'joshuaMarple/vim-startuptime'
-call plug#end() 
+
+  " Plug 'stevearc/dressing.nvim'
+  " Plug 'nvim-lua/plenary.nvim'
+  " Plug 'MunifTanjim/nui.nvim'
+  " Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
+
+  " Plug 'saghen/blink.cmp',
+  Plug 'ColinKennedy/cursor-text-objects.nvim'
+
+call plug#end()
 "}}}
 
 " {{{ Settings
@@ -254,6 +264,7 @@ nnoremap <leader>ev :e $MYVIMRC<cr>
 
 " Reload file
 nnoremap <leader>rr :e %<CR>
+nnoremap <leader>Rr :e! %<CR>
 
 " Easier nav with alt
 noremap <A-c> :cn<CR>

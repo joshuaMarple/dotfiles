@@ -69,6 +69,7 @@ bindkey '^F' fzf-file-widget
 
 ### Configure ZSH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source <(fzf --zsh)
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=bold,underline"
 ZSH_AUTOSUGGEST_USE_ASYNC=true
@@ -78,6 +79,8 @@ bindkey '^N' history-beginning-search-forward
 
 stty -ixon
 bindkey '^q' push-line-or-edit
+
+# bindkey '^r' history-incremental-search-backward
 
 # https://github.com/spaceship-prompt/spaceship-prompt/issues/91
 bindkey "^?" backward-delete-char
@@ -90,9 +93,18 @@ source ~/dotfiles/zsh/scripts/*
 
 # zprof
 
+source ~/.zshenv
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
 
+source ~/.secrets.sh
+
 # Added by Amplify CLI binary installer
 export PATH="$HOME/.amplify/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+chruby ruby-3.4.1

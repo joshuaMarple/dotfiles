@@ -39,6 +39,11 @@ require('telescope').setup{
    }
   },
   extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {
+        -- even more opts
+      }
+    },
       ast_grep = {
           command = {
               "sg",
@@ -49,3 +54,6 @@ require('telescope').setup{
     }
   }
 }
+
+require("telescope").load_extension("ui-select")
+

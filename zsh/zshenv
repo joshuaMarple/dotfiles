@@ -12,3 +12,4 @@ export FPP_EDITOR='nvim'
 
 export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history"
 export KEYTIMEOUT=1
+

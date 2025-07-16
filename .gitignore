@@ -9,3 +9,4 @@ zsh/snap/
 *.zwc
 tags.lock
 *.bak
+.DS_Store

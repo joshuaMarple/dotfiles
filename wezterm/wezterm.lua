@@ -1,13 +1,14 @@
 local wezterm = require 'wezterm'
 
 return {
+  max_fps = 240,
   window_decorations = "RESIZE",
   line_height = 1.4,
   cell_width = 1.05,
   color_scheme = "AtomOneLight",
   hide_tab_bar_if_only_one_tab = true,
   font_size = 13.0,
-  audible_bell="Disabled",
+  -- audible_bell="Disabled",
   enable_kitty_keyboard=true,
   keys = {
       -- Use ctrl-tab/ctrl-shift-tab to move forward/back tmux tabs

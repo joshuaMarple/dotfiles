@@ -6,3 +6,7 @@ alias l="ls --color"
 alias c="cd"
 alias fd="fd -c=never"
 alias load=cat /proc/loadavg | cut -f 2 -d ' '
+alias x="git branch"
+alias s="git status"
+alias -g ...='../..'
+alias -g ....='../../..'
