@@ -3,6 +3,7 @@ local wezterm = require 'wezterm'
 return {
   max_fps = 240,
   window_decorations = "RESIZE",
+  send_composed_key_when_left_alt_is_pressed = true,
   line_height = 1.4,
   cell_width = 1.05,
   color_scheme = "AtomOneLight",
