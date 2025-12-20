@@ -1,11 +1,8 @@
-alias ft="floaterm"
 alias v="nvim"
 alias r="ranger"
-alias antiup="antibody bundle < ~/dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh"
 alias l="ls --color"
 alias c="cd"
 alias fd="fd -c=never"
-alias load=cat /proc/loadavg | cut -f 2 -d ' '
 alias x="git branch"
 alias s="git status"
 alias -g ...='../..'

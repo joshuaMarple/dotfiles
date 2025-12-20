@@ -28,8 +28,7 @@ lua/
 │   └── autocmds.lua # Autocommands & project root detection
 ├── ui/             # Visual and interface elements
 │   ├── plugins.lua # Themes, statusline, colorizer
-│   ├── keymaps.lua # UI debugging keymaps
-│   └── number-toggle.lua # Number line toggle functionality
+│   └── keymaps.lua # UI debugging keymaps
 ├── editor/         # Text editing and manipulation
 │   ├── plugins.lua # Treesitter, text objects, editing tools
 │   ├── keymaps.lua # Text object & editing keymaps

@@ -68,7 +68,7 @@ bindkey '^ ' autosuggest-execute
 bindkey '^F' fzf-file-widget
 
 ### Configure ZSH
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf shell integration (modern approach)
 source <(fzf --zsh)
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="bg=bold,underline"
@@ -87,8 +87,6 @@ bindkey "^?" backward-delete-char
 
 eval "$(zoxide init zsh)"
 
-export BAT_THEME="ansi-light"
-
 source ~/dotfiles/zsh/scripts/*
 
 # zprof
@@ -100,11 +98,13 @@ source <(ng completion script)
 
 source ~/.secrets.sh
 
-# Added by Amplify CLI binary installer
-export PATH="$HOME/.amplify/bin:$PATH"
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-chruby ruby-3.4.1
+# Ruby version management (chruby)
+if [[ -f /opt/homebrew/opt/chruby/share/chruby/chruby.sh ]]; then
+  source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+  source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+  chruby ruby-3.4.1 2>/dev/null
+fi
+alias rm='~/safe_rm.sh'
+
+# bun completions
+[ -s "/Users/joshuamarple/.bun/_bun" ] && source "/Users/joshuamarple/.bun/_bun"
