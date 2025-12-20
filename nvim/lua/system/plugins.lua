@@ -2,7 +2,9 @@
 local add = require('mini.deps').add
 
 -- Git
-add('joshuaMarple/diffconflicts')
+-- add('joshuaMarple/diffconflicts')
+add('sindrets/diffview.nvim')
+
 
 -- Quickfix
 add('joshuaMarple/quickfix-reflector.vim')

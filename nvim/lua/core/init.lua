@@ -42,6 +42,12 @@ add({
     require('mini.indentscope').setup()
     require('mini.trailspace').setup()
     require('mini.surround').setup()
+    require('mini.diff').setup()
+    --   {
+    --   view = {
+    --     style = 'sign'
+    --   }
+    -- })
     require('mini.completion').setup({
       lsp_completion = {
         source_func = 'completefunc',
