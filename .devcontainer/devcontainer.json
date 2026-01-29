@@ -1,0 +1,11 @@
+{
+  "name": "Dev Base",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "containerEnv": {
+    "TERM": "xterm-256color"
+  },
+  "remoteUser": "dev"
+}
