@@ -2,8 +2,8 @@ FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG USERNAME=dev
-ARG USER_UID=1000
-ARG USER_GID=1000
+ARG USER_UID=1001
+ARG USER_GID=1001
 
 # System packages
 RUN apt-get update && apt-get install -y \
@@ -15,7 +15,6 @@ RUN apt-get update && apt-get install -y \
     neovim \
     tmux \
     ripgrep \
-    fzf \
     jq \
     unzip \
     ncurses-term \
@@ -38,11 +37,15 @@ USER $USERNAME
 WORKDIR /home/$USERNAME
 
 ENV HOME=/home/$USERNAME
-ENV PATH="$HOME/.local/bin:$HOME/.bun/bin:$PATH"
+ENV PATH="$HOME/.fzf/bin:$HOME/.local/bin:$HOME/.bun/bin:$PATH"
 ENV TERM=xterm-256color
 
 # zoxide
 RUN curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+
+# fzf (latest version for --zsh flag support)
+RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
+    && ~/.fzf/install --all --no-bash --no-fish
 
 # Create placeholder files dotfiles might expect
 RUN mkdir -p ~/.config ~/.local/bin \

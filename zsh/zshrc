@@ -93,18 +93,4 @@ source ~/dotfiles/zsh/scripts/*
 
 source ~/.zshenv
 
-# Load Angular CLI autocompletion.
-source <(ng completion script)
-
 source ~/.secrets.sh
-
-# Ruby version management (chruby)
-if [[ -f /opt/homebrew/opt/chruby/share/chruby/chruby.sh ]]; then
-  source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-  source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-  chruby ruby-3.4.1 2>/dev/null
-fi
-alias rm='~/safe_rm.sh'
-
-# bun completions
-[ -s "/Users/joshuamarple/.bun/_bun" ] && source "/Users/joshuamarple/.bun/_bun"
