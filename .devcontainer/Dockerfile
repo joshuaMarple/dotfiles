@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
     git \
     sudo \
     zsh \
-    neovim \
     tmux \
     ripgrep \
     jq \
@@ -22,6 +21,13 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     locales \
     && rm -rf /var/lib/apt/lists/*
+
+# Neovim (latest stable from GitHub releases)
+RUN curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz \
+    && tar -xzf nvim-linux64.tar.gz \
+    && mv nvim-linux64 /opt/nvim \
+    && ln -s /opt/nvim/bin/nvim /usr/local/bin/nvim \
+    && rm nvim-linux64.tar.gz
 
 # Set up locale
 RUN locale-gen en_US.UTF-8
@@ -48,9 +54,12 @@ RUN curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
     && ~/.fzf/install --all --no-bash --no-fish
 
+# TPM (Tmux Plugin Manager)
+RUN git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 # Create placeholder files dotfiles might expect
 RUN mkdir -p ~/.config ~/.local/bin \
-    && touch ~/.bash_aliases ~/.secrets.sh
+    && touch ~/.secrets.sh
 
 # Copy and run dotfiles setup
 COPY --chown=$USERNAME:$USERNAME . /home/$USERNAME/dotfiles
@@ -62,6 +71,7 @@ RUN cd /home/$USERNAME/dotfiles && \
         ln -sf /home/$USERNAME/dotfiles/nvim ~/.config/nvim; \
         ln -sf /home/$USERNAME/dotfiles/zsh/zshrc ~/.zshrc; \
         ln -sf /home/$USERNAME/dotfiles/zsh/zshenv ~/.zshenv; \
+        ln -sf /home/$USERNAME/dotfiles/zsh/aliases ~/.bash_aliases; \
         ln -sf /home/$USERNAME/dotfiles/tmux/tmux.conf ~/.tmux.conf 2>/dev/null || true; \
     fi
 
