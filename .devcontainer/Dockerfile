@@ -22,12 +22,18 @@ RUN apt-get update && apt-get install -y \
     locales \
     && rm -rf /var/lib/apt/lists/*
 
-# Neovim (latest stable from GitHub releases)
-RUN curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz \
-    && tar -xzf nvim-linux64.tar.gz \
-    && mv nvim-linux64 /opt/nvim \
-    && ln -s /opt/nvim/bin/nvim /usr/local/bin/nvim \
-    && rm nvim-linux64.tar.gz
+# Neovim (latest stable from GitHub releases - multi-arch)
+RUN ARCH=$(dpkg --print-architecture) && \
+    if [ "$ARCH" = "amd64" ]; then \
+        NVIM_ARCHIVE="nvim-linux-x86_64.tar.gz"; \
+    else \
+        NVIM_ARCHIVE="nvim-linux-arm64.tar.gz"; \
+    fi && \
+    curl -LO "https://github.com/neovim/neovim/releases/download/stable/$NVIM_ARCHIVE" && \
+    tar -xzf "$NVIM_ARCHIVE" && \
+    mv nvim-linux-* /opt/nvim && \
+    ln -s /opt/nvim/bin/nvim /usr/local/bin/nvim && \
+    rm "$NVIM_ARCHIVE"
 
 # Set up locale
 RUN locale-gen en_US.UTF-8
@@ -74,6 +80,12 @@ RUN cd /home/$USERNAME/dotfiles && \
         ln -sf /home/$USERNAME/dotfiles/zsh/aliases ~/.bash_aliases; \
         ln -sf /home/$USERNAME/dotfiles/tmux/tmux.conf ~/.tmux.conf 2>/dev/null || true; \
     fi
+
+# Pre-install tmux plugins via TPM
+RUN ~/.tmux/plugins/tpm/bin/install_plugins || true
+
+# Pre-install neovim plugins (mini.deps)
+RUN nvim --headless "+lua require('mini.deps').update()" +qa 2>/dev/null || true
 
 WORKDIR /workspace
 CMD ["zsh"]
