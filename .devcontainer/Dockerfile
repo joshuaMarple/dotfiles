@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     gnupg \
     locales \
+    xclip \
     && rm -rf /var/lib/apt/lists/*
 
 # Neovim (latest stable from GitHub releases - multi-arch)
@@ -58,10 +59,19 @@ RUN curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install
 
 # fzf (latest version for --zsh flag support)
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
-    && ~/.fzf/install --all --no-bash --no-fish
+    && ~/.fzf/install --all --no-bash --no-fish \
+    && sudo ln -s ~/.fzf/bin/fzf /usr/local/bin/fzf
 
 # TPM (Tmux Plugin Manager)
 RUN git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Node.js (for Claude Code)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - \
+    && sudo apt-get install -y nodejs \
+    && sudo rm -rf /var/lib/apt/lists/*
+
+# Claude Code
+RUN sudo npm install -g @anthropic-ai/claude-code
 
 # Create placeholder files dotfiles might expect
 RUN mkdir -p ~/.config ~/.local/bin \
@@ -84,8 +94,9 @@ RUN cd /home/$USERNAME/dotfiles && \
 # Pre-install tmux plugins via TPM
 RUN ~/.tmux/plugins/tpm/bin/install_plugins || true
 
-# Pre-install neovim plugins (mini.deps)
+# Pre-install neovim plugins and treesitter parsers
 RUN nvim --headless "+lua require('mini.deps').update()" +qa 2>/dev/null || true
+RUN nvim --headless "+TSUpdateSync" +qa 2>/dev/null || true
 
 WORKDIR /workspace
 CMD ["zsh"]
