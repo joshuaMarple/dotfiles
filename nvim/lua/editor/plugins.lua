@@ -97,4 +97,7 @@ add({
     }
   end,
 })
-add('nvim-treesitter/nvim-treesitter-textobjects')
+add({
+  source = 'nvim-treesitter/nvim-treesitter-textobjects',
+  depends = { 'nvim-treesitter/nvim-treesitter' },
+})

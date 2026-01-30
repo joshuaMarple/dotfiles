@@ -23,18 +23,12 @@ RUN apt-get update && apt-get install -y \
     xclip \
     && rm -rf /var/lib/apt/lists/*
 
-# Neovim (latest stable from GitHub releases - multi-arch)
-RUN ARCH=$(dpkg --print-architecture) && \
-    if [ "$ARCH" = "amd64" ]; then \
-        NVIM_ARCHIVE="nvim-linux-x86_64.tar.gz"; \
-    else \
-        NVIM_ARCHIVE="nvim-linux-arm64.tar.gz"; \
-    fi && \
-    curl -LO "https://github.com/neovim/neovim/releases/download/stable/$NVIM_ARCHIVE" && \
+# Neovim (latest stable - x86_64 only)
+RUN curl -LO "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz" && \
     mkdir -p /opt/nvim && \
-    tar -xzf "$NVIM_ARCHIVE" --strip-components=1 -C /opt/nvim && \
+    tar -xzf "nvim-linux-x86_64.tar.gz" --strip-components=1 -C /opt/nvim && \
     ln -s /opt/nvim/bin/nvim /usr/local/bin/nvim && \
-    rm "$NVIM_ARCHIVE"
+    rm "nvim-linux-x86_64.tar.gz"
 
 # Set up locale
 RUN locale-gen en_US.UTF-8
@@ -65,13 +59,15 @@ RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
 # TPM (Tmux Plugin Manager)
 RUN git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-# Node.js (for Claude Code)
+# Node.js (useful for dev work)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - \
     && sudo apt-get install -y nodejs \
     && sudo rm -rf /var/lib/apt/lists/*
 
-# Claude Code
-RUN sudo npm install -g @anthropic-ai/claude-code
+# Claude Code (native installer + light mode)
+RUN curl -fsSL https://claude.ai/install.sh | sh \
+    && mkdir -p ~/.claude \
+    && echo '{"theme":"light"}' > ~/.claude/settings.json
 
 # Create placeholder files dotfiles might expect
 RUN mkdir -p ~/.config ~/.local/bin \
@@ -94,9 +90,8 @@ RUN cd /home/$USERNAME/dotfiles && \
 # Pre-install tmux plugins via TPM
 RUN ~/.tmux/plugins/tpm/bin/install_plugins || true
 
-# Pre-install neovim plugins and treesitter parsers
+# Pre-install neovim plugins (run :TSUpdate manually on first use)
 RUN nvim --headless "+lua require('mini.deps').update()" +qa 2>/dev/null || true
-RUN nvim --headless "+TSUpdateSync" +qa 2>/dev/null || true
 
 WORKDIR /workspace
 CMD ["zsh"]
