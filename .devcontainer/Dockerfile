@@ -30,8 +30,8 @@ RUN ARCH=$(dpkg --print-architecture) && \
         NVIM_ARCHIVE="nvim-linux-arm64.tar.gz"; \
     fi && \
     curl -LO "https://github.com/neovim/neovim/releases/download/stable/$NVIM_ARCHIVE" && \
-    tar -xzf "$NVIM_ARCHIVE" && \
-    mv nvim-linux-* /opt/nvim && \
+    mkdir -p /opt/nvim && \
+    tar -xzf "$NVIM_ARCHIVE" --strip-components=1 -C /opt/nvim && \
     ln -s /opt/nvim/bin/nvim /usr/local/bin/nvim && \
     rm "$NVIM_ARCHIVE"
 
