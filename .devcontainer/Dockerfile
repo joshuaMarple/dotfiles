@@ -65,7 +65,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - \
     && sudo rm -rf /var/lib/apt/lists/*
 
 # Claude Code (native installer + light mode)
-RUN curl -fsSL https://claude.ai/install.sh | sh \
+RUN curl -fsSL https://claude.ai/install.sh | bash \
     && mkdir -p ~/.claude \
     && echo '{"theme":"light"}' > ~/.claude/settings.json
 
