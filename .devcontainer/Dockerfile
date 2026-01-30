@@ -90,8 +90,9 @@ RUN cd /home/$USERNAME/dotfiles && \
 # Pre-install tmux plugins via TPM
 RUN ~/.tmux/plugins/tpm/bin/install_plugins || true
 
-# Pre-install neovim plugins (run :TSUpdate manually on first use)
-RUN nvim --headless "+lua require('mini.deps').update()" +qa 2>/dev/null || true
+# NOTE: Don't pre-install neovim plugins - headless install causes
+# "loop or previous error" issues. Plugins install on first interactive use.
+# Ref: https://github.com/LazyVim/LazyVim/issues/6367
 
 WORKDIR /workspace
 CMD ["zsh"]
