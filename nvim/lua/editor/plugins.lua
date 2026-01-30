@@ -41,64 +41,7 @@ add({
       highlight = {
         enable = true,
       },
-      textobjects = {
-        select = {
-          enable = true,
-          keymaps = {
-            ["aF"] = "@function.outer",
-            ["iF"] = "@function.inner",
-            ["aC"] = "@class.outer",
-            ["iC"] = "@class.inner",
-            ["aB"] = "@block.outer",
-            ["iB"] = "@block.inner",
-            ["ac"] = "@call.outer",
-            ["ic"] = "@call.inner",
-            ["as"] = "@statement.outer",
-            ["ax"] = "@comment.outer",
-            ["iN"] = "@number.inner",
-          },
-        },
-        move = {
-          enable = true,
-          set_jumps = true,
-          goto_next_start = {
-            ["]m"] = "@function.outer",
-            ["]b"] = "@block.outer",
-            ["]x"] = "@comment.outer",
-            ["]s"] = "@statement.outer",
-            ["]N"] = "@number.inner",
-          },
-          goto_next_end = {
-            ["]M"] = "@function.outer",
-            ["]B"] = "@block.outer",
-            ["]C"] = "@call.outer",
-            ["][]"] = "@class.outer",
-            ["]x"] = "@comment.outer",
-            ["]s"] = "@statement.outer",
-          },
-          goto_previous_start = {
-            ["[m"] = "@function.outer",
-            ["[b"] = "@block.outer",
-            ["[["] = "@class.outer",
-            ["[x"] = "@comment.outer",
-            ["[s"] = "@statement.outer",
-            ["[N"] = "@number.inner",
-          },
-          goto_previous_end = {
-            ["[M"] = "@function.outer",
-            ["[B"] = "@block.outer",
-            ["[C"] = "@call.outer",
-            ["[]"] = "@class.outer",
-            ["[x"] = "@comment.outer",
-            ["[s"] = "@statement.outer",
-          },
-        },
-      },
     }
   end,
 })
 
--- Load textobjects AFTER treesitter is configured
-require('mini.deps').later(function()
-  add('nvim-treesitter/nvim-treesitter-textobjects')
-end)
