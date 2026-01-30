@@ -23,10 +23,9 @@ add({
   end,
 })
 
--- Treesitter (textobjects is a dependency, not loaded separately)
+-- Treesitter
 add({
   source = 'nvim-treesitter/nvim-treesitter',
-  depends = { 'nvim-treesitter/nvim-treesitter-textobjects' },
   build = ':TSUpdate',
   config = function()
     require'nvim-treesitter.configs'.setup {
@@ -98,3 +97,8 @@ add({
     }
   end,
 })
+
+-- Load textobjects AFTER treesitter is configured
+require('mini.deps').later(function()
+  add('nvim-treesitter/nvim-treesitter-textobjects')
+end)
