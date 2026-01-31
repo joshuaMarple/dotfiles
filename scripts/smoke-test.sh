@@ -6,7 +6,11 @@ set -euo pipefail
 
 echo "=== Dotfiles Smoke Tests ==="
 
-echo "Testing zsh..."
+echo "Checking zsh config syntax..."
+zsh -n ~/dotfiles/zsh/zshrc
+zsh -n ~/dotfiles/zsh/zshenv
+
+echo "Testing zsh starts..."
 zsh -c 'echo "zsh ok"'
 
 echo "Testing nvim starts..."

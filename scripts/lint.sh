@@ -11,12 +11,4 @@ else
   echo "shellcheck not installed, skipping"
 fi
 
-# Syntax check zsh files
-for file in zsh/zshrc zsh/zshenv; do
-  if [ -f "$file" ]; then
-    echo "Checking $file syntax..."
-    zsh -n "$file"
-  fi
-done
-
 echo "All lint checks passed"
