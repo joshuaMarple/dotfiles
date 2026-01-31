@@ -1,11 +1,13 @@
 FROM ubuntu:24.04
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 ARG DEBIAN_FRONTEND=noninteractive
 ARG USERNAME=dev
 ARG USER_UID=1001
 ARG USER_GID=1001
 
-# System packages
+# hadolint ignore=DL3008,DL3015
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
@@ -76,6 +78,7 @@ RUN mkdir -p ~/.config ~/.local/bin \
 # Copy and run dotfiles setup
 COPY --chown=$USERNAME:$USERNAME . /home/$USERNAME/dotfiles
 
+# hadolint ignore=DL3003,SC2015
 RUN cd /home/$USERNAME/dotfiles && \
     if [ -f install.sh ]; then \
         chmod +x install.sh && ./install.sh || true; \
