@@ -51,7 +51,7 @@ ENV TERM=xterm-256color
 # zoxide
 RUN curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
-# fzf (latest version for --zsh flag support)
+# hadolint ignore=DL3004
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
     && ~/.fzf/install --all --no-bash --no-fish \
     && sudo ln -s ~/.fzf/bin/fzf /usr/local/bin/fzf
@@ -59,7 +59,7 @@ RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
 # TPM (Tmux Plugin Manager)
 RUN git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-# Node.js (useful for dev work)
+# hadolint ignore=DL3004,DL3008
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - \
     && sudo apt-get install -y nodejs \
     && sudo rm -rf /var/lib/apt/lists/*
