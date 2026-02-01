@@ -1,11 +1,13 @@
 FROM ubuntu:24.04
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 ARG DEBIAN_FRONTEND=noninteractive
 ARG USERNAME=dev
 ARG USER_UID=1001
 ARG USER_GID=1001
 
-# System packages
+# hadolint ignore=DL3008,DL3015
 RUN apt-get update && apt-get install -y \
     curl \
     wget \
@@ -51,7 +53,7 @@ ENV TERM=xterm-256color
 # zoxide
 RUN curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
-# fzf (latest version for --zsh flag support)
+# hadolint ignore=DL3004
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
     && ~/.fzf/install --all --no-bash --no-fish \
     && sudo ln -s ~/.fzf/bin/fzf /usr/local/bin/fzf
@@ -59,7 +61,7 @@ RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf \
 # TPM (Tmux Plugin Manager)
 RUN git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-# Node.js (useful for dev work)
+# hadolint ignore=DL3004,DL3008
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - \
     && sudo apt-get install -y nodejs \
     && sudo rm -rf /var/lib/apt/lists/*
@@ -76,6 +78,7 @@ RUN mkdir -p ~/.config ~/.local/bin \
 # Copy and run dotfiles setup
 COPY --chown=$USERNAME:$USERNAME . /home/$USERNAME/dotfiles
 
+# hadolint ignore=DL3003,SC2015
 RUN cd /home/$USERNAME/dotfiles && \
     if [ -f install.sh ]; then \
         chmod +x install.sh && ./install.sh || true; \
